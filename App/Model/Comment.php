@@ -1,5 +1,7 @@
-<?php 
+<?php
+namespace App\Model;
 
+use Core\ORM\BaseModel;
 /*
 *  Comment class
 */

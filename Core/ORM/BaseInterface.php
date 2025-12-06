@@ -1,5 +1,5 @@
 <?php
-
+namespace Core\ORM;
 
 /**
  * L'obbiettivo è definire un query builder da poter usare come piccolo ORM. 

@@ -1,8 +1,12 @@
 <?php
+namespace Core\ORM;
+
+use App\Database;
+use \PDO;
+use \Exception;
 
 
-require_once("Database.php");
-
+// TODO: Capire se vogliamo mantenere le eccezioni, dichiarare un logger e fare log su file oppure mostrare messaggio a schermo
 
 /**
  * Query builder
@@ -76,6 +80,7 @@ Class BaseModel implements BaseInterface{
             // Aggiunge la condizione WHERE "coloumn" "operator" "value"
             $this->conditions[] = [$column, $operator, $value];
         } else {
+            
             throw new Exception("ERROR: Invalid where parameters");
         }
         return $this;
@@ -227,10 +232,6 @@ Class BaseModel implements BaseInterface{
 
     public static function find($id) {
         return (new static())->where('id', '=', $id)->first();
-    }
-
-    public static function byId($id) {
-        return static::find($id);
     }
 }
 

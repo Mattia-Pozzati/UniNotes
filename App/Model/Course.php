@@ -1,4 +1,7 @@
 <?php 
+namespace App\Model;
+
+use Core\ORM\BaseModel;
 
 /*
 *  Course class

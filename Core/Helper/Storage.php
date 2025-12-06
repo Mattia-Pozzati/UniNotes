@@ -1,9 +1,10 @@
 <?php
+namespace Core\Helper;
 
 /**
  * Classe utile per interfacciarsi con lo storage:
  * 
- * /files/
+ * /storage/uploads/
  *  note_{id}/
  *     file_{id}/
  *          v1.pdf
