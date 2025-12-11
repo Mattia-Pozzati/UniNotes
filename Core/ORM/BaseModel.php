@@ -8,8 +8,6 @@ use \Exception;
 
 
 
-// TODO: Capire se vogliamo mantenere le eccezioni, dichiarare un logger e fare log su file oppure mostrare messaggio a schermo
-
 /**
  * Query builder
  * 
@@ -91,6 +89,7 @@ Class BaseModel implements BaseInterface{
                 ]);
             throw new Exception("ERROR: Invalid where parameters");
         }
+        Logger::getInstance()->info("Aggiunta condizione where con successo", ["condition" => $this->conditions[-1]]);
         return $this;
     }
 
@@ -113,6 +112,7 @@ Class BaseModel implements BaseInterface{
                 ]);
             throw new Exception("ERROR: Invalid order_by parameters");
         }
+        Logger::getInstance()->info("Aggiunta condizione order_by con successo", ["condition" => $this->order]);
         return $this;
     }
 
@@ -132,6 +132,7 @@ Class BaseModel implements BaseInterface{
                 ]);
             throw new Exception("ERROR: Invalid limit parameter");
         }
+        Logger::getInstance()->info("Aggiunta condizione where con successo", ["condition" => $this->limit]);
         return $this;
     }
 
@@ -158,6 +159,7 @@ Class BaseModel implements BaseInterface{
         $stmt = $pdo->prepare($query);
         $stmt->execute($params);
 
+        Logger::getInstance()->info("Query eseguita con successo", ["query" => $query]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC, static::class);
     }
 
@@ -185,7 +187,9 @@ Class BaseModel implements BaseInterface{
         $stmt = $pdo->prepare($query);
         $stmt->execute(array_values($data));
 
-        return $pdo->lastInsertId();
+        $last_id = $pdo->lastInsertId();
+        Logger::getInstance()->info("Entry inserita con successo", ["id" => $last_id]);
+        return $last_id;
     }
 
     /**
@@ -227,7 +231,8 @@ Class BaseModel implements BaseInterface{
      * Delete SQL
      * 
      */
-    public function delete() {
+    public function delete()
+    {
         // Evito di cancellare tutta la tabella per errore
         if (empty($this->conditions)) {
             Logger::getInstance()->error("WHERE conditions required for delete");
@@ -235,7 +240,7 @@ Class BaseModel implements BaseInterface{
         }
 
         $pdo = Database::getInstance();
-        $params = [];
+        $params = []; // 
         $conds = [];
         foreach ($this->conditions as $c) {
             $conds[] = "{$c[0]} {$c[1]} ?";
@@ -247,12 +252,14 @@ Class BaseModel implements BaseInterface{
         return $stmt->execute($params);
     }
 
-    public static function all() {
+    public static function all() : BaseModel
+    { 
         return (new static())->get();
     }
 
-    public static function find($id) {
-        return (new static())->where('id', '=', $id)->first();
+    public static function find($id) : BaseModel
+    {
+        return (new static())->where("id", "=", $id)->first();
     }
 }
 

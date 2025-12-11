@@ -60,7 +60,7 @@ class Logger
         }
 
         $logLine = sprintf(
-            "%s %s %s user:%s req:%s %s %s\n",
+            "%s %s %s user:%s %s %s\n",
             $timestamp,
             strtoupper($level),
             $ip,

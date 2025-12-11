@@ -9,6 +9,7 @@ use Core\Helper\Logger;
 $router = new Router;
 
 Logger::getInstance(__DIR__ . '/../storage/logs/log.log');
+Logger::getInstance()->info("Init...")
 
 
 ?>

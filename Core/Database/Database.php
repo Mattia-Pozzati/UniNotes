@@ -1,6 +1,7 @@
 <?php
 namespace Core\Database;
 
+use Core\Helper\Logger;
 use \PDO;
 
 /**
@@ -20,6 +21,7 @@ class Database {
             ""
         );
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        Logger::getInstance()->info("Connessione al database riuscita");
     }
 
     public static function getInstance() {
@@ -27,6 +29,7 @@ class Database {
             self::$instance = new self();
         }
         return self::$instance->pdo;
+        Logger::getInstance()->info("Rilasciata istanza database a user");
     }
 }
 
