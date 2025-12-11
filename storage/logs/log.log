@@ -1,0 +1,6 @@
+2025-12-11T10:15:33+01:00 INFO 192.168.1.10 user:1 req:a1b2c3d4 action=login User logged in successfully
+2025-12-11T10:17:05+01:00 ERROR 192.168.1.12 user:2 req:e5f6g7h8 action=create_order order_id=101 amount=49.99 Invalid payment method
+2025-12-11T10:25:47+01:00 DEBUG 192.168.1.20 user:4 req:m3n4o5p6 action=cache_clear key=session_42 Cache cleared successfully
+2025-12-11T10:35:21+01:00 INFO 192.168.1.10 user:1 req:u1v2w3x4 action=logout User logged out
+2025-12-11T10:40:10+01:00 ERROR 192.168.1.12 user:2 req:y5z6a7b8 action=create_order order_id=102 amount=19.99 Stock not available
+2025-12-11T10:50:32+01:00 DEBUG 192.168.1.20 user:4 req=g3h4i5j6 action=session_check Session valid

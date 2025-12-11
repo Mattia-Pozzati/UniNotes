@@ -1,14 +1,9 @@
 <?php
-require_once "../Core/Helper/Autoloader.php";
 
-use Core\Routing\Router;
-
-$router = new Router;
+require_once "../config/bootstrap.php";
 
 // carica tutte le route
-require __DIR__ . '/../config/routes.php';
-
-echo "Backend in sviluppo!<br>";
+require_once "../config/routes.php";
 
 $router->resolve();
 

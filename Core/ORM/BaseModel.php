@@ -1,9 +1,11 @@
 <?php
 namespace Core\ORM;
 
-use App\Database;
+use Core\Database\Database;
+use Core\Helper\Logger;
 use \PDO;
 use \Exception;
+
 
 
 // TODO: Capire se vogliamo mantenere le eccezioni, dichiarare un logger e fare log su file oppure mostrare messaggio a schermo
@@ -80,7 +82,13 @@ Class BaseModel implements BaseInterface{
             // Aggiunge la condizione WHERE "coloumn" "operator" "value"
             $this->conditions[] = [$column, $operator, $value];
         } else {
-            
+            Logger::getInstance()->error(
+                "Invalid where parameters", 
+                [
+                    "coloumn" => $column, 
+                    "operator" => $operator, 
+                    "value" => $value
+                ]);
             throw new Exception("ERROR: Invalid where parameters");
         }
         return $this;
@@ -97,6 +105,12 @@ Class BaseModel implements BaseInterface{
         if ($this->validate([$column]) && ($direction === "ASC" || $direction === "DESC")) {
             $this->order = "ORDER BY {$column} {$direction}";
         } else {
+            Logger::getInstance()->error(
+                "Invalid order_by parameters", 
+                [
+                    "column" => $column, 
+                    "direction" => $direction
+                ]);
             throw new Exception("ERROR: Invalid order_by parameters");
         }
         return $this;
@@ -111,6 +125,11 @@ Class BaseModel implements BaseInterface{
         if ($this->validate([$number]) && is_numeric($number)) {
             $this->limit = "LIMIT {$number}";
         } else {
+            Logger::getInstance()->error(
+                "Invalid limit parameters", 
+                [
+                    "number" => $number
+                ]);
             throw new Exception("ERROR: Invalid limit parameter");
         }
         return $this;
@@ -176,6 +195,7 @@ Class BaseModel implements BaseInterface{
      */
     public function update($data) {
         if (empty($this->conditions)) {
+            Logger::getInstance()->error("WHERE conditions required for update");
             throw new Exception("ERROR: WHERE conditions required for update");
         }
 
@@ -210,6 +230,7 @@ Class BaseModel implements BaseInterface{
     public function delete() {
         // Evito di cancellare tutta la tabella per errore
         if (empty($this->conditions)) {
+            Logger::getInstance()->error("WHERE conditions required for delete");
             throw new Exception("ERROR: WHERE conditions required for delete");
         }
 

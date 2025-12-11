@@ -13,5 +13,6 @@
  */
 
 $router->get('/', 'PageController@index');
+$router->get("/log", "LogController@show");
 
 ?>
