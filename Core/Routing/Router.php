@@ -1,6 +1,7 @@
 <?php
 namespace Core\Routing;
 
+use Core\Helper\Logger;
 use \Exception;
 
 /**
@@ -8,7 +9,19 @@ use \Exception;
  */
 class Router
 {
-    protected array $routes = [];
+    // Voglio accedere staticamente all'istanza (Pattern singleton)
+    private static ?Router $instance = null;
+    private array $routes = [];
+
+    private function __construct() {}
+
+    public static function getInstance() : Router {
+        if (!self::$instance) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+        Logger::getInstance()->info("Rilasciata istanza database a user");
+    }
 
     /**
      * Funzione wrapper generica. Definisce una rotta.
@@ -16,26 +29,22 @@ class Router
      * @param url -> url.
      * @param handler -> collable -> funzione da eseguire.
      */
-    public function add(string $method, string $url, $handler)
-    {
+    public function add(string $method, string $url, $handler) : void{
         $this->routes[] = compact('method', 'url', 'handler');
     }
 
-    public function get($url, $handler)
-    {
+    public function get($url, $handler) : void  {
         $this->add('GET', $url, $handler);
     }
 
-    public function post($url, $handler)
-    {
+    public function post($url, $handler): void {
         $this->add('POST', $url, $handler);
     }
 
     /**
      * Risolve la richiesta 
      */
-    public function resolve()
-    {
+    public function resolve() : mixed{
 
         $method = $_SERVER['REQUEST_METHOD'];
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -68,5 +77,6 @@ class Router
 
         http_response_code(404);
         echo "404 - Not Found";
+        return false;
     }
 }

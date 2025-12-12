@@ -34,7 +34,7 @@ Class BaseModel implements BaseInterface{
      * @param values -> Array di valori da valutare
      * @return true se tutte le variabili sono settate
      */
-    private function validate($values) {
+    private function validate($values) : bool {
         foreach ($values as $value) {
             if (!isset($value)) return false;
         }
@@ -51,7 +51,7 @@ Class BaseModel implements BaseInterface{
      * @param columns -> Campi da selezionare
      * @return this
      */
-    public function select($columns = ['*']) {
+    public function select($columns = ['*']) : BaseInterface {
         if (!empty($columns)) {
             $this->selects = $columns;
         }
@@ -75,7 +75,7 @@ Class BaseModel implements BaseInterface{
      * @param op -> operatore di verifica (==, >, <, ...)
      * @param value -> valore da valutare
      */
-    public function where($column, $operator, $value) {
+    public function where($column, $operator, $value) : BaseInterface {
         if ($this->validate([$column, $operator, $value])) {
             // Aggiunge la condizione WHERE "coloumn" "operator" "value"
             $this->conditions[] = [$column, $operator, $value];
@@ -99,7 +99,7 @@ Class BaseModel implements BaseInterface{
      * @param coloumn -> campo indice
      * @param direction -> crescente o decrescente
      */
-    public function order_by($column, $direction = "ASC") {
+    public function order_by($column, $direction = "ASC") : BaseInterface{
         $direction = strtoupper($direction);
         if ($this->validate([$column]) && ($direction === "ASC" || $direction === "DESC")) {
             $this->order = "ORDER BY {$column} {$direction}";
@@ -121,7 +121,7 @@ Class BaseModel implements BaseInterface{
      * 
      * @param number -> numero di entry da prendere
      */
-    public function limit($number) {
+    public function limit($number) : BaseInterface {
         if ($this->validate([$number]) && is_numeric($number)) {
             $this->limit = "LIMIT {$number}";
         } else {
@@ -139,7 +139,7 @@ Class BaseModel implements BaseInterface{
     /**
      * Performa la query composta finora
      */
-    public function get() {
+    public function get() : array {
         $pdo = Database::getInstance();
         $fields = implode(', ', $this->selects);
         $query = "SELECT $fields FROM {$this->table}";
@@ -166,7 +166,7 @@ Class BaseModel implements BaseInterface{
     /**
      * Prende il primo riscontro
      */
-    public function first() {
+    public function first() : BaseInterface | null {
         $this->limit(1);
         $results = $this->get();
         return $results[0] ?? null;
@@ -178,7 +178,8 @@ Class BaseModel implements BaseInterface{
      * @param data -> istanza da inserire
      * @return #l'istanza inserita
      */
-    public function insert($data) {
+    public function insert($data) : string
+    {
         $pdo = Database::getInstance();
         $columns = implode(", ", array_keys($data));
         $placeholders = implode(", ", array_fill(0, count($data), "?"));
@@ -188,7 +189,14 @@ Class BaseModel implements BaseInterface{
         $stmt->execute(array_values($data));
 
         $last_id = $pdo->lastInsertId();
-        Logger::getInstance()->info("Entry inserita con successo", ["id" => $last_id]);
+
+        Logger::getInstance()->warning(
+            $last_id ? "Entry inserita con successo" : "Entry non inserita con successo", 
+            [
+                "id" => $last_id
+            ]
+        );
+        
         return $last_id;
     }
 
@@ -197,7 +205,8 @@ Class BaseModel implements BaseInterface{
      * 
      * @param data -> nuovi dati dell'istanza
      */
-    public function update($data) {
+    public function update($data) : bool
+    {
         if (empty($this->conditions)) {
             Logger::getInstance()->error("WHERE conditions required for update");
             throw new Exception("ERROR: WHERE conditions required for update");
@@ -231,7 +240,7 @@ Class BaseModel implements BaseInterface{
      * Delete SQL
      * 
      */
-    public function delete()
+    public function delete() : bool
     {
         // Evito di cancellare tutta la tabella per errore
         if (empty($this->conditions)) {
@@ -252,14 +261,14 @@ Class BaseModel implements BaseInterface{
         return $stmt->execute($params);
     }
 
-    public static function all() : BaseModel
+    public static function all() : array | BaseInterface
     { 
         return (new static())->get();
     }
 
-    public static function find($id) : BaseModel
+    public static function find($id) : BaseInterface
     {
-        return (new static())->where("id", "=", $id)->first();
+        return (new static())->where("id", "=", $id)-> first();
     }
 }
 

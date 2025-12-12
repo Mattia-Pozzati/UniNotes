@@ -7,8 +7,9 @@ class LogController
 {
     public function show()
     {
-        Logger::getInstance()->info("Mostra log");
-        require_once __DIR__."/../View/template/log.php";
+        // TODO: Da togliere dal commento in prod
+        // Logger::getInstance()->info("Mostra log");
+        require_once __DIR__."/../../public/log.php";
     }
 }
 

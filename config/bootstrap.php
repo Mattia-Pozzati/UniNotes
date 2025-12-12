@@ -6,10 +6,11 @@ require_once "../Core/Helper/Autoloader.php";
 use Core\Routing\Router;
 use Core\Helper\Logger;
 
-$router = new Router;
+Router::getInstance();
 
 Logger::getInstance(__DIR__ . '/../storage/logs/log.log');
-Logger::getInstance()->info("Init...")
+// TODO: Da togliere dal commento in prod
+// Logger::getInstance()->info("Init...")
 
 
 ?>

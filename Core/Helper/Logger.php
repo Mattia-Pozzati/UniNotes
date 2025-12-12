@@ -20,8 +20,7 @@ class Logger
         $this->log_file = $filepath;
     }
 
-    public static function getInstance(string $filepath=""): Logger
-    {
+    public static function getInstance(string $filepath=""): Logger {
         if (self::$instance === null) {
             if ($filepath === "" ){
                 throw new Exception("Error: Devi fornire filepath", 1);
@@ -38,8 +37,7 @@ class Logger
      * @param level -> livello del log (INFO, DEBUG, ERROR)
      * @param context -> array associativo per informazioni aggiutive
      */
-    public function log_to_file(string $msg, string $level = 'INFO', array $context = []): void
-    {
+    public function log_to_file(string $msg, string $level = 'INFO', array $context = []): void {
         // data e ora
         $timestamp = date('c');
 
@@ -112,6 +110,14 @@ class Logger
      */
     public function error(string $message, array $context = []){
         $this->log_to_file($message, "ERROR", $context);
+    }
+
+     /**
+     * Fatto apposta per log di info. Se lo vedi scappa più lontano che puoi
+     * Chiama log_to_file
+     */
+    public function warning(string $message, array $context = []){
+        $this->log_to_file($message, "WARNING", $context);
     }
 }
 

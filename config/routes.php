@@ -1,5 +1,7 @@
 <?php
 
+use Core\Routing\Router;
+
 /**
  * Rotte rest API:
  * 
@@ -12,7 +14,7 @@
  * Potremo direttamente scrivere funzioni anonime ma credo sia più pulito creare controller specializzati.
  */
 
-$router->get('/', 'PageController@index');
-$router->get("/log", "LogController@show");
+Router::getInstance()->get('/', 'PageController@index');
+Router::getInstance()->get("/log", "LogController@show");
 
 ?>

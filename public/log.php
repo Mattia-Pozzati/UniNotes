@@ -1,6 +1,6 @@
 <?php
 // Percorso file log
-$logFile = __DIR__ ."/../../../storage/logs/log.log";
+$logFile = __DIR__ ."/../storage/logs/log.log";
 
 // Colori per livello
 $colors = [
@@ -19,18 +19,7 @@ $lines = file_exists($logFile) ? file($logFile, FILE_IGNORE_NEW_LINES | FILE_SKI
 <head>
     <meta charset="UTF-8">
     <title>Log Viewer</title>
-    <style>
-        body {
-            font-family: monospace;
-            background: #f8f9fa;
-            padding: 20px;
-        }
-        .log-line {
-            padding: 4px 8px;
-            margin-bottom: 2px;
-            border-radius: 4px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/log.css">
 </head>
 <body>
     <h1>Log Viewer</h1>

@@ -16,7 +16,9 @@ interface BaseInterface {
     public function insert($data);
     public function update($data);
     public function delete();
-
+    public function first();
+    public static function all();
+    public static function find($id);
 }
 
 

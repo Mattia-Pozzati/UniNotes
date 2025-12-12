@@ -10,8 +10,8 @@ use \PDO;
 
 class Database {
     // Voglio accedere staticamente all'istanza (Pattern singleton)
-    private static $instance = null;
-    private $pdo;
+    private static ?Database $instance = null;
+    private PDO $pdo;
 
     //TODO cambiare con effettivi parametri connessione al db
     private function __construct() {
@@ -24,7 +24,7 @@ class Database {
         Logger::getInstance()->info("Connessione al database riuscita");
     }
 
-    public static function getInstance() {
+    public static function getInstance() : PDO { 
         if (!self::$instance) {
             self::$instance = new self();
         }
