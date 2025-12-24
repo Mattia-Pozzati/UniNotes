@@ -1,4 +1,3 @@
-Cose da fare ora:
 project-root/
 │
 ├─ public/                   # Document root esposta al webserver
@@ -43,3 +42,29 @@ project-root/
 ├─ .env                      # Variabili di ambiente (ignorato in git)
 ├─ composer.json             # Anche solo per autoload PSR-4
 └─ README.md
+
+
+
+
+
+
+
+Suddivisione lavori
+
+
+
+Tommaso Nori
+1. AREA PUBBLICA
+   └── Landing
+   └── Login / Registrazione
+
+Mattia Pozzati
+2. AREA UTENTE
+   └── Feed / Search
+   └── Singola Nota
+   └── Like & Commenti
+
+Simone Brunelli
+3. AREA PROFILO
+   └── Profilo
+   └── Crea / Modifica / Elimina Note
