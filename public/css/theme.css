@@ -1,0 +1,329 @@
+/* =========================================================
+   THEME.CSS COMPLETO PER LIGHT / DARK MODE
+   Bootstrap 5.3 - Variabili CSS centralizzate
+   ========================================================= */
+
+/* =========================================================
+   DESIGN TOKENS
+   → Qui definisci i TUOI colori (non Bootstrap)
+   → Cambi questi → cambia tutto il sito
+   ========================================================= */
+:root {
+  --color-primary: #735234;          /* CTA, bottoni primari, link */
+  --color-secondary: #242424;       /* Azioni secondarie */
+  --color-success: #198754;          /* Operazioni riuscite */
+  --color-danger: #dc3545;           /* Errori o eliminazioni */
+  --color-warning: #ffc107;          /* Avvisi */
+  --color-info: #0dcaf0;             /* Informazioni */
+  --color-bg: #ffffff;               /* Sfondo pagina */
+  --color-text: #000000;             /* Testo principale */
+  --color-text-muted: #666666;       /* Testo secondario */
+  --color-border: #dddddd;           /* Bordi */
+}
+
+/* =========================================================
+   BOOTSTRAP BRIDGE
+   → Mappa i token alle variabili Bootstrap
+   ========================================================= */
+:root {
+  --bs-primary: var(--color-primary);
+  --bs-primary-rgb: 115,82,52;
+
+  --bs-secondary: var(--color-secondary);
+  --bs-secondary-rgb: 77,77,77;
+
+  --bs-success: var(--color-success);
+  --bs-success-rgb: 25,135,84;
+
+  --bs-danger: var(--color-danger);
+  --bs-danger-rgb: 220,53,69;
+
+  --bs-warning: var(--color-warning);
+  --bs-warning-rgb: 255,193,7;
+
+  --bs-info: var(--color-info);
+  --bs-info-rgb: 13,202,240;
+
+  /* Layout globale */
+  --bs-body-bg: var(--color-bg);
+  --bs-body-color: var(--color-text);
+
+  /* Testi */
+  --bs-secondary-color: var(--color-text-muted);
+  --bs-heading-color: var(--color-text);
+
+  /* Bordi */
+  --bs-border-color: var(--color-border);
+}
+
+/* =========================================================
+   DARK MODE
+   → Attivo con <html data-bs-theme="dark">
+   ========================================================= */
+[data-bs-theme="dark"] {
+  --color-primary: #9F51FF;
+  --color-secondary: #242424;
+  --color-success: #28a745;
+  --color-danger: #dc3545;
+  --color-warning: #ffc107;
+  --color-info: #0dcaf0;
+  --color-bg: #000000;
+  --color-text: #ffffff;
+  --color-text-muted: #aaaaaa;
+  --color-border: #333333;
+
+  /* Bootstrap bridge */
+  --bs-primary: var(--color-primary);
+  --bs-primary-rgb: 159,81,255;
+
+  --bs-secondary: var(--color-secondary);
+  --bs-secondary-rgb: 255,255,255;
+
+  --bs-success: var(--color-success);
+  --bs-success-rgb: 40,167,69;
+
+  --bs-danger: var(--color-danger);
+  --bs-danger-rgb: 220,53,69;
+
+  --bs-warning: var(--color-warning);
+  --bs-warning-rgb: 255,193,7;
+
+  --bs-info: var(--color-info);
+  --bs-info-rgb: 13,202,240;
+
+  /* Layout globale */
+  --bs-body-bg: var(--color-bg);
+  --bs-body-color: var(--color-text);
+
+  /* Testi */
+  --bs-secondary-color: var(--color-text-muted);
+  --bs-heading-color: var(--color-text);
+
+  /* Bordi */
+  --bs-border-color: var(--color-border);
+}
+
+/* =========================================================
+   BODY E HEADING
+   → Applicazione globale delle variabili
+   ========================================================= */
+body {
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+}
+
+
+h1,h2,h3,h4,h5,h6 {
+  color: var(--bs-heading-color);
+}
+
+/* =========================================================
+   NOTE
+   - Usa SOLO classi Bootstrap standard
+   - NON sovrascrivere .btn-primary ecc.
+   - Cambia solo i token sopra
+   ========================================================= */
+/* =========================================================
+   FORZATURA COMPONENTI BOOTSTRAP
+   → Applica le variabili a tutti i componenti Bootstrap
+   ========================================================= */
+
+/* Bottoni */
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: color-mix(in srgb, var(--bs-primary) 85%, black);
+  --bs-btn-hover-border-color: color-mix(in srgb, var(--bs-primary) 85%, black);
+  --bs-btn-focus-shadow-rgb: var(--bs-primary-rgb);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: color-mix(in srgb, var(--bs-primary) 85%, black);
+  --bs-btn-active-border-color: color-mix(in srgb, var(--bs-primary) 85%, black);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: var(--bs-primary);
+  --bs-btn-disabled-border-color: var(--bs-primary);
+}
+
+.btn-secondary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--bs-secondary);
+  --bs-btn-border-color: var(--bs-secondary);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: color-mix(in srgb, var(--bs-secondary) 85%, black);
+  --bs-btn-hover-border-color: color-mix(in srgb, var(--bs-secondary) 85%, black);
+}
+
+.btn-success {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--bs-success);
+  --bs-btn-border-color: var(--bs-success);
+}
+
+.btn-danger {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--bs-danger);
+  --bs-btn-border-color: var(--bs-danger);
+}
+
+.btn-warning {
+  --bs-btn-color: #000;
+  --bs-btn-bg: var(--bs-warning);
+  --bs-btn-border-color: var(--bs-warning);
+}
+
+.btn-info {
+  --bs-btn-color: #000;
+  --bs-btn-bg: var(--bs-info);
+  --bs-btn-border-color: var(--bs-info);
+}
+
+/* Badge */
+.badge.bg-primary {
+  background-color: var(--bs-primary) !important;
+}
+
+.badge.bg-secondary {
+  background-color: var(--bs-secondary) !important;
+}
+
+.badge.bg-success {
+  background-color: var(--bs-success) !important;
+}
+
+.badge.bg-danger {
+  background-color: var(--bs-danger) !important;
+}
+
+.badge.bg-warning {
+  background-color: var(--bs-warning) !important;
+}
+
+.badge.bg-info {
+  background-color: var(--bs-info) !important;
+}
+
+/* Alert */
+.alert-primary {
+  --bs-alert-color: var(--bs-primary);
+  --bs-alert-bg: color-mix(in srgb, var(--bs-primary) 15%, transparent);
+  --bs-alert-border-color: color-mix(in srgb, var(--bs-primary) 50%, transparent);
+}
+
+.alert-secondary {
+  --bs-alert-color: var(--bs-secondary);
+  --bs-alert-bg: color-mix(in srgb, var(--bs-secondary) 15%, transparent);
+  --bs-alert-border-color: color-mix(in srgb, var(--bs-secondary) 50%, transparent);
+}
+
+.alert-success {
+  --bs-alert-color: var(--bs-success);
+  --bs-alert-bg: color-mix(in srgb, var(--bs-success) 15%, transparent);
+  --bs-alert-border-color: color-mix(in srgb, var(--bs-success) 50%, transparent);
+}
+
+.alert-danger {
+  --bs-alert-color: var(--bs-danger);
+  --bs-alert-bg: color-mix(in srgb, var(--bs-danger) 15%, transparent);
+  --bs-alert-border-color: color-mix(in srgb, var(--bs-danger) 50%, transparent);
+}
+
+.alert-warning {
+  --bs-alert-color: var(--bs-warning);
+  --bs-alert-bg: color-mix(in srgb, var(--bs-warning) 15%, transparent);
+  --bs-alert-border-color: color-mix(in srgb, var(--bs-warning) 50%, transparent);
+}
+
+.alert-info {
+  --bs-alert-color: var(--bs-info);
+  --bs-alert-bg: color-mix(in srgb, var(--bs-info) 15%, transparent);
+  --bs-alert-border-color: color-mix(in srgb, var(--bs-info) 50%, transparent);
+}
+
+/* Link */
+a {
+  color: var(--bs-primary);
+}
+
+a:hover {
+  color: color-mix(in srgb, var(--bs-primary) 85%, black);
+}
+
+/* Progress bar */
+.progress-bar {
+  background-color: var(--bs-primary);
+}
+
+.bg-primary {
+  background-color: var(--bs-primary) !important;
+}
+
+.bg-secondary {
+  background-color: var(--bs-secondary) !important;
+}
+
+.bg-success {
+  background-color: var(--bs-success) !important;
+}
+
+.bg-danger {
+  background-color: var(--bs-danger) !important;
+}
+
+.bg-warning {
+  background-color: var(--bs-warning) !important;
+}
+
+.bg-info {
+  background-color: var(--bs-info) !important;
+}
+
+/* Text colors */
+.text-primary {
+  color: var(--bs-primary) !important;
+}
+
+.text-secondary {
+  color: var(--bs-secondary) !important;
+}
+
+.text-success {
+  color: var(--bs-success) !important;
+}
+
+.text-danger {
+  color: var(--bs-danger) !important;
+}
+
+.text-warning {
+  color: var(--bs-warning) !important;
+}
+
+.text-info {
+  color: var(--bs-info) !important;
+}
+
+/* Border colors */
+.border-primary {
+  border-color: var(--bs-primary) !important;
+}
+
+.border-secondary {
+  border-color: var(--bs-secondary) !important;
+}
+
+.border-success {
+  border-color: var(--bs-success) !important;
+}
+
+.border-danger {
+  border-color: var(--bs-danger) !important;
+}
+
+.border-warning {
+  border-color: var(--bs-warning) !important;
+}
+
+.border-info {
+  border-color: var(--bs-info) !important;
+}
