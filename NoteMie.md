@@ -68,3 +68,11 @@ Simone Brunelli
 3. AREA PROFILO
    └── Profilo
    └── Crea / Modifica / Elimina Note
+
+
+
+
+
+
+Componenti bootstrap:
+- Button: Primary

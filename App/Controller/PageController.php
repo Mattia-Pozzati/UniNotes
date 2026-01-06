@@ -1,12 +1,12 @@
 <?php
 namespace App\Controller;
+use App\View\View;
 
 class PageController
 {
     public function index()
     {
-        echo "ciao";
-
+        View::render('home',["title" => "Home"]);
     }
 }
 
