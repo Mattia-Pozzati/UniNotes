@@ -235,6 +235,7 @@ erDiagram
         int student_id FK
         text content
         date created_at
+        int parent_comment_id FK "nullable, references COMMENT.id"
     }
 
     LIKE {
@@ -252,10 +253,17 @@ erDiagram
         date created_at
     }
 
+    NOTE_DOWNLOAD {
+        int student_id FK
+        int note_id FK
+        date downloaded_at
+    }
+
     USER ||--o{ NOTE : writes
     NOTE ||--o{ FILE : "has files"
     FILE ||--o{ FILE_VERSION : "has versions"
     NOTE ||--o{ COMMENT : "has comments"
+    COMMENT ||--o{ COMMENT : "has replies"
     USER ||--o{ COMMENT : writes
     NOTE ||--o{ LIKE : "is liked by"
     USER ||--o{ LIKE : likes
@@ -264,6 +272,9 @@ erDiagram
     NOTE ||--o{ NOTE_TAG : "tagged with"
     TAG ||--o{ NOTE_TAG : tags
     USER ||--o{ NOTIFICATION : receives
+    USER ||--o{ NOTE_DOWNLOAD : "downloads"
+    NOTE ||--o{ NOTE_DOWNLOAD : "is downloaded by"
+
 
 ```
 ## UML
