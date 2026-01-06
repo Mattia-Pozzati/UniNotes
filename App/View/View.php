@@ -1,8 +1,49 @@
 <?php
 namespace App\View;
 
+use Core\Helper\Logger;
+
 class View {
-    public static function render(string $view, array $data = []): void
+    public static function render(string $view, string $type, array $data = []): void
+    {
+        match ($type) {
+            "component" => self::renderComponent($view, $data),
+            "page" => self::renderPage($view, $data),
+            default => Logger::getInstance()->error("View not found", ["view" => $view])
+        };
+    }
+
+    /**
+     * Stampa direttamente un componente (utile per componenti statici)
+     */
+    public static function renderComponent(string $view, array $data = []): void
+    {
+        echo self::getComponent($view, $data);
+    }
+
+    /**
+     * Ritorna il contenuto di un componente come stringa (utile per componenti dinamici)
+     */
+    public static function getComponent(string $view, array $data = []): string
+    {
+        // Path del componente
+        $viewFile = __DIR__.'/components/'.$view.'.php';
+
+        if (!file_exists($viewFile)) {
+            Logger::getInstance()->error("View not found", ["view" => $view]);
+            throw new \RuntimeException("View not found: {$viewFile}");
+        }
+
+        // Data del componente
+        extract($data, EXTR_SKIP);
+
+        // Contenuto specifico del componente
+        ob_start();
+        require $viewFile;
+        return ob_get_clean();
+    }
+
+    public static function renderPage(string $view, array $data = []): void
     {
         // Path della view "interna"
         $viewFile = __DIR__.'/pages/'.$view.'.php';
@@ -23,8 +64,3 @@ class View {
         require __DIR__ . '/template/base.php';
     }
 }
-
-
-
-
-?>

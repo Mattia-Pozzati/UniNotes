@@ -6,7 +6,7 @@ class PageController
 {
     public function index()
     {
-        View::render('home',["title" => "Home"]);
+        View::render('home',"page", ["title" => "Home"]);
     }
 }
 

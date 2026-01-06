@@ -380,3 +380,13 @@ classDiagram
     User "1" --> "0..*" Notification : receives
 
 ```
+
+
+
+
+
+
+
+
+TODO:
+- Mettere paginazione

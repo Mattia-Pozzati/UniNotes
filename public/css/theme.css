@@ -10,7 +10,7 @@
    ========================================================= */
 :root {
   --color-primary: #735234;          /* CTA, bottoni primari, link */
-  --color-secondary: #242424;       /* Azioni secondarie */
+  --color-secondary: #000000;       /* Azioni secondarie */
   --color-success: #198754;          /* Operazioni riuscite */
   --color-danger: #dc3545;           /* Errori o eliminazioni */
   --color-warning: #ffc107;          /* Avvisi */
@@ -18,7 +18,7 @@
   --color-bg: #ffffff;               /* Sfondo pagina */
   --color-text: #000000;             /* Testo principale */
   --color-text-muted: #666666;       /* Testo secondario */
-  --color-border: #dddddd;           /* Bordi */
+  --color-border: #735234;           /* Bordi */
 }
 
 /* =========================================================
@@ -30,7 +30,7 @@
   --bs-primary-rgb: 115,82,52;
 
   --bs-secondary: var(--color-secondary);
-  --bs-secondary-rgb: 77,77,77;
+  --bs-secondary-rgb: 0,0,0;
 
   --bs-success: var(--color-success);
   --bs-success-rgb: 25,135,84;
@@ -62,7 +62,7 @@
    ========================================================= */
 [data-bs-theme="dark"] {
   --color-primary: #9F51FF;
-  --color-secondary: #242424;
+  --color-secondary: #ffffff;
   --color-success: #28a745;
   --color-danger: #dc3545;
   --color-warning: #ffc107;
@@ -70,7 +70,7 @@
   --color-bg: #000000;
   --color-text: #ffffff;
   --color-text-muted: #aaaaaa;
-  --color-border: #333333;
+  --color-border: #9F51FF;
 
   /* Bootstrap bridge */
   --bs-primary: var(--color-primary);

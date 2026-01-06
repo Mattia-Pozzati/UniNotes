@@ -14,13 +14,13 @@
 
 <body class="d-flex flex-column min-vh-100">
 
-    <?php require_once __DIR__.'/../components/header.php'?>
+    <?php \App\View\View::render("header", "component") ?>
 
-    <main class="container-fluid" >
+    <main class="container-fluid p-5 " >
         <?= $content ?? '' ?>
     </main>
 
-    <?php require_once __DIR__.'/../components/footer.php'?>
+    <?php \App\View\View::render('footer', "component"); ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/DarkLightToggle.js"></script>
