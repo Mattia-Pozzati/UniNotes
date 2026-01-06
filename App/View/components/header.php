@@ -1,46 +1,94 @@
 <header class="p-5">
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light"
+        aria-label="Barra di navigazione principale">
+
         <div class="container-fluid p-0">
-            <h5><a class="navbar-brand" href="#">Uninotes</a></h5>
-            <!-- Navbar desktop -->
-            <div class="collapse navbar-collapse d-none d-lg-flex justify-content-between align-items-center">
+
+            <a class="navbar-brand fw-bold" href="#">Uninotes</a>
+
+            <!-- Link desktop -->
+            <div 
+                class="collapse 
+                    navbar-collapse 
+                    d-none 
+                    d-lg-flex 
+                    justify-content-between 
+                    align-items-center">
+
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Chi siamo</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Servizi</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contatti</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" aria-current="page">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Chi siamo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Servizi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contatti</a>
+                    </li>
                 </ul>
             </div>
 
-            <div class="d-flex gap-1"> 
-                <button class="btn w-100" id="themeToggle">
-                    <i class="bi bi-moon "></i>
+            <div class="d-flex gap-1">
+
+                <button class="btn" id="themeToggle" aria-label="Toogle tema">
+                    <i class="bi bi-moon " aria-hidden="true"></i>
                 </button>
-                <button class="btn btn-primary" id="loginBtn">Login</button>
+
+                <button class="btn btn-primary" id="loginBtn">
+                    Login
+                </button>
+
                 <!-- Hamburger mobile -->
-                <button class="btn d-lg-none" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#mobileMenu" aria-controls="mobileMenu">
-                    <i class="bi bi-list"></i>
+                <button class="btn d-lg-none"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#mobileMenu"
+                    aria-controls="mobileMenu">
+                    <i class="bi bi-list" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
     </nav>
 
     <!-- Offcanvas mobile -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu">
+    <nav
+        class="offcanvas offcanvas-start"
+        tabindex="-1"
+        id="mobileMenu"
+        aria-label="mobileMunu">
+
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title p-5">Uninotes</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            <h2 class="offcanvas-title p-5">Uninotes</h2>
+            <button 
+                type="button" 
+                class="btn-close" 
+                data-bs-dismiss="offcanvas">
+            </button>
         </div>
-        <div class="offcanvas-body d-flex justify-content-center align-items-start p-5 h-100">
+        <div class="offcanvas-body 
+                    d-flex 
+                    justify-content-center 
+                    align-items-start 
+                    p-5 
+                    h-100">
+
             <ul class="navbar-nav d-flex gap-5">
-                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">About-Us</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Reward</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" aria-current="page">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About-Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Reward</a>
+                </li>
             </ul>
         </div>
-    </div>
+    </nav>
 
 </header>
