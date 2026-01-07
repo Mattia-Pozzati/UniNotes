@@ -12,13 +12,17 @@
     
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="container-fluid">
 
     <?php \App\View\View::render("header", "component") ?>
-
-    <main class="container-fluid p-5 " >
-        <?= $content ?? '' ?>
-    </main>
+    
+    <div class="row">
+        <div class="col-1"></div>
+        <main class="col-10" >
+            <?= $content ?? '' ?>
+        </main>
+        <div class="col-1"></div>
+    </div>
 
     <?php \App\View\View::render('footer', "component"); ?>
 

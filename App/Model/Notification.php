@@ -13,7 +13,7 @@ class Notification extends BaseModel{
     protected $table = "notification";
     private $id; // Identificatico univoco 
     private $student_id; // Studente autore
-    private $type; // [sistena, like, commento]
+    private $type; // [sistema, like, commento]
     private $message;
     private $is_read;
     private $created_at;

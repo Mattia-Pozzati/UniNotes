@@ -1,4 +1,4 @@
-<header class="p-5">
+<header class="row p-5">
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light"
