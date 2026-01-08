@@ -61,6 +61,6 @@ class View {
         $content = ob_get_clean();
 
         // Include il layout base che userà $content e, se vuoi, $title
-        require __DIR__ . '/template/base.php';
+        require __DIR__ . '/Template/base.php';
     }
 }

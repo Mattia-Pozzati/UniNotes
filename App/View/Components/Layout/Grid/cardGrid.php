@@ -18,14 +18,14 @@ $showPagination = $currentPage !== null && $totalPages !== null;
     <div class="row g-3 g-md-5">
         <?php foreach ($cards as $card): ?>
             <div class="col-12 col-md-<?= 12 / $columnsTablet ?> col-lg-<?= 12 / $columnsDesktop ?>">
-                <?= \App\View\View::getComponent($component, ["card" => $card]) ?>
+                <?= \App\View\View::getComponent( $component, ["card" => $card]) ?>
             </div>
         <?php endforeach; ?>
     </div>
     
     <?php if ($showPagination && $totalPages > 1): ?>
         <?php
-        $buildUrl = function($page) use ($baseUrl, $queryParams, $pageParam) {
+        $buildUrl = function($page) use ($baseUrl, $queryParams, $pageParam): string {
             $params = array_merge($queryParams, [$pageParam => $page]);
             return $baseUrl . '?' . http_build_query($params);
         };

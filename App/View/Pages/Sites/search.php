@@ -1,0 +1,25 @@
+<?php
+$q = $q ?? '';
+$cards = $cards ?? [];  // <-- cambia da $notes a $cards
+$currentPage = $currentPage ?? null;
+$totalPages = $totalPages ?? null;
+$queryParams = $queryParams ?? ['q' => $q];  // <-- aggiungi questo
+?>
+
+<?= \App\View\View::getComponent('Base/sectionHeader', [
+    'titolo' => 'Cerca note',
+    'p' => 'Trova appunti, PDF, riassunti'
+]) ?>
+
+<?= \App\View\View::getComponent('Forms/searchForm') ?>
+
+<?= \App\View\View::getComponent('Layout/Grid/cardGrid', [
+    'cards' => $cards,
+    'columnsTablet' => 2,
+    'columnsDesktop' => 3,
+    'component' => "Cards/noteCard",
+    'currentPage' => $currentPage,
+    'totalPages' => $totalPages,
+    'baseUrl' => '/search',
+    'queryParams' => $queryParams,
+]) ?>
