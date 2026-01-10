@@ -45,12 +45,19 @@ $buttons = $buttons ?? [
         <footer class="card-footer d-flex justify-content-center gap-2">
             <?php foreach ($buttons as $index => $btn): ?>
                 <?php if ($buttonsEnabled[$index] ?? false): ?>
-                    <a href="<?= htmlspecialchars($btn['link'] ?? '#') ?>" class="btn <?= htmlspecialchars($btn['class'] ?? 'btn-primary') ?>">
-                        <?= htmlspecialchars($btn['text'] ?? 'Button') ?>
-                        <?php if (!empty($btn['icon'])): ?>
-                            <i class="bi <?= htmlspecialchars($btn["icon-class"]) ?> fw-bold ms-1"></i>
-                        <?php endif; ?>
-                    </a>
+                    <a  href="<?= htmlspecialchars($btn['link'] ?? '#') ?>"
+    class="btn <?= htmlspecialchars($btn['class'] ?? 'btn-primary') ?>"
+    aria-label="<?= trim($btn['text'] ?? '') !== '' ? htmlspecialchars($btn['text']) : htmlspecialchars($btn['icon-class'] ?? 'Azione') ?>">
+        
+    <?php if (trim($btn['text'] ?? '') !== ''): ?>
+        <?= htmlspecialchars($btn['text']) ?>
+    <?php endif ?>
+
+    <?php if (!empty($btn['icon'])): ?>
+        <i class="bi <?= htmlspecialchars($btn["icon-class"]) ?> fw-bold ms-1" aria-hidden="true"></i>
+    <?php endif ?>
+</a>
+
                 <?php endif; ?>
             <?php endforeach; ?>
         </footer>

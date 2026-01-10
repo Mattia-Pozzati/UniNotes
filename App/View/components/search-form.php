@@ -1,8 +1,8 @@
 <form class="container px-3">
     <section class="row">
         <div class="col-10 mb-3">
-            <label for="searchbar" class="form-label" value="Analisi-1"></label>
-            <input type="text" class="form-control" id="searchbar" aria-describedby="searchbar">
+            <label for="searchbar" class="form-label"></label>
+            <input type="text" class="form-control" id="searchbar" aria-describedby="searchbar" aria-label="searchbar">
         </div>
         <button type="submit" class="btn col-2">
             <i class="bi bi-search"></i>

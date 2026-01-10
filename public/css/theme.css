@@ -61,7 +61,7 @@
    → Attivo con <html data-bs-theme="dark">
    ========================================================= */
 [data-bs-theme="dark"] {
-  --color-primary: #9F51FF;
+  --color-primary: #5f19b5;
   --color-secondary: #ffffff;
   --color-success: #28a745;
   --color-danger: #dc3545;
@@ -70,7 +70,7 @@
   --color-bg: #000000;
   --color-text: #ffffff;
   --color-text-muted: #aaaaaa;
-  --color-border: #9F51FF;
+  --color-border: #5f19b5;
 
   /* Bootstrap bridge */
   --bs-primary: var(--color-primary);
@@ -326,4 +326,43 @@ a:hover {
 
 .border-info {
   border-color: var(--bs-info) !important;
+}
+
+
+/* FIxx Access Error */
+
+button:focus,
+button:focus-visible {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+}
+
+/* LIGHT MODE */
+button.btn.btn-outline-secondary.btn-sm[disabled] {
+    color: #000 !important;
+    border-color: #000 !important;
+    opacity: 1 !important;
+}
+
+/* DARK MODE */
+[data-bs-theme="dark"] button.btn.btn-outline-secondary.btn-sm:disabled {
+    color: #fff !important;
+    border-color: #fff !important;
+    opacity: 1 !important;
+}
+
+/* LIGHT */
+a.btn.btn-outline-secondary[aria-label="Like"] {
+    color: #000 !important;
+    border-color: #000 !important;
+}
+
+/* DARK */
+[data-bs-theme="dark"] a.btn.btn-outline-secondary[aria-label="Like"] {
+    color: #fff !important;
+    border-color: #fff !important;
+}
+
+[data-bs-theme="dark"] .bi-chat-left-dots {
+    color: #fff !important;
 }

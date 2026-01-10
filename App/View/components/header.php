@@ -19,7 +19,7 @@
 
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link" onClick="window.location.href='/'" aria-current="/">Home</a>
+                        <a class="nav-link" href="/index" aria-current="/">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Chi siamo</a>
@@ -48,7 +48,9 @@
                     type="button"
                     data-bs-toggle="offcanvas"
                     data-bs-target="#mobileMenu"
-                    aria-controls="mobileMenu">
+                    aria-controls="mobileMenu"
+                    aria-label="Apri menu"
+                    >
                     <i class="bi bi-list" aria-hidden="true"></i>
                 </button>
             </div>
