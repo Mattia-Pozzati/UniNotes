@@ -1,2 +1,2 @@
 .env.local
-Prove/
+Prove/storage/logs/*.log
