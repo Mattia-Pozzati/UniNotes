@@ -1,4 +1,5 @@
 <?php
+
 use Core\Routing\Router;
 
 require_once "../config/bootstrap.php";
