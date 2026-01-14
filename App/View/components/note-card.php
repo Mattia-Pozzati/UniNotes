@@ -6,8 +6,9 @@ $desc   = $desc ?? 'Descrizione non disponibile';
 $chatEnabled = $chatEnabled ?? false;
 $tags = $tags ?? ["PDF", "Note", "Salva"];
 $buttonsEnabled = $buttonsEnabled ?? [true, true];
+$noteId = $id ?? $noteData['id'] ?? 1;
 $buttons = $buttons ?? [
-    ["text" => "Primary", "icon" => true, "class" => "btn-primary", "link" => "#", "icon-class" => "bi-arrow-right"],
+    ["text" => "Primary", "icon" => true, "class" => "btn-primary", "link" => "/note/{$note['id']}", "icon-class" => "bi-arrow-right"],
     ["text" => "Like", "icon" => true, "class" => "btn-outline-secondary", "link" => "#", "icon-class" => "bi-hand-thumbs-up"]
 ];
 ?>
