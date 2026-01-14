@@ -20,7 +20,6 @@ class Router
             self::$instance = new self();
         }
         return self::$instance;
-        Logger::getInstance()->info("Rilasciata istanza database a user");
     }
 
     /**
@@ -49,16 +48,37 @@ class Router
         $method = $_SERVER['REQUEST_METHOD'];
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
+        // Rimuovi trailing slash se presente (tranne per la root)
+        if ($path !== '/' && str_ends_with($path, '/')) {
+            $path = rtrim($path, '/');
+        }
+
         foreach ($this->routes as $route) {
             [$routeMethod, $url, $handler] = [$route['method'], $route['url'], $route['handler']];
 
             // Ci possono essere rotte con metodi diversi ma stesso url 
             if ($routeMethod !== $method) continue;
 
-            $regex = "#^" . preg_replace('#\{[^}]+\}#', '([^/]+)', $url) . "$#";
+            // Converti la rotta in regex
+            // {id} diventa ([^/]+) - cattura tutto tranne /
+            // {nome} diventa ([^/]+) ecc.
+            $pattern = preg_replace('#\{[^\}]+\}#', '([^/]+)', $url);
+            $regex = "#^" . $pattern . "$#";
 
             if (preg_match($regex, $path, $matches)) {
-                array_shift($matches); // remove full match
+                array_shift($matches); // rimuovi il full match
+
+                // Log solo se Logger è già inizializzato
+                try {
+                    Logger::getInstance()->info("Route matched", [
+                        "method" => $method,
+                        "path" => $path,
+                        "route" => $url,
+                        "params" => implode(',', $matches)
+                    ]);
+                } catch (\Exception $e) {
+                    // Logger non ancora inizializzato, ignora
+                }
 
                 if (is_callable($handler)) {
                     return call_user_func_array($handler, $matches);
@@ -66,8 +86,27 @@ class Router
 
                 if (is_string($handler) && str_contains($handler, '@')) {
                     [$controller, $method] = explode('@', $handler);
-                    $controller = "App\\Controller\\$controller";
-                    $obj = new $controller;
+                    $controllerClass = "App\\Controller\\$controller";
+                    
+                    if (!class_exists($controllerClass)) {
+                        try {
+                            Logger::getInstance()->error("Controller not found", ["controller" => $controllerClass]);
+                        } catch (\Exception $e) {}
+                        throw new Exception("Controller non trovato: $controllerClass");
+                    }
+                    
+                    $obj = new $controllerClass;
+                    
+                    if (!method_exists($obj, $method)) {
+                        try {
+                            Logger::getInstance()->error("Method not found", [
+                                "controller" => $controllerClass,
+                                "method" => $method
+                            ]);
+                        } catch (\Exception $e) {}
+                        throw new Exception("Metodo non trovato: $method in $controllerClass");
+                    }
+                    
                     return call_user_func_array([$obj, $method], $matches);
                 }
 
@@ -75,8 +114,24 @@ class Router
             }
         }
 
+        try {
+            Logger::getInstance()->warning("404 - Route not found", [
+                "method" => $method,
+                "path" => $path
+            ]);
+        } catch (\Exception $e) {
+            // Logger non inizializzato
+        }
+
         http_response_code(404);
-        echo "404 - Not Found";
+        echo "404 - Not Found: " . htmlspecialchars($path);
         return false;
+    }
+
+    /**
+     * Restituisce tutte le rotte registrate (per debug)
+     */
+    public function getRoutes(): array {
+      return $this->routes;
     }
 }
