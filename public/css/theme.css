@@ -235,10 +235,16 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .alert-info {
-  --bs-alert-color: var(--bs-info);
-  --bs-alert-bg: color-mix(in srgb, var(--bs-info) 15%, transparent);
-  --bs-alert-border-color: color-mix(in srgb, var(--bs-info) 50%, transparent);
+    background-color: #fff;
+    color: #1a1a1a;
+    border-color: #000;
 }
+
+.alert-info.text\:dark {
+    background-color: #1a1a1a;
+    color: #e5e5e5;
+}
+
 
 /* Link */
 a {
@@ -365,4 +371,9 @@ a.btn.btn-outline-secondary[aria-label="Like"] {
 
 [data-bs-theme="dark"] .bi-chat-left-dots {
     color: #fff !important;
+}
+
+.bg-grey {
+    background-color: #4c474e !important;
+    color: #f0f0f0 !important;
 }
