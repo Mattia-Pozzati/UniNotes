@@ -16,9 +16,21 @@ use Core\Routing\Router;
 
 Router::getInstance()->get('/', 'PageController@index');
 Router::getInstance()->get('/search', 'PageController@search');
-Router::getInstance()->get('/admin', 'PageController@adminDashboard'); 
-Router::getInstance()->get("/log", "LogController@show");
+
+// Auth
+Router::getInstance()->get('/login', 'AuthController@showLogin');
+Router::getInstance()->post('/login', 'AuthController@Login');
+
+Router::getInstance()->get('/register', 'AuthController@showRegister');
+Router::getInstance()->post('/register', 'AuthController@register');
+
+Router::getInstance()->get('/logout', 'AuthController@logout');
+
+// Log
+Router::getInstance()->get("/log", "LogController@show");   
+
 Router::getInstance()->get('/user/dashboard', 'PageController@userDashboard');
+Router::getInstance()->get('/admin', 'PageController@adminDashboard');
 Router::getInstance()->post('/note/create', 'NoteController@create'); // per il form
 
 ?>

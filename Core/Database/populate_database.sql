@@ -1,90 +1,73 @@
-USE share_notes_app;
+USE `uninotes`;
 
--- -----------------------------
--- UTENTI
--- -----------------------------
-INSERT INTO user (name, email, password_hash, role, reputation) VALUES
-('Mario Rossi', 'mario.rossi@example.com', MD5('password1'), 'student', 10),
-('Lucia Bianchi', 'lucia.bianchi@example.com', MD5('password2'), 'student', 5),
-('Admin', 'admin@example.com', MD5('adminpass'), 'admin', 0);
+-- Clear existing (safe to run on dev)
+SET FOREIGN_KEY_CHECKS=0;
+-- use DELETE (safer with FK relationships / when running commands interactively)
+DELETE FROM NOTE_DOWNLOAD;
+DELETE FROM NOTIFICATION;
+DELETE FROM `LIKE`;
+DELETE FROM `COMMENT`;
+DELETE FROM NOTE_COURSE;
+DELETE FROM COURSE;
+DELETE FROM FILE;
+DELETE FROM NOTE;
+DELETE FROM `USER`;
+SET FOREIGN_KEY_CHECKS=1;
 
--- -----------------------------
--- CORSI
--- -----------------------------
-INSERT INTO course (name) VALUES
-('Matematica 1'),
-('Fisica 2'),
-('Informatica');
+-- Users
+INSERT INTO `USER` (id,name,email,password_hash,university,role,reputation) VALUES
+(1,'Alice Rossi','alice@example.com','$2y$…', 'Università di A', 'student', 10),
+(2,'Luca Bianchi','luca@example.com','$2y$…', 'Università di B', 'student', 5),
+(3,'Admin','admin@example.com','$2y$…', NULL, 'admin', 0);
 
--- -----------------------------
--- TAG
--- -----------------------------
-INSERT INTO tag (name) VALUES
-('riassunto'),
-('esercizi'),
-('formulario'),
-('teoria');
+-- Courses
+INSERT INTO COURSE (id,name) VALUES
+(1,'Analisi 1'),
+(2,'Fisica 1');
 
--- -----------------------------
--- NOTE
--- -----------------------------
-INSERT INTO note (student_id, title, visibility) VALUES
-(1, 'Appunti Matematica 1 - Integrali', 'public'),
-(2, 'Fisica 2 - Appunti Meccanica', 'course'),
-(1, 'Informatica - Algoritmi', 'private');
+-- Notes
+INSERT INTO NOTE (id,student_id,title,description,note_type,visibility,created_at,updated_at) VALUES
+(1,1,'Riassunto Analisi 1','Breve riassunto degli argomenti principali', 'riassunto','public', NOW(), NOW()),
+(2,2,'Esercizi Fisica','Soluzioni esercizi del capitolo 3', 'esercizi','course', NOW(), NOW()),
+(3,1,'Formulario Matematica','Formule utili per il compito', 'formulario','private', NOW(), NOW());
 
--- -----------------------------
--- NOTE ↔ CORSI
--- -----------------------------
-INSERT INTO note_course (note_id, course_id) VALUES
-(1, 1),
-(2, 2),
-(3, 3);
+-- Note-Course links
+INSERT INTO NOTE_COURSE (note_id,course_id) VALUES
+(1,1),
+(2,2);
 
--- -----------------------------
--- NOTE ↔ TAG
--- -----------------------------
-INSERT INTO note_tag (note_id, tag_id) VALUES
-(1, 1),
-(1, 3),
-(2, 2),
-(3, 4);
+-- Files (pointing to files/ directories — created by script)
+INSERT INTO FILE (id,note_id,filename,filepath,mime_type,size,format,hash) VALUES
+(1,1,'riassunto_analisi1.txt','files/note_1/file_1.txt','text/plain', 1234,'txt','hash1'),
+(2,2,'esercizi_fisica.txt','files/note_2/file_2.txt','text/plain', 2345,'txt','hash2'),
+(3,3,'formulario_mat.txt','files/note_3/file_3.txt','text/plain', 1500,'txt','hash3');
 
--- -----------------------------
--- FILE
--- -----------------------------
-INSERT INTO file (note_id, filename, filepath, mime_type, size, current_version) VALUES
-(1, 'integrali.pdf', '/files/note_1/file_1/v1.pdf', 'application/pdf', 204800, 1),
-(2, 'meccanica.docx', '/files/note_2/file_2/v1.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 102400, 1),
-(3, 'algoritmi.txt', '/files/note_3/file_3/v1.txt', 'text/plain', 1024, 1);
+-- Comments
+-- include created_at column to match values
+INSERT INTO `COMMENT` (id,note_id,student_id,content,created_at) VALUES
+(1,1,2,'Ottimo riassunto, grazie!', NOW()),
+(2,1,1,'Grazie a te!', NOW());
 
--- -----------------------------
--- FILE_VERSION
--- -----------------------------
-INSERT INTO file_version (file_id, version_number, filepath, size, hash) VALUES
-(1, 1, '/files/note_1/file_1/v1.pdf', 204800, MD5('v1')),
-(1, 2, '/files/note_1/file_1/v2.pdf', 205000, MD5('v2')),
-(2, 1, '/files/note_2/file_2/v1.docx', 102400, MD5('v1')),
-(3, 1, '/files/note_3/file_3/v1.txt', 1024, MD5('v1'));
+-- Likes
+INSERT INTO `LIKE` (student_id,note_id) VALUES
+(2,1),
+(1,2);
 
--- -----------------------------
--- COMMENTI
--- -----------------------------
-INSERT INTO comment (note_id, student_id, content) VALUES
-(1, 2, 'Ottimo riassunto, grazie!'),
-(2, 1, 'Non capisco il passaggio sulla dinamica.'),
-(3, 2, 'Interessante, puoi spiegare meglio l’algoritmo?');
+-- Notifications
+INSERT INTO NOTIFICATION (id,sender_id,recipient_id,type,message,payload) VALUES
+(1,2,1,'like','Luca ha messo like alla tua nota', JSON_OBJECT('note_id',1)),
+(2,1,2,'comment','Alice ha commentato la tua nota', JSON_OBJECT('note_id',1,'comment_id',1));
 
--- -----------------------------
--- LIKE
--- -----------------------------
-INSERT INTO `like` (student_id, note_id) VALUES
-(2, 1),
-(1, 2);
+-- Note downloads
+INSERT INTO NOTE_DOWNLOAD (student_id,note_id) VALUES
+(2,1),
+(1,2);
 
--- -----------------------------
--- NOTIFICHE
--- -----------------------------
-INSERT INTO notification (student_id, type, message) VALUES
-(1, 'like', 'Lucia ha messo like alla tua nota "Appunti Matematica 1 - Integrali".'),
-(2, 'comment', 'Mario ha commentato la tua nota "Fisica 2 - Appunti Meccanica".');
+-- Adjust AUTO_INCREMENTs
+ALTER TABLE `USER` AUTO_INCREMENT = 100;
+ALTER TABLE `NOTE` AUTO_INCREMENT = 100;
+ALTER TABLE `FILE` AUTO_INCREMENT = 100;
+ALTER TABLE `COMMENT` AUTO_INCREMENT = 100;
+ALTER TABLE `NOTIFICATION` AUTO_INCREMENT = 100;
+
+SELECT 'Seed complete' AS msg;

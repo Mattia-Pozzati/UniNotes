@@ -6,7 +6,7 @@
 
         <div class="container-fluid p-0">
 
-            <a class="navbar-brand fw-bold" href="#">Uninotes</a>
+            <a class="navbar-brand fw-bold" href="/">Uninotes</a>
 
             <!-- Link desktop -->
             <div 
@@ -19,7 +19,7 @@
 
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" aria-current="page">Home</a>
+                        <a class="nav-link" onClick="window.location.href='/'" aria-current="/">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Chi siamo</a>
@@ -39,7 +39,7 @@
                     <i class="bi bi-moon " aria-hidden="true"></i>
                 </button>
 
-                <button class="btn btn-primary" id="loginBtn">
+                <button class="btn btn-primary" id="loginBtn" onClick="window.location.href='/login'">
                     Login
                 </button>
 
@@ -79,7 +79,7 @@
 
             <ul class="navbar-nav d-flex gap-5">
                 <li class="nav-item">
-                    <a class="nav-link" href="#" aria-current="page">Home</a>
+                    <a class="nav-link" onClick="window.location.href='/'" aria-current="/">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">About-Us</a>

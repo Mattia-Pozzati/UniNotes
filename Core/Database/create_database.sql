@@ -1,112 +1,126 @@
--- Creazione del database  
-CREATE DATABASE IF NOT EXISTS uninotes CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE uninotes;
+-- Schema creation for MySQL / MariaDB
+CREATE DATABASE IF NOT EXISTS `uninotes` CHARACTER SET = 'utf8mb4' COLLATE = 'utf8mb4_unicode_ci';
+USE `uninotes`;
 
--- Tabella utenti  
-CREATE TABLE user (
-    id            INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name          VARCHAR(255) NOT NULL,
-    email         VARCHAR(255) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,
-    role          ENUM('student','admin') NOT NULL DEFAULT 'student',
-    reputation    INT UNSIGNED NOT NULL DEFAULT 0,
-    created_at    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB;
+SET FOREIGN_KEY_CHECKS = 0;
 
--- Tabella corsi  
-CREATE TABLE course (
-    id   INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
-) ENGINE=InnoDB;
+DROP TABLE IF EXISTS `NOTE_DOWNLOAD`;
+DROP TABLE IF EXISTS `NOTIFICATION`;
+DROP TABLE IF EXISTS `LIKE`;
+DROP TABLE IF EXISTS `COMMENT`;
+DROP TABLE IF EXISTS `NOTE_COURSE`;
+DROP TABLE IF EXISTS `COURSE`;
+DROP TABLE IF EXISTS `FILE`;
+DROP TABLE IF EXISTS `NOTE`;
+DROP TABLE IF EXISTS `USER`;
 
--- Tabella tag  
-CREATE TABLE tag (
-    id   INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE
-) ENGINE=InnoDB;
+SET FOREIGN_KEY_CHECKS = 1;
 
--- Tabella note  
-CREATE TABLE note (
-    id          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    student_id  INT UNSIGNED NOT NULL,
-    title       VARCHAR(255) NOT NULL,
-    visibility  ENUM('public','course','private') NOT NULL DEFAULT 'public',
-    created_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    is_deleted  TINYINT(1) NOT NULL DEFAULT 0,
-    FOREIGN KEY (student_id) REFERENCES user(id)
-) ENGINE=InnoDB;
+CREATE TABLE `USER` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(191) NOT NULL,
+  `email` VARCHAR(191) NOT NULL UNIQUE,
+  `password_hash` VARCHAR(255) NOT NULL,
+  `university` VARCHAR(191) DEFAULT NULL,
+  `role` ENUM('student','admin') NOT NULL DEFAULT 'student',
+  `reputation` INT NOT NULL DEFAULT 0,
+  `created_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Tabella many‑to‑many note ↔ corsi  
-CREATE TABLE note_course (
-    note_id   INT UNSIGNED NOT NULL,
-    course_id INT UNSIGNED NOT NULL,
-    PRIMARY KEY (note_id, course_id),
-    FOREIGN KEY (note_id)   REFERENCES note(id)   ON DELETE CASCADE,
-    FOREIGN KEY (course_id) REFERENCES course(id) ON DELETE CASCADE
-) ENGINE=InnoDB;
+CREATE TABLE `NOTE` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `student_id` BIGINT UNSIGNED NOT NULL,
+  `title` VARCHAR(255) NOT NULL,
+  `description` VARCHAR(250) DEFAULT NULL,
+  `note_type` VARCHAR(100) DEFAULT NULL,
+  `visibility` ENUM('public','course','private') NOT NULL DEFAULT 'public',
+  `created_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updated_at` DATETIME(6) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(6),
+  `deleted_at` DATETIME(6) DEFAULT NULL,
+  INDEX (`student_id`),
+  INDEX (`created_at`),
+  CONSTRAINT `fk_note_student` FOREIGN KEY (`student_id`) REFERENCES `USER` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Tabella many‑to‑many note ↔ tag  
-CREATE TABLE note_tag (
-    note_id INT UNSIGNED NOT NULL,
-    tag_id  INT UNSIGNED NOT NULL,
-    PRIMARY KEY (note_id, tag_id),
-    FOREIGN KEY (note_id) REFERENCES note(id) ON DELETE CASCADE,
-    FOREIGN KEY (tag_id)  REFERENCES tag(id)  ON DELETE CASCADE
-) ENGINE=InnoDB;
+CREATE TABLE `FILE` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `note_id` BIGINT UNSIGNED NOT NULL,
+  `filename` VARCHAR(255) NOT NULL,
+  `filepath` VARCHAR(1024) NOT NULL,
+  `mime_type` VARCHAR(191) DEFAULT NULL,
+  `size` BIGINT UNSIGNED DEFAULT NULL,
+  `format` VARCHAR(50) DEFAULT NULL,
+  `hash` VARCHAR(128) DEFAULT NULL,
+  `uploaded_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updated_at` DATETIME(6) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(6),
+  INDEX (`note_id`),
+  CONSTRAINT `fk_file_note` FOREIGN KEY (`note_id`) REFERENCES `NOTE` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Tabella file principale  
-CREATE TABLE file (
-    id              INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    note_id         INT UNSIGNED NOT NULL,
-    filename        VARCHAR(255) NOT NULL,
-    filepath        VARCHAR(255) NOT NULL,
-    mime_type       VARCHAR(100) NOT NULL,
-    size            INT UNSIGNED NOT NULL,
-    current_version INT UNSIGNED NOT NULL DEFAULT 1,
-    FOREIGN KEY (note_id) REFERENCES note(id) ON DELETE CASCADE
-) ENGINE=InnoDB;
+CREATE TABLE `COURSE` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(255) NOT NULL UNIQUE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Tabella versioni file  
-CREATE TABLE file_version (
-    id             INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    file_id        INT UNSIGNED NOT NULL,
-    version_number INT UNSIGNED NOT NULL,
-    filepath       VARCHAR(255) NOT NULL,
-    size           INT UNSIGNED NOT NULL,
-    hash           VARCHAR(255) NOT NULL,
-    created_at     DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (file_id) REFERENCES file(id) ON DELETE CASCADE
-) ENGINE=InnoDB;
+CREATE TABLE `NOTE_COURSE` (
+  `note_id` BIGINT UNSIGNED NOT NULL,
+  `course_id` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`note_id`,`course_id`),
+  INDEX (`course_id`),
+  CONSTRAINT `fk_notecourse_note` FOREIGN KEY (`note_id`) REFERENCES `NOTE` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_notecourse_course` FOREIGN KEY (`course_id`) REFERENCES `COURSE` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Tabella commenti  
-CREATE TABLE comment (
-    id         INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    note_id    INT UNSIGNED NOT NULL,
-    student_id INT UNSIGNED NOT NULL,
-    content    TEXT NOT NULL,
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (note_id)    REFERENCES note(id)    ON DELETE CASCADE,
-    FOREIGN KEY (student_id) REFERENCES user(id)    ON DELETE CASCADE
-) ENGINE=InnoDB;
+CREATE TABLE `COMMENT` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `note_id` BIGINT UNSIGNED NOT NULL,
+  `student_id` BIGINT UNSIGNED NOT NULL,
+  `content` TEXT NOT NULL,
+  `created_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `parent_comment_id` BIGINT UNSIGNED DEFAULT NULL,
+  INDEX (`note_id`),
+  INDEX (`student_id`),
+  INDEX (`parent_comment_id`),
+  CONSTRAINT `fk_comment_note` FOREIGN KEY (`note_id`) REFERENCES `NOTE` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_comment_user` FOREIGN KEY (`student_id`) REFERENCES `USER` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_comment_parent` FOREIGN KEY (`parent_comment_id`) REFERENCES `COMMENT` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Tabella like  
-CREATE TABLE `like` (
-    student_id INT UNSIGNED NOT NULL,
-    note_id    INT UNSIGNED NOT NULL,
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (student_id, note_id),
-    FOREIGN KEY (student_id) REFERENCES user(id) ON DELETE CASCADE,
-    FOREIGN KEY (note_id)    REFERENCES note(id) ON DELETE CASCADE
-) ENGINE=InnoDB;
+CREATE TABLE `LIKE` (
+  `student_id` BIGINT UNSIGNED NOT NULL,
+  `note_id` BIGINT UNSIGNED NOT NULL,
+  `created_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  PRIMARY KEY (`student_id`,`note_id`),
+  INDEX (`note_id`),
+  CONSTRAINT `fk_like_user` FOREIGN KEY (`student_id`) REFERENCES `USER` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_like_note` FOREIGN KEY (`note_id`) REFERENCES `NOTE` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Tabella notifiche  
-CREATE TABLE notification (
-    id          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    student_id  INT UNSIGNED NOT NULL,
-    type        ENUM('comment','like','system') NOT NULL,
-    message     VARCHAR(500) NOT NULL,
-    is_read     TINYINT(1) NOT NULL DEFAULT 0,
-    created_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (student_id) REFERENCES user(id) ON DELETE CASCADE
-) ENGINE=InnoDB;
+CREATE TABLE `NOTIFICATION` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `sender_id` BIGINT UNSIGNED NOT NULL,
+  `recipient_id` BIGINT UNSIGNED NOT NULL,
+  `type` ENUM('comment','like','system') NOT NULL,
+  `message` VARCHAR(1000) DEFAULT NULL,
+  `is_read` TINYINT(1) NOT NULL DEFAULT 0,
+  `payload` JSON DEFAULT NULL,
+  `created_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  INDEX (`sender_id`),
+  INDEX (`recipient_id`),
+  CONSTRAINT `fk_notification_sender` FOREIGN KEY (`sender_id`) REFERENCES `USER` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_notification_recipient` FOREIGN KEY (`recipient_id`) REFERENCES `USER` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `NOTE_DOWNLOAD` (
+  `student_id` BIGINT UNSIGNED NOT NULL,
+  `note_id` BIGINT UNSIGNED NOT NULL,
+  `downloaded_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  PRIMARY KEY (`student_id`,`note_id`),
+  INDEX (`note_id`),
+  CONSTRAINT `fk_notedownload_user` FOREIGN KEY (`student_id`) REFERENCES `USER` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_notedownload_note` FOREIGN KEY (`note_id`) REFERENCES `NOTE` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Useful indexes
+CREATE INDEX idx_note_created_at ON `NOTE` (`created_at`);
+CREATE INDEX idx_file_uploaded_at ON `FILE` (`uploaded_at`);

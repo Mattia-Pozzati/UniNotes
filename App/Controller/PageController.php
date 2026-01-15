@@ -13,7 +13,7 @@ class PageController
         View::render('home', 'page', ['title' => 'Home']);
     }
 
-    public function search()
+    public function search() : void
     {
         $q = $_GET['q'] ?? '';
         $page = max(1, (int) ($_GET['page'] ?? 1));

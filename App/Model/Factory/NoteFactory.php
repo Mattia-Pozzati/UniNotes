@@ -7,9 +7,8 @@ class NoteView {
     private string $author;
     private string $course;
     private string $desc;
+    private ?string $note_type;
     private bool $chatEnabled;
-    /** @var string[] */
-    private array $tags;
     private int $likes;
     private int $downloads;
     /** @var bool[] quali pulsanti sono visibili, in ordine */
@@ -26,8 +25,8 @@ class NoteView {
         string $author,
         string $course,
         string $desc,
+        ?string $note_type,
         bool $chatEnabled,
-        array $tags,
         int $likes,
         int $downloads,
         array $buttonsEnabled,
@@ -38,8 +37,8 @@ class NoteView {
         $this->author = $author;
         $this->course = $course;
         $this->desc = $desc;
+        $this->note_type = $note_type;
         $this->chatEnabled = $chatEnabled;
-        $this->tags = $tags;
         $this->likes = $likes;
         $this->downloads = $downloads;
         $this->buttonsEnabled = $buttonsEnabled;
@@ -52,7 +51,7 @@ class NoteView {
         string $author,
         string $course,
         string $desc,
-        array $tags,
+        ?string $note_type,
         int $likes,
         int $downloads,
     ) : array {
@@ -62,8 +61,8 @@ class NoteView {
             $author,
             $course,
             $desc,
+            $note_type,
             false,
-            $tags,
             $likes,
             $downloads,
             [false, true],
@@ -84,7 +83,7 @@ class NoteView {
         string $author,
         string $course,
         string $desc,
-        array $tags,
+        ?string $note_type,
         int $likes,
         int $downloads,
     ) : array {
@@ -94,8 +93,8 @@ class NoteView {
             $author,
             $course,
             $desc,
+            $note_type,
             false,
-            $tags,
             $likes,
             $downloads,
             [false, true],
@@ -118,7 +117,7 @@ class NoteView {
         string $author,
         string $course,
         string $desc,
-        array $tags,
+        ?string $note_type,
         int $likes,
         int $downloads,
     ) : array {
@@ -128,8 +127,8 @@ class NoteView {
             $author,
             $course,
             $desc,
+            $note_type,
             false,
-            $tags,
             $likes,
             $downloads,
             [true, true],
@@ -158,7 +157,7 @@ class NoteView {
         string $author,
         string $course,
         string $desc,
-        array $tags,
+            ?string $note_type,
         int $likes,
         int $downloads,
     ) : array {
@@ -167,9 +166,9 @@ class NoteView {
             $title,
             $author,
             $course,
-            $desc,
-            true,
-            $tags,
+                $desc,
+                $note_type,
+                true,
             $likes,
             $downloads,
             [false, false],
@@ -184,8 +183,8 @@ class NoteView {
             "author" => $this->author,            
             "course" => $this->course,        
             "desc" => $this->desc,
+            "note_type" => $this->note_type,
             "chatEnabled" => $this->chatEnabled,
-            "tags" => $this->tags,
             "likes" => $this->likes,
             "downloads" => $this->downloads,
             "buttonsEnabled" => $this->buttonsEnabled,
