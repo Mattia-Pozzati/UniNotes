@@ -101,7 +101,7 @@ class AnalyzeFileController {
      * Converte il testo in UTF8 se non lo è già
      * @return string -> ( string ) testo codificato in UTF8
      */
-    private function UTF8(string $text): string {
+    private static function UTF8(string $text): string {
         if (!mb_check_encoding($text, 'UTF-8')) {
             return mb_convert_encoding($text, 'UTF-8', 'auto');
         }

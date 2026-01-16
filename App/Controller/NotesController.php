@@ -67,7 +67,7 @@ class NotesController
      * @param int $id
      * @return Note|null
      */
-    public static function getNote(int $id): ?Note
+    public static function getNote(int $id): array | null
     {
         $res = (new Note())
             ->select(['note.*', 'user.name AS student_name', 'user.surname AS student_surname'])
@@ -94,7 +94,6 @@ class NotesController
      */
     public static function searchNotes(array $filters = [], array $paginate = []): array
     {
-
         // Filtri
         $qText = trim((string) ($filters['text'] ?? ''));
         $university = trim((string) ($filters['university'] ?? ''));

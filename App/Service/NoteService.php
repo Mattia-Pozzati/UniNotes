@@ -86,7 +86,7 @@ class NoteService {
                 'author_id' => $commentAuthor->id(),
                 'content' => $comment->content(),
                 'created_at' => $comment->created_at(),
-                'is_author' => $comment->student_id() === $note->student_id()
+                'is_author' => $comment->student_id() === $note['student_id']
             ];
         }, $commentsFromDb);
         
@@ -131,7 +131,7 @@ class NoteService {
         
         $notes = [];
         foreach ($notesFromDb as $note) {
-            $author = User::find($note->student_id());
+            $author = new User() -> where ('student_id', '=', $note['student_id']);
             
             $notes[] = [
                 'id' => $note->id(),

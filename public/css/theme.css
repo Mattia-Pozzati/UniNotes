@@ -61,7 +61,7 @@
    → Attivo con <html data-bs-theme="dark">
    ========================================================= */
 [data-bs-theme="dark"] {
-  --color-primary: #5f19b5;
+  --color-primary: #9467cb;
   --color-secondary: #ffffff;
   --color-success: #28a745;
   --color-danger: #dc3545;

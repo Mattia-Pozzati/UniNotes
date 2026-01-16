@@ -6,7 +6,7 @@ use App\Service\NoteService;
 use Core\Helper\Logger;
 
 class NoteController {
-  public function show($id) {
+  public function show($id): void {
     Logger::getInstance()->info("Visualizzazione nota", ["note_id" => $id]);
     
     $noteData = NoteService::getFullNote((int)$id);

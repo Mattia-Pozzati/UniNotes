@@ -15,4 +15,118 @@
 2025-12-12T10:04:26+00:00 INFO ::1 user:- - Mostra log
 2026-01-06T19:20:38+00:00 ERROR ::1 user:- view=>components/card View not found
 2026-01-08T10:54:59+00:00 INFO ::1 user:- email=>sad@gmail.com name=>sad Tentativo di registrazione
+<<<<<<< Updated upstream
 2026-01-08T14:23:48+00:00 INFO 192.168.0.220 user:- email=>das@dasda.csacsa admin=>no Tentativo di login
+=======
+2026-01-15T11:13:13+00:00 INFO ::1 user:- method=>GET path=>/note/1 route=>/note/{id} params=>1 Route matched
+2026-01-15T11:13:13+00:00 INFO ::1 user:- note_id=>1 Visualizzazione nota
+2026-01-15T11:13:13+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-15T11:13:45+00:00 INFO ::1 user:- method=>POST path=>/note/1/like route=>/note/{id}/like params=>1 Route matched
+2026-01-15T11:13:45+00:00 INFO ::1 user:- method=>GET path=>/note/1 route=>/note/{id} params=>1 Route matched
+2026-01-15T11:13:45+00:00 INFO ::1 user:- note_id=>1 Visualizzazione nota
+2026-01-15T11:13:45+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-15T11:14:11+00:00 WARNING ::1 user:- method=>POST path=>/note/1/chat 404 - Route not found
+2026-01-15T11:18:20+00:00 WARNING ::1 user:- method=>GET path=>/user/1 404 - Route not found
+2026-01-15T11:21:03+00:00 INFO ::1 user:- method=>GET path=>/note/1 route=>/note/{id} params=>1 Route matched
+2026-01-15T11:21:03+00:00 INFO ::1 user:- note_id=>1 Visualizzazione nota
+2026-01-15T11:21:03+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-15T11:23:22+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-15T11:24:05+00:00 INFO ::1 user:- method=>GET path=>/note/1 route=>/note/{id} params=>1 Route matched
+2026-01-15T11:24:05+00:00 INFO ::1 user:- note_id=>1 Visualizzazione nota
+2026-01-15T11:24:05+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-15T11:24:05+00:00 WARNING ::1 user:- method=>GET path=>/favicon.ico 404 - Route not found
+2026-01-15T11:24:12+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-15T11:25:54+00:00 INFO ::1 user:- method=>GET path=>/note/1 route=>/note/{id} params=>1 Route matched
+2026-01-15T11:25:54+00:00 INFO ::1 user:- note_id=>1 Visualizzazione nota
+2026-01-15T11:25:54+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-15T11:25:54+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-15T11:25:58+00:00 WARNING ::1 user:- method=>GET path=>/robots.txt 404 - Route not found
+2026-01-15T11:26:00+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-15T11:26:00+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-15T11:26:01+00:00 INFO ::1 user:- method=>GET path=>/note/1 route=>/note/{id} params=>1 Route matched
+2026-01-15T11:26:01+00:00 INFO ::1 user:- note_id=>1 Visualizzazione nota
+2026-01-15T11:26:01+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-15T11:26:01+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:23:52+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:23:52+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:23:54+00:00 WARNING ::1 user:- method=>GET path=>/favicon.ico 404 - Route not found
+2026-01-16T15:25:22+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:26:30+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:26:30+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:26:30+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:26:39+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:26:39+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:26:39+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:26:45+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:26:45+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:26:46+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:27:13+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:27:13+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:27:13+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:28:41+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:28:41+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:28:41+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:28:54+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:28:54+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:28:54+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:29:12+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:29:12+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:29:12+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:32:32+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:32:32+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:32:32+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:32:44+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:32:44+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:32:44+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:32:56+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:32:56+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:32:56+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:33:47+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:33:47+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:33:47+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:34:09+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:34:09+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:34:09+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:34:30+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:34:30+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:34:30+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:34:37+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:34:37+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:34:37+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:36:53+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:36:53+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:36:54+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:37:06+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:37:06+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:37:06+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:37:13+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:37:13+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:37:13+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:37:20+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:37:20+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:37:20+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:37:28+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:37:28+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:37:28+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:38:44+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:38:44+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:38:44+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:39:00+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:39:00+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:39:00+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:39:10+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:39:10+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:39:10+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:39:17+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:39:17+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:39:17+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:39:23+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:39:23+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:39:23+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:39:59+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:39:59+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:39:59+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+2026-01-16T15:41:40+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T15:41:40+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
+2026-01-16T15:41:40+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
+>>>>>>> Stashed changes
