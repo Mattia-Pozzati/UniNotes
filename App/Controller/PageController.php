@@ -1,10 +1,9 @@
 <?php
 namespace App\Controller;
 
-use App\Model\ViewModels\NotificationView;
-use App\Model\ViewModels\NoteView;
+use App\Model\Factory\NoteFactory;
 use App\View\View;
-use App\Service\MockDB;
+use App\Controller\NotesController;
 
 class PageController
 {
@@ -18,6 +17,21 @@ class PageController
         $q = $_GET['q'] ?? '';
         $page = max(1, (int) ($_GET['page'] ?? 1));
         $perPage = 6;
+
+
+        // Costruisci filtri/parametri per NotesController::searchNotes
+        $filters = [
+            'text' => $q,
+            'university' => $_GET['university'] ?? '',
+            'format' => $_GET['format'] ?? ''
+        ];
+        
+        $paginate = [
+            'page' => $page,
+            'per_page' => $perPage
+        ];
+
+        /*
 
         if (defined('USE_MOCK_DB') && USE_MOCK_DB) {
             $mock = new MockDB();
@@ -34,40 +48,52 @@ class PageController
         $totalCount = count($allNotes);
         $totalPages = max(1, ceil($totalCount / $perPage));
         $notes = array_slice($allNotes, ($page - 1) * $perPage, $perPage);
+    */
+
+        $res = NotesController::searchNotes(
+            $filters,
+            $paginate
+        );
+
+        $notes = $res['data'] ?? []; 
+        $meta = $res['meta'] ?? 
+            [
+                'total' => 0, 
+                'per_page' => $perPage, 
+                'current_page' => $page, 
+                'total_pages' => 1
+            ];
+
+        $cards = array_map(function ($noteData) {
+            return NoteFactory::searchNoteView(
+                $noteData['id'],
+                $noteData['title'],
+                $noteData['student_name'],
+                $noteData['course_name'] ?? 'Corso Sconosciuto',
+                $noteData['description'],
+                $noteData['note_type'],
+                $noteData['format'] ?? 'PDF',
+                $noteData['university'] ?? 'Unibo',
+                $noteData['likes'],
+                $noteData['downloads']
+            );
+        }, $notes);
 
         View::render('Sites/search', 'page', [
             'q' => $q,
-            'cards' => $notes,
-            'currentPage' => $page,
-            'totalPages' => $totalPages,
-            'totalCount' => $totalCount,
-            'perPage' => $perPage,
+            'cards' => $cards,
+            'meta' => $meta,
             'queryParams' => ['q' => $q],
         ]);
     }
 
+    /*
     public function adminDashboard(): void
     {
         $perPage = 6;
         $activeTab = $_GET['tab'] ?? 'ban';
         $baseUrl = '/admin?';
         $queryParams = $_GET;
-
-        if (defined(constant_name: 'USE_MOCK_DB') && USE_MOCK_DB) {
-            $mock = new MockDB();
-            $allNotes = $mock->getMyNotes();
-            $allNotifications = $mock->getNotifications(10);
-        } else {
-            $allNotes = [
-                NoteView::userNoteView(1, 'Mia Nota 1', 'Autore', 'Corso', 'Descrizione', ['PDF'], 300, 1000),
-                NoteView::userNoteView(2, 'Mia Nota 2', 'Autore', 'Corso', 'Descrizione', ['Note'], 235, 10201),
-            ];
-
-            $allNotifications = [
-                NotificationView::systemNotification(1, 'Admin', 'Messaggio sistema'),
-                NotificationView::commentNotification(2, 10, 'Utente', 'Admin', 'Hai un nuovo commento'),
-            ];
-        }
 
         // Paginate datasets for tabs
         $notesPaginated = $this->paginate($allNotes, $perPage, 'notesPage');
@@ -185,6 +211,7 @@ class PageController
             'queryParams' => $_GET,
         ]);
     }
+        */
 }
 
 ?>

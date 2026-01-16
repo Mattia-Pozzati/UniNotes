@@ -130,3 +130,90 @@
 2026-01-16T15:41:40+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
 2026-01-16T15:41:40+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
 >>>>>>> Stashed changes
+2026-01-16T16:42:35+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T16:42:35+00:00 ERROR ::1 user:- view=>section-header View not found
+2026-01-16T16:43:41+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T16:43:41+00:00 ERROR ::1 user:- view=>Base/section-header View not found
+2026-01-16T16:44:08+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T16:44:08+00:00 ERROR ::1 user:- view=>card-grid View not found
+2026-01-16T16:45:12+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T16:45:12+00:00 ERROR ::1 user:- view=>search-form View not found
+2026-01-16T16:45:29+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T16:45:29+00:00 ERROR ::1 user:- view=>search-form View not found
+2026-01-16T16:45:30+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T16:45:30+00:00 ERROR ::1 user:- view=>search-form View not found
+2026-01-16T16:45:35+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T16:45:35+00:00 ERROR ::1 user:- view=>Forms/search-form View not found
+2026-01-16T16:45:46+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T16:51:23+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T17:18:24+00:00 INFO ::1 user:- method=>GET path=>/search route=>/search params=> Route matched
+2026-01-16T17:18:24+00:00 INFO ::1 user:- join=>Array Aggiunta join con successo
+2026-01-16T17:18:24+00:00 INFO ::1 user:- join=>Array Aggiunta join con successo
+2026-01-16T17:18:24+00:00 INFO ::1 user:- condition=>Array Aggiunta condizione where con successo
+2026-01-16T17:18:24+00:00 INFO ::1 user:- condition=>Array Aggiunta condizione where con successo
+2026-01-16T17:20:12+00:00 INFO ::1 user:- method=>GET path=>/search route=>/search params=> Route matched
+2026-01-16T17:20:12+00:00 INFO ::1 user:- join=>Array Aggiunta join con successo
+2026-01-16T17:20:12+00:00 INFO ::1 user:- join=>Array Aggiunta join con successo
+2026-01-16T17:20:12+00:00 INFO ::1 user:- condition=>Array Aggiunta condizione where con successo
+2026-01-16T17:20:12+00:00 INFO ::1 user:- condition=>Array Aggiunta condizione where con successo
+2026-01-16T17:20:14+00:00 INFO ::1 user:- method=>GET path=>/search route=>/search params=> Route matched
+2026-01-16T17:20:14+00:00 INFO ::1 user:- join=>Array Aggiunta join con successo
+2026-01-16T17:20:14+00:00 INFO ::1 user:- join=>Array Aggiunta join con successo
+2026-01-16T17:20:14+00:00 INFO ::1 user:- condition=>Array Aggiunta condizione where con successo
+2026-01-16T17:20:14+00:00 INFO ::1 user:- condition=>Array Aggiunta condizione where con successo
+2026-01-16T17:20:17+00:00 INFO ::1 user:- method=>GET path=>/search route=>/search params=> Route matched
+2026-01-16T17:20:17+00:00 INFO ::1 user:- join=>Array Aggiunta join con successo
+2026-01-16T17:20:17+00:00 INFO ::1 user:- join=>Array Aggiunta join con successo
+2026-01-16T17:20:17+00:00 INFO ::1 user:- condition=>Array Aggiunta condizione where con successo
+2026-01-16T17:20:17+00:00 INFO ::1 user:- condition=>Array Aggiunta condizione where con successo
+2026-01-16T17:20:17+00:00 INFO ::1 user:- method=>GET path=>/search route=>/search params=> Route matched
+2026-01-16T17:20:17+00:00 INFO ::1 user:- join=>Array Aggiunta join con successo
+2026-01-16T17:20:17+00:00 INFO ::1 user:- join=>Array Aggiunta join con successo
+2026-01-16T17:20:17+00:00 INFO ::1 user:- condition=>Array Aggiunta condizione where con successo
+2026-01-16T17:20:17+00:00 INFO ::1 user:- condition=>Array Aggiunta condizione where con successo
+2026-01-16T17:20:17+00:00 INFO ::1 user:- method=>GET path=>/search route=>/search params=> Route matched
+2026-01-16T17:20:17+00:00 INFO ::1 user:- join=>Array Aggiunta join con successo
+2026-01-16T17:20:17+00:00 INFO ::1 user:- join=>Array Aggiunta join con successo
+2026-01-16T17:20:17+00:00 INFO ::1 user:- condition=>Array Aggiunta condizione where con successo
+2026-01-16T17:20:17+00:00 INFO ::1 user:- condition=>Array Aggiunta condizione where con successo
+2026-01-16T17:20:29+00:00 WARNING ::1 user:- method=>GET path=>/phpmyadmin 404 - Route not found
+2026-01-16T17:20:36+00:00 WARNING ::1 user:- method=>GET path=>/phpMyAdmin 404 - Route not found
+2026-01-16T17:20:40+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T17:20:54+00:00 WARNING ::1 user:- method=>GET path=>/phpmyadmin 404 - Route not found
+2026-01-16T17:21:35+00:00 WARNING ::1 user:- method=>GET path=>/phpmyadmin 404 - Route not found
+2026-01-16T17:21:48+00:00 WARNING ::1 user:- method=>GET path=>/phpmyadmin 404 - Route not found
+2026-01-16T17:21:57+00:00 WARNING ::1 user:- method=>GET path=>/phpmyadmin 404 - Route not found
+2026-01-16T17:22:27+00:00 WARNING ::1 user:- method=>GET path=>/phpmyadmin 404 - Route not found
+2026-01-16T17:22:35+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T17:22:36+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-16T17:22:41+00:00 INFO ::1 user:- method=>GET path=>/search route=>/search params=> Route matched
+2026-01-16T17:22:41+00:00 INFO ::1 user:- join=>Array Aggiunta join con successo
+2026-01-16T17:22:41+00:00 INFO ::1 user:- join=>Array Aggiunta join con successo
+2026-01-16T17:22:41+00:00 INFO ::1 user:- condition=>Array Aggiunta condizione where con successo
+2026-01-16T17:22:41+00:00 INFO ::1 user:- condition=>Array Aggiunta condizione where con successo
+2026-01-16T17:22:41+00:00 ERROR ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory dsn=>mysql:host=localhost;dbname=uninotes;charset=utf8 Connessione al database fallita
+2026-01-16T17:23:39+00:00 INFO ::1 user:- method=>GET path=>/search route=>/search params=> Route matched
+2026-01-16T17:23:39+00:00 INFO ::1 user:- join=>Array Aggiunta join con successo
+2026-01-16T17:23:39+00:00 INFO ::1 user:- join=>Array Aggiunta join con successo
+2026-01-16T17:23:39+00:00 INFO ::1 user:- condition=>Array Aggiunta condizione where con successo
+2026-01-16T17:23:39+00:00 INFO ::1 user:- condition=>Array Aggiunta condizione where con successo
+2026-01-16T17:23:45+00:00 WARNING ::1 user:- method=>GET path=>/phpmyadmin 404 - Route not found
+2026-01-16T17:23:51+00:00 INFO ::1 user:- method=>GET path=>/search route=>/search params=> Route matched
+2026-01-16T17:23:51+00:00 INFO ::1 user:- join=>Array Aggiunta join con successo
+2026-01-16T17:23:51+00:00 INFO ::1 user:- join=>Array Aggiunta join con successo
+2026-01-16T17:23:51+00:00 INFO ::1 user:- condition=>Array Aggiunta condizione where con successo
+2026-01-16T17:23:51+00:00 INFO ::1 user:- condition=>Array Aggiunta condizione where con successo
+2026-01-16T17:25:29+00:00 INFO ::1 user:- method=>GET path=>/search route=>/search params=> Route matched
+2026-01-16T17:25:29+00:00 INFO ::1 user:- join=>Array Aggiunta join con successo
+2026-01-16T17:25:29+00:00 INFO ::1 user:- join=>Array Aggiunta join con successo
+2026-01-16T17:25:29+00:00 INFO ::1 user:- condition=>Array Aggiunta condizione where con successo
+2026-01-16T17:25:29+00:00 INFO ::1 user:- condition=>Array Aggiunta condizione where con successo
+2026-01-16T17:25:40+00:00 WARNING ::1 user:- method=>GET path=>/phpmyadmin 404 - Route not found
+2026-01-16T17:25:44+00:00 WARNING ::1 user:- method=>GET path=>/phpmyadmin 404 - Route not found
+2026-01-16T17:25:45+00:00 WARNING ::1 user:- method=>GET path=>/phpmyadmin 404 - Route not found
+2026-01-16T17:25:45+00:00 WARNING ::1 user:- method=>GET path=>/phpmyadmin 404 - Route not found
+2026-01-16T17:25:45+00:00 WARNING ::1 user:- method=>GET path=>/phpmyadmin 404 - Route not found
+2026-01-16T17:25:46+00:00 WARNING ::1 user:- method=>GET path=>/phpmyadmin 404 - Route not found
+2026-01-16T17:26:34+00:00 WARNING ::1 user:- method=>GET path=>/phpmyadmin 404 - Route not found
+2026-01-16T17:26:46+00:00 WARNING ::1 user:- method=>GET path=>/phpmyadmin 404 - Route not found
+2026-01-16T17:28:28+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched

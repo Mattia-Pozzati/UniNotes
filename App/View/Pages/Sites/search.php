@@ -1,9 +1,9 @@
 <?php
 $q = $q ?? '';
 $cards = $cards ?? [];  // <-- cambia da $notes a $cards
-$currentPage = $currentPage ?? null;
-$totalPages = $totalPages ?? null;
-$queryParams = $queryParams ?? ['q' => $q];  // <-- aggiungi questo
+$currentPage = $meta['current_page'] ?? null;
+$totalPages = $meta['total_pages'] ?? null;
+$queryParams = $queryParams ?? ['q' => $q];
 ?>
 
 <?= \App\View\View::getComponent('Base/sectionHeader', [

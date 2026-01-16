@@ -1,3 +1,4 @@
+<?php namespace App\View; ?>
 
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
     <div class="card shadow-sm" style="width: 100%; max-width: 400px;">

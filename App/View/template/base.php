@@ -1,3 +1,6 @@
+<?php namespace App\View; ?>
+
+
 <!DOCTYPE html>
 <html lang="it" data-bs-theme="light">
 
@@ -31,7 +34,7 @@
 
 <body class="container">
 
-    <?php \App\View\View::render('Base/header', "component") ?>
+    <?php echo View::getComponent('Base/header'); ?>
 
     <div class="row">
         <div class="col-1"></div>
@@ -41,7 +44,7 @@
         <div class="col-1"></div>
     </div>
 
-    <?php \App\View\View::render('Base/footer', "component"); ?>
+    <?php echo View::getComponent('Base/footer'); ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/DarkLightToggle.js"></script>

@@ -16,7 +16,7 @@ class Database {
     //TODO cambiare con effettivi parametri connessione al db
     private function __construct() {
         $this->pdo = new PDO(
-            "mysql:host=localhost;dbname=test;charset=utf8",
+            "mysql:host=127.0.0.1:3307;dbname=uninotes;charset=utf8mb4",
             "root",
             ""
         );
@@ -28,8 +28,8 @@ class Database {
         if (!self::$instance) {
             self::$instance = new self();
         }
-        return self::$instance->pdo;
         Logger::getInstance()->info("Rilasciata istanza database a user");
+        return self::$instance->pdo;
     }
 }
 

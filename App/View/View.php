@@ -2,6 +2,7 @@
 namespace App\View;
 
 use Core\Helper\Logger;
+use RuntimeException;
 
 class View {
     public static function render(string $view, string $type, array $data = []): void
@@ -31,7 +32,7 @@ class View {
 
         if (!file_exists($viewFile)) {
             Logger::getInstance()->error("View not found", ["view" => $view]);
-            throw new \RuntimeException("View not found: {$viewFile}");
+            throw new RuntimeException("View not found: {$viewFile}");
         }
 
         // Data del componente
@@ -49,7 +50,7 @@ class View {
         $viewFile = __DIR__.'/pages/'.$view.'.php';
 
         if (!file_exists($viewFile)) {
-            throw new \RuntimeException("View non trovata: {$viewFile}");
+            throw new RuntimeException("View non trovata: {$viewFile}");
         }
 
         // ($title, $user, ecc.)

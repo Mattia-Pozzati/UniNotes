@@ -1,3 +1,6 @@
+<?php namespace App\View; ?>
+
+
 <?php
 $note = $note ?? [];
 $currentUserId = null; // Per ora nessun utente loggato

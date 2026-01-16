@@ -1,5 +1,5 @@
 <?php
-namespace App\Model\ViewModels;
+namespace App\Model\Factory;
 
 class NotificationView {
     private int $id;

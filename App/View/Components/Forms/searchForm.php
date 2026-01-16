@@ -1,3 +1,5 @@
+<?php namespace App\View; ?>
+
 <form class="row px-3 d-flex justify-content-center">
     <section class="row">
         <div class="col-10 mb-3">

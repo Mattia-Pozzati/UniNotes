@@ -1,3 +1,5 @@
+<?php namespace App\View; ?>
+
 <?php
 $title = $title ?? 'Titolo';
 $subtitle = $subtitle ?? '';

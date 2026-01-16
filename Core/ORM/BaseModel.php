@@ -29,6 +29,7 @@ class BaseModel implements BaseInterface
     private $conditions = [];
     private $order = "";
     private $limit = "";
+    private $group = "";
     private $joins = [];
 
     /**
@@ -138,6 +139,30 @@ class BaseModel implements BaseInterface
             throw new Exception("ERROR: Invalid order_by parameters");
         }
         Logger::getInstance()->info("Aggiunta condizione order_by con successo", ["condition" => $this->order]);
+        return $this;
+    }
+
+    /**
+     * Clausola GROUP BY SQL
+     *
+     * @param string column -> campo su cui raggruppare
+     * @return BaseInterface
+     */
+    public function group_by(string $column): BaseInterface
+    {
+        if ($this->validate([$column])) {
+            $this->group = "GROUP BY {$column}";
+        } else {
+            Logger::getInstance()->error(
+                "Invalid group_by parameters",
+                [
+                    "column" => $column
+                ]
+            );
+            throw new Exception("ERROR: Invalid group_by parameters");
+        }
+
+        Logger::getInstance()->info("Aggiunta condizione group_by con successo", ["condition" => $this->group]);
         return $this;
     }
 
@@ -317,6 +342,8 @@ class BaseModel implements BaseInterface
         }
 
         if (!$forCount) {
+            if (!empty($this->group))
+                $query .= " " . $this->group;
             if (!empty($this->order))
                 $query .= " " . $this->order;
             if (!empty($this->limit))
@@ -427,7 +454,7 @@ class BaseModel implements BaseInterface
         // Ripristina stato precedente del limit
         $this->limit = $oldLimit;
 
-        $lastPage = (int) ceil($total / $perPage);
+        $total_pages = (int) ceil($total / $perPage);
 
         return [
             'data' => $items,
@@ -435,7 +462,7 @@ class BaseModel implements BaseInterface
                 'total' => $total,
                 'per_page' => $perPage,
                 'current_page' => $page,
-                'last_page' => $lastPage,
+                'total_pages' => $total_pages,
             ]];
     }
 

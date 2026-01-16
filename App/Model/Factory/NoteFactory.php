@@ -1,13 +1,15 @@
 <?php 
-namespace App\Model\ViewModels;
+namespace App\Model\Factory;
 
-class NoteView {
+class NoteFactory {
     private int $id;
     private string $title;
     private string $author;
     private string $course;
     private string $desc;
     private ?string $note_type;
+    private ?string $format;
+    private ?string $university;
     private bool $chatEnabled;
     private int $likes;
     private int $downloads;
@@ -26,6 +28,8 @@ class NoteView {
         string $course,
         string $desc,
         ?string $note_type,
+        ?string $format,
+        ?string $university,
         bool $chatEnabled,
         int $likes,
         int $downloads,
@@ -38,6 +42,8 @@ class NoteView {
         $this->course = $course;
         $this->desc = $desc;
         $this->note_type = $note_type;
+        $this->format = $format;
+        $this->university = $university;
         $this->chatEnabled = $chatEnabled;
         $this->likes = $likes;
         $this->downloads = $downloads;
@@ -52,16 +58,20 @@ class NoteView {
         string $course,
         string $desc,
         ?string $note_type,
+        ?string $format,
+        ?string $university,
         int $likes,
         int $downloads,
     ) : array {
-        return new self(
+        return (new self(
             $id,
             $title,
             $author,
             $course,
             $desc,
             $note_type,
+            $format,
+            $university,
             false,
             $likes,
             $downloads,
@@ -75,7 +85,7 @@ class NoteView {
                     "link" => "#", 
                     "icon-class" => ""]
             ]
-        )->toArray();
+        ))->toArray();
     }
     public static function userDashboardNoteView (
         int $id,
@@ -84,16 +94,20 @@ class NoteView {
         string $course,
         string $desc,
         ?string $note_type,
+        ?string $format,
+        ?string $university,
         int $likes,
         int $downloads,
     ) : array {
-        return new self(
+        return (new self(
             $id,
             $title,
             $author,
             $course,
             $desc,
             $note_type,
+            $format,
+            $university,
             false,
             $likes,
             $downloads,
@@ -108,7 +122,7 @@ class NoteView {
                 ],[]
 
             ]
-        )->toArray();
+        ))->toArray();
     }
 
    public static function searchNoteView (
@@ -118,16 +132,20 @@ class NoteView {
         string $course,
         string $desc,
         ?string $note_type,
+        ?string $format,
+        ?string $university,
         int $likes,
         int $downloads,
     ) : array {
-        return new self(
+        return (new self(
             $id,
             $title,
             $author,
             $course,
             $desc,
             $note_type,
+            $format,
+            $university,
             false,
             $likes,
             $downloads,
@@ -148,7 +166,7 @@ class NoteView {
                     "icon-class" => "bi-hand-thumbs-up"
                 ]
             ]
-        )->toArray();
+        ))->toArray();
     }
 
     public static function userNoteView (
@@ -158,22 +176,26 @@ class NoteView {
         string $course,
         string $desc,
             ?string $note_type,
+        ?string $format,
+        ?string $university,
         int $likes,
         int $downloads,
     ) : array {
-        return new self(
+        return (new self(
             $id,
             $title,
             $author,
             $course,
-                $desc,
-                $note_type,
-                true,
+            $desc,
+            $note_type,
+            $format,
+            $university,
+            true,
             $likes,
             $downloads,
             [false, false],
             [[],[]]
-        )->toArray();
+        ))->toArray();
     }
 
     private function toArray() {
@@ -184,6 +206,8 @@ class NoteView {
             "course" => $this->course,        
             "desc" => $this->desc,
             "note_type" => $this->note_type,
+            "format"=> $this->format,
+            "university"=> $this->university,
             "chatEnabled" => $this->chatEnabled,
             "likes" => $this->likes,
             "downloads" => $this->downloads,

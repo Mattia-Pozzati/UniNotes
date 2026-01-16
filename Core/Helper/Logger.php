@@ -32,6 +32,27 @@ class Logger
     }
 
     /**
+     * Format a mixed value safely for logging (arrays/objects -> JSON, booleans/null -> string)
+     */
+    private static function formatForLog(mixed $val): string
+    {
+        if (is_array($val) || is_object($val)) {
+            $enc = json_encode($val, JSON_UNESCAPED_UNICODE);
+            return $enc === false ? print_r($val, true) : $enc;
+        }
+
+        if (is_bool($val)) {
+            return $val ? 'true' : 'false';
+        }
+
+        if ($val === null) {
+            return 'null';
+        }
+
+        return (string) $val;
+    }
+
+    /**
      * log to file
      * @param msg -> autoesplicativo
      * @param level -> livello del log (INFO, DEBUG, ERROR)
@@ -52,7 +73,7 @@ class Logger
         if (!empty($context)) {
             $pairs = [];
             foreach ($context as $k => $v) {
-                $pairs[] = "$k=>$v";
+                $pairs[] = $k . "=>" . self::formatForLog($v);
             }
             $contextString = implode(' ', $pairs);
         }

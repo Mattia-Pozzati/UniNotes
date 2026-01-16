@@ -1,3 +1,6 @@
+<?php namespace App\View; ?>
+
+
 <header class="row p-5">
 
     <!-- Navbar -->

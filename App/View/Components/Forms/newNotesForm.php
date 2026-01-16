@@ -1,4 +1,7 @@
+<?php namespace App\View; ?>
+
 <?php
+
 $courses = $courses ?? [];
 $action = $action ?? "";
 ?>

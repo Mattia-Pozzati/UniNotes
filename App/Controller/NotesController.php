@@ -1,6 +1,5 @@
 <?php
 namespace App\Controller;
-
 use App\Model\Note;
 
 class NotesController
@@ -17,7 +16,6 @@ class NotesController
      *  - per_page (int) default 12
      *  - visibility (string|null) es. 'public' (null = tutti)
      *  - order (array) ['field'=>'created_at','direction'=>'DESC']
-     *
      * @param array $opts
      * @return array ['data'=>array, 'meta'=>array]
      */
@@ -29,10 +27,10 @@ class NotesController
         $perPage = $opts['per_page'] ?? 12;
         $page = $opts['page'] ?? 1;
 
-        return new Note()
-            ->select(['note.*', 'user.name AS student_name', 'user.surname AS student_surname'])
+        return (new Note())
+            ->select(['note.*', 'user.name AS student_name'])
             ->join('user', 'note.student_id', '=', 'user.id')
-            ->where('note.is_deleted', '=', 0)
+            ->where('note.deleted_at', 'IS', null)
             ->where('note.visibility', '=', $visibility)
             ->order_by($order['field'], $order['direction'])
             ->paginate($perPage, $page);
@@ -52,11 +50,11 @@ class NotesController
         $perPage = $opts['per_page'] ?? 12;
         $page = $opts['page'] ?? 1;
 
-        return new Note()
-            ->select(['note.*', 'user.name AS student_name', 'user.surname AS student_surname'])
+        return (new Note())
+            ->select(['note.*', 'user.name AS student_name'])
             ->join('user', 'note.student_id', '=', 'user.id')
             ->where('note.student_id', '=', $studentId)
-            ->where('note.is_deleted', '=', 0)
+            ->where('note.deleted_at', 'IS', null)
             ->order_by($order['field'], $order['direction'])
             ->paginate($perPage, $page);
     }
@@ -67,13 +65,13 @@ class NotesController
      * @param int $id
      * @return Note|null
      */
-    public static function getNote(int $id): array | null
+    public static function getNote(int $id): array|null
     {
         $res = (new Note())
-            ->select(['note.*', 'user.name AS student_name', 'user.surname AS student_surname'])
+            ->select(['note.*', 'user.name AS student_name'])
             ->join('user', 'note.student_id', '=', 'user.id')
             ->where('note.id', '=', $id)
-            ->where('note.is_deleted', '=', 0)
+            ->where('note.deleted_at', 'IS', null)
             ->first();
 
         return $res ?: null;
@@ -106,13 +104,20 @@ class NotesController
             ->select([
                 'note.*',
                 'user.name AS student_name',
-                'user.surname AS student_surname',
-                'course.name AS course_name'
+                'course.name AS course_name',
+                'COUNT(DISTINCT `like`.student_id) AS likes',
+                'COUNT(DISTINCT note_download.student_id) AS downloads'
             ])
             ->leftJoin('user', 'note.student_id', '=', 'user.id')
-            ->leftJoin('course', 'note.course_id', '=', 'course.id')
-            ->where('note.is_deleted', '=', 0)
+            ->leftJoin('note_course', 'note.id', '=', 'note_course.note_id')
+            ->leftJoin('course', 'note_course.course_id', '=', 'course.id')
+            ->leftJoin('`like`', 'note.id', '=', 'like.note_id')
+            ->leftJoin('note_download', 'note.id', '=', 'note_download.note_id')
+            ->where('note.deleted_at', 'IS', null)
             ->where('note.visibility', '=', 'public');
+
+        // When using aggregate COUNT(...) we must GROUP BY note.id so each note is a row
+        $qb->group_by('note.id');
 
         // Filtro sulla barra di ricerca sia per titolo della nota sia per corso
         if ($qText !== '') {
@@ -137,7 +142,7 @@ class NotesController
      */
     public static function insertNote(array $data): string|bool
     {
-        return new Note()->insert($data);
+        return (new Note())->insert($data);
     }
 
     /**
@@ -156,7 +161,7 @@ class NotesController
 
         unset($data['id']);
 
-        return new Note()
+        return (new Note())
             ->where('id', '=', $id)
             ->update($data);
     }
@@ -169,9 +174,9 @@ class NotesController
      */
     public static function deleteNote(int $id): bool
     {
-        return new Note()
+        return (new Note())
             ->where('id', '=', $id)
-            ->update(['is_deleted' => 1]);
+            ->update(['deleted_at' => date('Y-m-d H:i:s')]);
     }
 }
 ?>
