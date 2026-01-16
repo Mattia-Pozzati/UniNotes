@@ -15,8 +15,8 @@ use Core\Routing\Router;
  */
 $router = Router::getInstance();
 
-// Home
-$router->get('/', 'PageController@index');
+Router::getInstance()->get('/', 'PageController@index');
+Router::getInstance()->get('/search', 'PageController@search');
 
 // Auth
 $router->get('/login', 'AuthController@showLogin');
@@ -31,17 +31,10 @@ $router->post('/note/{id}/like', 'NoteController@toggleLike');
 $router->post('/note/{id}/comment', 'NoteController@addComment');
 
 // Log
-$router->get('/log', 'LogController@show');
+Router::getInstance()->get("/log", "LogController@show");   
 
-// Debug (rimuovi in produzione)
-$router->get('/debug-routes', function() use ($router) {
-    echo "<h2>Rotte registrate:</h2><pre>";
-    foreach ($router->getRoutes() as $route) {
-        echo "{$route['method']} {$route['url']} -> ";
-        echo is_string($route['handler']) ? $route['handler'] : 'Closure';
-        echo "\n";
-    }
-    echo "</pre>";
-});
+Router::getInstance()->get('/user/dashboard', 'PageController@userDashboard');
+Router::getInstance()->get('/admin', 'PageController@adminDashboard');
+Router::getInstance()->post('/note/create', 'NoteController@create'); // per il form
 
 ?>

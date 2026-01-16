@@ -5,22 +5,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($title ?? 'Uninotes') ?></title>
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/css/theme.css">
-    
+
+    <script>
+        (function () {
+            const storedTheme = localStorage.getItem('theme');
+
+            if (storedTheme === 'dark' || storedTheme === 'light') {
+                document.documentElement.setAttribute('data-bs-theme', storedTheme);
+            } else {
+                // fallback: preferenza di sistema
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.setAttribute(
+                    'data-bs-theme',
+                    prefersDark ? 'dark' : 'light'
+                );
+            }
+        })();
+    </script>
+
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="container">
 
-    <?php \App\View\View::render("header", "component") ?>
+    <?php \App\View\View::render('Base/header', "component") ?>
 
-    <main class="container-fluid p-5 " >
-        <?= $content ?? '' ?>
-    </main>
+    <div class="row">
+        <div class="col-1"></div>
+        <main class="col-10">
+            <?= $content ?? '' ?>
+        </main>
+        <div class="col-1"></div>
+    </div>
 
-    <?php \App\View\View::render('footer', "component"); ?>
+    <?php \App\View\View::render('Base/footer', "component"); ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/DarkLightToggle.js"></script>

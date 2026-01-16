@@ -9,7 +9,7 @@ class LogController
     {
         // TODO: Da togliere dal commento in prod
         // Logger::getInstance()->info("Mostra log");
-        require_once __DIR__."/../../public/log.php";
+        require_once __DIR__."/../../Public/log.php";
     }
 }
 

@@ -102,6 +102,7 @@
   /* Bordi */
   --bs-border-color: var(--color-border);
 }
+/*
 
 /* =========================================================
    BODY E HEADING
@@ -335,7 +336,7 @@ a:hover {
 }
 
 
-/* FIxx Access Error */
+/* FIX Access Error */
 
 button:focus,
 button:focus-visible {
@@ -376,4 +377,41 @@ a.btn.btn-outline-secondary[aria-label="Like"] {
 .bg-grey {
     background-color: #4c474e !important;
     color: #f0f0f0 !important;
+}
+
+/* =========================================================
+   DASHBOARD TABS (nav-pills)
+   ========================================================= */
+
+#dashboardTabs {
+  gap: .5rem;
+}
+
+/* Stato normale */
+#dashboardTabs .nav-link {
+  color: var(--bs-primary);
+  background-color: transparent;
+  border-radius: .5rem;
+  transition: all .2s ease-in-out;
+}
+
+/* Hover */
+#dashboardTabs .nav-link:hover {
+  color: var(--bs-primary);
+}
+
+/* Stato attivo */
+#dashboardTabs .nav-link.active {
+  color: var(--bs-body-bg);
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+  box-shadow: 0 0.25rem 0.5rem var(--bs-primary);
+}
+
+
+/* Badge notifiche */
+#dashboardTabs .badge {
+  background-color: var(--bs-primary);
+  color: #fff;
+  font-size: .7rem;
 }

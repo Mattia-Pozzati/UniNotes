@@ -1,32 +1,20 @@
-<?php 
+<?php
 namespace App\Model;
 
 use Core\ORM\BaseModel;
 
-/*
-*  Like class
-*/
-class Like extends BaseModel{
-
-    protected $table = "like";
-    private $id; // identificatore univoco
-    private $note_id; // identificatore univoco della nota
-    private $student_id; // identificatore univoco dello studente autore del commento
-    private $created_at; // Data di creazioen
+class Like extends BaseModel
+{
+    protected $table = 'LIKE';
 
     /**
-     * Metodo chiamato da fetch class per definire l'oggetto mantenendo i campi privati
+     * Insert a like (expects associative array with student_id and note_id)
+     * Returns boolean/insert id depending on underlying ORM
      */
-    public function __set($property, $value) {
-        if (property_exists($this, $property)) {
-            $this->$property = $value;
-        }
+    public function add(array $data)
+    {
+        return $this->insert($data);
     }
-
-    public function id() {return $this->id;}
-    public function note_id() {return $this->note_id;}
-    public function student_id() {return $this->student_id;}
-    public function created_at() {return $this->created_at;}
 }
 
 ?>
