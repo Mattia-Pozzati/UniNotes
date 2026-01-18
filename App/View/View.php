@@ -28,10 +28,10 @@ class View {
     public static function getComponent(string $view, array $data = []): string
     {
         // Path del componente
-        $viewFile = __DIR__.'/components/'.$view.'.php';
+        $viewFile = dirname(__DIR__) . '/View/Components/' . $view . '.php';
 
         if (!file_exists($viewFile)) {
-            Logger::getInstance()->error("View not found", ["view" => $view]);
+            Logger::getInstance()->error("View not found", ["view" => $viewFile]);
             throw new RuntimeException("View not found: {$viewFile}");
         }
 
@@ -44,10 +44,13 @@ class View {
         return ob_get_clean();
     }
 
+
+
     public static function renderPage(string $view, array $data = []): void
     {
         // Path della view "interna"
-        $viewFile = __DIR__.'/pages/'.$view.'.php';
+        $viewFile = dirname(__DIR__) . '/View/Pages/' . $view . '.php';
+
 
         if (!file_exists($viewFile)) {
             throw new RuntimeException("View non trovata: {$viewFile}");
@@ -62,6 +65,6 @@ class View {
         $content = ob_get_clean();
 
         // Include il layout base che userà $content e, se vuoi, $title
-        require __DIR__ . '/Template/base.php';
+        require dirname(__DIR__) . '/View/template/base.php';
     }
 }

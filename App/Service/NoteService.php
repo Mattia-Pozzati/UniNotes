@@ -131,7 +131,7 @@ class NoteService {
         
         $notes = [];
         foreach ($notesFromDb as $note) {
-            $author = new User() -> where ('student_id', '=', $note['student_id']);
+            $author = (new User())->where('student_id', '=', $note['student_id']);
             
             $notes[] = [
                 'id' => $note->id(),

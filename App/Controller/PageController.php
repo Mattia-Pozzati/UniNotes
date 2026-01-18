@@ -9,7 +9,7 @@ class PageController
 {
     public function index(): void
     {
-        View::render('home', 'page', ['title' => 'Home']);
+        View::render('Sites/home', 'page', ['title' => 'Home']);
     }
 
     public function search() : void
