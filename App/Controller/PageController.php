@@ -34,7 +34,7 @@ class PageController
             );
         }, $notes);
         
-        View::render('Sites/home', 'page', [
+        View::render('home', 'page', [
             'title' => 'Home',
             'cards' => $cards
         ]);

@@ -1,5 +1,3 @@
-<?php namespace App\View; ?>
-
 <!-- Hero Section -->
 <section class="hero text-center py-5 my-5">
     <h1 class="display-3 fw-bold mb-4">Prova UniNotes!</h1>
@@ -24,31 +22,31 @@
     <div class="row g-4">
         <!-- Card 1: Cerca Appunti -->
         <div class="col-12 col-md-6 col-lg-4">
-            <?= \App\View\View::getComponent('Cards/featureCard', [
+            <?= $getComponent('Cards/featureCard', [
                 'icon' => 'bi-search',
                 'iconBg' => 'bg-primary',
                 'title' => 'Cerca Appunti',
-                'description' => 'Trova rapidamente gli appunti di cui hai bisogno tra migliaia di risorse'
+                'description' => 'Trova rapidamente gli appunti di cui hai bisogno tra migliaia di note.'
             ]) ?>
         </div>
 
-        <!-- Card 2: Condividi -->
+        <!-- Card 2: share -->
         <div class="col-12 col-md-6 col-lg-4">
-            <?= \App\View\View::getComponent('Cards/featureCard', [
+            <?= $getComponent('Cards/featureCard', [
                 'icon' => 'bi-share',
-                'iconBg' => 'bg-success',
+                'iconBg' => 'bg-primary',
                 'title' => 'Condividi',
-                'description' => 'Carica i tuoi appunti e aiuta altri studenti'
+                'description' => 'Condividi i tuoi appunti con tutti.'
             ]) ?>
         </div>
 
         <!-- Card 3: Reward -->
         <div class="col-12 col-md-6 col-lg-4">
-            <?= \App\View\View::getComponent('Cards/featureCard', [
+            <?= $getComponent('Cards/featureCard', [
                 'icon' => 'bi-gift',
-                'iconBg' => 'bg-warning',
+                'iconBg' => 'bg-primary',
                 'title' => 'Reward',
-                'description' => 'Guadagna reputazione condividendo contenuti di qualità'
+                'description' => 'Pubblica le tue note per scalare la classifica e ottenere fantastici premi.'
             ]) ?>
         </div>
     </div>
@@ -64,4 +62,35 @@
             Registrati gratuitamente
         </a>
     </div>
+</section>
+
+
+<section class="aboutUs text-center fw-bold py-3 my-3">
+    <h1>
+        Chi Siamo?
+    </h1>
+</section>
+
+<section>
+    <div>
+        <h2 class="mission text-center fw-bold py-3 my-3">
+            La nostra missione
+        </h2>
+        <div>
+            UniNotes nasce con l'obiettivo di creare una community di studenti universitari che collaborano per il successo comune. 
+            Crediamo nella potenza della condivisione della conoscenza e nel supporto reciproco durante il percorso accademico.
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2 class="team text-center fw-bold py-3 my-3">
+        Il Nostro Team
+    </h2>
+
+    <div>
+        UniNotes nasce con l'obiettivo di creare una community di studenti universitari che collaborano per il successo comune. 
+        Crediamo nella potenza della condivisione della conoscenza e nel supporto reciproco durante il percorso accademico.
+    </div>
+
 </section>

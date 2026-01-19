@@ -46,11 +46,9 @@ class View {
 
 
 
-    public static function renderPage(string $view, array $data = []): void
-    {
+    public static function renderPage(string $view, array $data = []): void {
         // Path della view "interna"
         $viewFile = dirname(__DIR__) . '/View/Pages/' . $view . '.php';
-
 
         if (!file_exists($viewFile)) {
             throw new RuntimeException("View non trovata: {$viewFile}");
@@ -59,12 +57,17 @@ class View {
         // ($title, $user, ecc.)
         extract($data, EXTR_SKIP);
 
+        // Rende disponibile la classe View come funzione helper
+        $getComponent = function($component, $data = []) {
+            return \App\View\View::getComponent($component, $data);
+        };
+
         // Contenuto specifico della pagina
         ob_start();
         require $viewFile;
         $content = ob_get_clean();
 
-        // Include il layout base che userà $content e, se vuoi, $title
+        // Include il layout base
         require dirname(__DIR__) . '/View/template/base.php';
     }
 }
