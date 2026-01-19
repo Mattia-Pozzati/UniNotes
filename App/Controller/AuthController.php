@@ -47,7 +47,7 @@ class AuthController
         }
 
         $email = trim($_POST['email'] ?? '');
-        $password = $_POST['password'] ?? '';
+        $password = trim($_POST['password'] ?? '');
 
         Logger::getInstance()->info("Tentativo di login", [
             "email" => $email
