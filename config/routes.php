@@ -24,7 +24,7 @@ $router->get('/register', 'AuthController@showRegister');
 $router->post('/register', 'AuthController@register');
 $router->get('/logout', 'AuthController@logout');
 
-// Note - QUESTE SONO LE NUOVE ROTTE
+// Note
 $router->get('/note/{id}', 'NoteController@show');
 $router->post('/note/{id}/like', 'NoteController@toggleLike');
 $router->post('/note/{id}/chat', 'NoteController@Chat');
@@ -33,8 +33,8 @@ $router->post('/note/{id}/comment', 'NoteController@addComment');
 // Log
 Router::getInstance()->get("/log", "LogController@show");   
 
-Router::getInstance()->get('/user/dashboard', 'PageController@userDashboard');
-Router::getInstance()->get('/admin', 'PageController@adminDashboard');
+$router->get('/user/dashboard', 'UserDashboardController@show');
+$router->get('/admin', 'AdminDashboardController@show');
 Router::getInstance()->post('/note/create', 'NoteController@create'); // per il form
 
 ?>
