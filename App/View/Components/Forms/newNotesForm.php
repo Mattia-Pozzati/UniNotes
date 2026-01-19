@@ -4,6 +4,7 @@
 
 $courses = $courses ?? [];
 $action = $action ?? "";
+
 ?>
 
 <section class="container py-4">
@@ -58,6 +59,22 @@ $action = $action ?? "";
                     </small>
                 </div>
 
+                <!-- Tipo Nota -->
+                <div class="mb-3">
+                    <label for="note_type" class="form-label">Tipo Nota</label>
+                    <select class="form-select" id="note_type" name="note_type" aria-describedby="noteTypeHelp">
+                        <option value="">Seleziona tipo</option>
+                        <option value="riassunto">Riassunto</option>
+                        <option value="formulario">Formulario</option>
+                        <option value="esercizi">Esercizi</option>
+                        <option value="note">Note</option>
+                        <option value="altro">Altro</option>
+                    </select>
+                    <small id="noteTypeHelp" class="form-text text-muted">
+                        Tipo di contenuto della nota
+                    </small>
+                </div>
+
                 <!-- Formato -->
                 <div class="mb-3">
                     <label for="format" class="form-label">Formato *</label>
@@ -65,8 +82,8 @@ $action = $action ?? "";
                             aria-describedby="formatHelp">
                         <option value="">Seleziona un formato</option>
                         <option value="pdf">PDF</option>
-                        <option value="md">MD</option>
-                        <option value="tex">TEX</option>
+                        <option value="md">Markdown</option>
+                        <option value="tex">LaTeX</option>
                     </select>
                     <small id="formatHelp" class="form-text text-muted">
                         Seleziona il formato del file
@@ -80,20 +97,19 @@ $action = $action ?? "";
                            accept=".pdf,.md,.tex" required aria-required="true"
                            aria-describedby="fileHelp">
                     <small id="fileHelp" class="form-text text-muted">
-                        Formati supportati: PDF, MD, TEX
+                        Formati supportati: PDF, MD, TEX (max 2MB)
                     </small>
                 </div>
 
-                <!-- Opzioni avanzate -->
-                <fieldset class="mb-3">
-                    <legend class="form-label">Opzioni avanzate</legend>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="chatEnabled" name="chatEnabled" value="1">
-                        <label class="form-check-label" for="chatEnabled">
-                            Abilita chat AI per questa nota
-                        </label>
-                    </div>
-                </fieldset>
+                <!-- Visibilità -->
+                <div class="mb-3">
+                    <label for="visibility" class="form-label">Visibilità *</label>
+                    <select class="form-select" id="visibility" name="visibility" required aria-required="true">
+                        <option value="public">Pubblica</option>
+                        <option value="course">Solo corso</option>
+                        <option value="private">Privata</option>
+                    </select>
+                </div>
 
                 <!-- Bottoni -->
                 <div class="d-grid gap-2 d-md-flex justify-content-md-between">
