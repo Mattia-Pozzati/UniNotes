@@ -93,10 +93,11 @@
             <div class="col-lg-8 col-md-10">
                 <h2 class="h3 fw-bold mb-4 text-center">Il nostro team</h2>
                 <p class="text-muted text-start">
-                    UniNotes nasce con l'obiettivo di creare una community di studenti 
-                    universitari che collaborano per il successo comune. 
-                    Crediamo nella potenza della condivisione della conoscenza 
-                    e nel supporto reciproco durante il percorso accademico.
+                    UniNotes è un progetto accademico sviluppato per il corso di Tecnologie Web 
+                    presso l'Università di Bologna. Abbiamo scelto di creare una piattaforma di 
+                    condivisione appunti per combinare l'apprendimento pratico di PHP, database 
+                    e web design con la risoluzione di un problema reale che viviamo ogni giorno 
+                    come studenti.
                 </p>
             </div>
         </div>
