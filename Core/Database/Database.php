@@ -13,11 +13,10 @@ class Database {
     private PDO $pdo;
 
     private function __construct() {
-        // Carica configurazione da .env.local
         $envPath = dirname(__DIR__, 2) . '/.env.local';
         
         $host = 'localhost';
-        $port = 3306;  // Porta standard MySQL
+        $port = 3306;
         $dbname = 'uninotes';
         $username = 'root';
         $password = '';
