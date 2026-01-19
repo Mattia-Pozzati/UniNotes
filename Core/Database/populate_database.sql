@@ -15,7 +15,7 @@ DELETE FROM `USER`;
 
 SET FOREIGN_KEY_CHECKS=1;
 
--- Users (password hash per 'password123')
+-- Users (password hash per 'password')
 INSERT INTO `USER` (id, name, email, password_hash, university, role, reputation) VALUES
 (1, 'Alice Rossi', 'alice@uninotes.it', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Università di Bologna', 'student', 15),
 (2, 'Luca Bianchi', 'luca@uninotes.it', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Politecnico di Milano', 'student', 8),
