@@ -75,18 +75,26 @@ class NoteFactory {
             false,
             $likes,
             $downloads,
-            [false, true],
+            [true, true],
             [
-                [], 
+                [
+                    "text" => "Vai alla nota", 
+                    "icon" => true, 
+                    "class" => "btn-primary", 
+                    "link" => "/note/{$id}", 
+                    "icon-class" => "bi-arrow-right"
+                ],
                 [
                     "text" => "Blocca", 
                     "icon" => false, 
                     "class" => "btn-outline-secondary", 
                     "link" => "#", 
-                    "icon-class" => ""]
+                    "icon-class" => ""
+                ]
             ]
         ))->toArray();
     }
+    
     public static function userDashboardNoteView (
         int $id,
         string $title,
@@ -111,16 +119,22 @@ class NoteFactory {
             false,
             $likes,
             $downloads,
-            [false, true],
+            [true, true],
             [ 
+                [
+                    "text" => "Vai alla nota", 
+                    "icon" => true, 
+                    "class" => "btn-primary", 
+                    "link" => "/note/{$id}", 
+                    "icon-class" => "bi-arrow-right"
+                ],
                 [
                     "text" => "Modifica", 
                     "icon" => true, 
-                    "class" => "btn-primary", 
+                    "class" => "btn-outline-secondary", 
                     "link" => "#", 
-                    "icon-class" => "bi-arrow-right"
-                ],[]
-
+                    "icon-class" => "bi-pencil"
+                ]
             ]
         ))->toArray();
     }
@@ -155,7 +169,7 @@ class NoteFactory {
                     "text" => "Vai alla nota", 
                     "icon" => true, 
                     "class" => "btn-primary", 
-                    "link" => "#", 
+                    "link" => "/note/{$id}", 
                     "icon-class" => "bi-arrow-right"
                 ],
                 [
@@ -217,4 +231,3 @@ class NoteFactory {
         
     }
 }
-?>

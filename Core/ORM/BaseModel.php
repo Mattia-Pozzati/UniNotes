@@ -33,6 +33,28 @@ class BaseModel implements BaseInterface
     private $joins = [];
 
     /**
+     * Trova un record per ID
+     * 
+     * @param int $id
+     * @return array|null
+     */
+    public static function find(int $id): ?array
+    {
+        $instance = new static();
+        return $instance->where('id', '=', $id)->first();
+    }
+
+    /**
+     * Ottieni tutti i record della tabella
+     * 
+     * @return array
+     */
+    public function getAll(): array
+    {
+        return $this->get();
+    }
+
+    /**
      * Validazione valori generici (non identifier)
      */
     private function validate(array $values): bool
