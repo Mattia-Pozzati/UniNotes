@@ -53,7 +53,7 @@
                         </button>
                     </div>
                     <small class="form-text text-muted">
-                        Demo: alice@uninotes.it / password123
+                        Demo: alice@uninotes.it / password
                     </small>
                 </div>
 
