@@ -191,7 +191,7 @@ class AuthController
             
             // Crea nuovo utente
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-            
+        
             Logger::getInstance()->info("Hash generato", [
                 "hash_length" => strlen($passwordHash),
                 "hash_preview" => substr($passwordHash, 0, 20)
