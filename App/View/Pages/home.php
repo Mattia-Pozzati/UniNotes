@@ -119,7 +119,7 @@
                 'name' => 'Simone Brunelli',
                 'github' => 'https://github.com/Purp7ePi3',
                 'linkedin' => '',
-                'email' => 'mattia.pozzati3@studio.unibo.it',
+                'email' => 'simone.brunelli3@studio.unibo.it',
             ]) ?>
         </div>
     
