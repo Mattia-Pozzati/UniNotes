@@ -1,10 +1,21 @@
 <?php namespace App\View; ?>
 
-
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
     <div class="card shadow-sm" style="width: 100%; max-width: 400px;">
         <div class="card-body p-4">
             <h2 class="card-title text-center mb-4">Accedi</h2>
+            
+            <?php if (!empty($error)): ?>
+                <div class="alert alert-danger" role="alert">
+                    <?= htmlspecialchars($error) ?>
+                </div>
+            <?php endif; ?>
+            
+            <?php if (!empty($success)): ?>
+                <div class="alert alert-success" role="alert">
+                    <?= htmlspecialchars($success) ?>
+                </div>
+            <?php endif; ?>
             
             <form action="/login" method="POST">
 
@@ -16,8 +27,9 @@
                         class="form-control" 
                         id="email" 
                         name="email" 
-                        placeholder="esempio@uninotes.it"
+                        placeholder="alice@uninotes.it"
                         required
+                        autofocus
                     >
                 </div>
 
@@ -40,6 +52,9 @@
                             <i class="bi bi-eye"></i>
                         </button>
                     </div>
+                    <small class="form-text text-muted">
+                        Demo: alice@uninotes.it / password123
+                    </small>
                 </div>
 
                 <!-- Submit Button -->

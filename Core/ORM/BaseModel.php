@@ -375,7 +375,7 @@ class BaseModel implements BaseInterface
     /**
      * @return BaseInterface|null prima riga del risultato
      */
-    public function first(): BaseInterface|null
+    public function first(): array|null
     {
         $this->limit(1);
         $results = $this->get();

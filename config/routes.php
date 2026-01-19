@@ -27,6 +27,7 @@ $router->get('/logout', 'AuthController@logout');
 // Note - QUESTE SONO LE NUOVE ROTTE
 $router->get('/note/{id}', 'NoteController@show');
 $router->post('/note/{id}/like', 'NoteController@toggleLike');
+$router->post('/note/{id}/chat', 'NoteController@Chat');
 $router->post('/note/{id}/comment', 'NoteController@addComment');
 
 // Log

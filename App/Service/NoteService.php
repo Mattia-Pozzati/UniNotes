@@ -11,47 +11,13 @@ use Core\Helper\Logger;
 class NoteService {
   private static ?bool $dbAvailable = null;
 
-  /**
-   * Controlla se il database è disponibile
-   */
-  private static function isDatabaseAvailable(): bool {
-    if (self::$dbAvailable !== null) {
-        return self::$dbAvailable;
-    }
-    
-    try {
-        Database::getInstance();
-        self::$dbAvailable = true;
-        Logger::getInstance()->info("Database disponibile - uso dati reali");
-    } catch (\Exception $e) {
-        self::$dbAvailable = false;
-        Logger::getInstance()->warning("Database non disponibile - uso mockup", [
-            "error" => $e->getMessage()
-        ]);
-    }
-    
-    return self::$dbAvailable;
-  }
+ public static function getFullNote(int $id): ?array {
+    return self::getFullNoteFromDatabase($id);
+}
 
-  /**
-   * Restituisce una nota completa per ID
-   */
-  public static function getFullNote(int $id): ?array {
-    if (self::isDatabaseAvailable()) {
-        return self::getFullNoteFromDatabase($id);
-    }
-    return self::getFullNoteFromMockup($id);
-  }
-
-  /**
-   * Restituisce le note per la home
-   */
-  public static function getNotesForHome(int $limit = 10): array {
-    if (self::isDatabaseAvailable()) {
-        return self::getNotesFromDatabase($limit);
-    }
-    return self::getNotesFromMockup();
-  }
+public static function getNotesForHome(int $limit = 10): array {
+    return self::getNotesFromDatabase($limit);
+}
 
 
   private static function getFullNoteFromDatabase(int $id): ?array {

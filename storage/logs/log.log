@@ -15,9 +15,7 @@
 2025-12-12T10:04:26+00:00 INFO ::1 user:- - Mostra log
 2026-01-06T19:20:38+00:00 ERROR ::1 user:- view=>components/card View not found
 2026-01-08T10:54:59+00:00 INFO ::1 user:- email=>sad@gmail.com name=>sad Tentativo di registrazione
-<<<<<<< Updated upstream
 2026-01-08T14:23:48+00:00 INFO 192.168.0.220 user:- email=>das@dasda.csacsa admin=>no Tentativo di login
-=======
 2026-01-15T11:13:13+00:00 INFO ::1 user:- method=>GET path=>/note/1 route=>/note/{id} params=>1 Route matched
 2026-01-15T11:13:13+00:00 INFO ::1 user:- note_id=>1 Visualizzazione nota
 2026-01-15T11:13:13+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
@@ -129,7 +127,6 @@
 2026-01-16T15:41:40+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
 2026-01-16T15:41:40+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] No such file or directory Database non disponibile - uso mockup
 2026-01-16T15:41:40+00:00 WARNING ::1 user:- method=>GET path=>/.well-known/appspecific/com.chrome.devtools.json 404 - Route not found
->>>>>>> Stashed changes
 2026-01-16T16:42:35+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
 2026-01-16T16:42:35+00:00 ERROR ::1 user:- view=>section-header View not found
 2026-01-16T16:43:41+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
@@ -258,3 +255,194 @@
 2026-01-18T16:15:33+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
 2026-01-18T16:15:34+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
 2026-01-18T16:15:35+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-18T23:35:19+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-18T23:35:25+00:00 WARNING ::1 user:- method=>GET path=>/note 404 - Route not found
+2026-01-18T23:35:27+00:00 INFO ::1 user:- method=>GET path=>/note/1 route=>/note/{id} params=>1 Route matched
+2026-01-18T23:35:27+00:00 INFO ::1 user:- note_id=>1 Visualizzazione nota
+2026-01-18T23:35:27+00:00 WARNING ::1 user:- error=>SQLSTATE[HY000] [2002] Connection refused Database non disponibile - uso mockup
+2026-01-18T23:36:53+00:00 WARNING ::1 user:- method=>GET path=>/note 404 - Route not found
+2026-01-18T23:36:57+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-18T23:36:58+00:00 INFO ::1 user:- method=>GET path=>/register route=>/register params=> Route matched
+2026-01-18T23:36:59+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-18T23:44:21+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-18T23:44:23+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-18T23:44:45+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-18T23:45:32+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-18T23:45:38+00:00 INFO ::1 user:- method=>GET path=>/register route=>/register params=> Route matched
+2026-01-18T23:45:40+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-18T23:46:04+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-18T23:51:14+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-18T23:51:15+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-18T23:55:31+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-18T23:55:33+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-18T23:55:33+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-18T23:55:38+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-18T23:56:37+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-18T23:57:03+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-18T23:58:10+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-18T23:58:17+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-19T00:02:02+00:00 INFO - user:- condition=>{"column":"visibility","operator":"=","value":"public","and":true} Aggiunta condizione where con successo
+2026-01-19T00:02:02+00:00 ERROR - user:- error=>SQLSTATE[HY000] [1698] Access denied for user 'root'@'localhost' dsn=>mysql:host=localhost;port=3306;dbname=uninotes;charset=utf8mb4 Connessione al database fallita
+2026-01-19T00:02:28+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-19T00:03:07+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-19T00:03:08+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-19T00:03:43+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-19T00:03:45+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-19T00:05:47+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-19T00:05:59+00:00 INFO - user:- per_page=>5 page=>1 getAllNotes chiamato
+2026-01-19T00:05:59+00:00 INFO - user:- join=>{"type":"INNER","table":"USER","first":"NOTE.student_id","operator":"=","second":"USER.id"} Aggiunta join con successo
+2026-01-19T00:05:59+00:00 INFO - user:- condition=>{"column":"NOTE.deleted_at","operator":"IS","value":null,"and":true} Aggiunta condizione where con successo
+2026-01-19T00:05:59+00:00 INFO - user:- condition=>{"column":"NOTE.visibility","operator":"=","value":"public","and":true} Aggiunta condizione where con successo
+2026-01-19T00:05:59+00:00 INFO - user:- condition=>ORDER BY created_at DESC Aggiunta condizione order_by con successo
+2026-01-19T00:05:59+00:00 INFO - user:- host=>localhost port=>3306 database=>uninotes Connessione al database riuscita
+2026-01-19T00:05:59+00:00 INFO - user:- - Rilasciata istanza database a user
+2026-01-19T00:05:59+00:00 INFO - user:- query=>SELECT NOTE.*, USER.name AS student_name FROM NOTE INNER JOIN USER ON NOTE.student_id = USER.id WHERE NOTE.deleted_at IS NULL AND NOTE.visibility = ? ORDER BY created_at DESC LIMIT 5 OFFSET 0 Query eseguita con successo
+2026-01-19T00:05:59+00:00 INFO - user:- - Rilasciata istanza database a user
+2026-01-19T00:05:59+00:00 INFO - user:- count=>5 getAllNotes risultato
+2026-01-19T00:06:03+00:00 INFO - user:- per_page=>5 page=>1 getAllNotes chiamato
+2026-01-19T00:06:03+00:00 INFO - user:- join=>{"type":"INNER","table":"USER","first":"NOTE.student_id","operator":"=","second":"USER.id"} Aggiunta join con successo
+2026-01-19T00:06:03+00:00 INFO - user:- condition=>{"column":"NOTE.deleted_at","operator":"IS","value":null,"and":true} Aggiunta condizione where con successo
+2026-01-19T00:06:03+00:00 INFO - user:- condition=>{"column":"NOTE.visibility","operator":"=","value":"public","and":true} Aggiunta condizione where con successo
+2026-01-19T00:06:03+00:00 INFO - user:- condition=>ORDER BY created_at DESC Aggiunta condizione order_by con successo
+2026-01-19T00:06:03+00:00 INFO - user:- host=>localhost port=>3306 database=>uninotes Connessione al database riuscita
+2026-01-19T00:06:03+00:00 INFO - user:- - Rilasciata istanza database a user
+2026-01-19T00:06:03+00:00 INFO - user:- query=>SELECT NOTE.*, USER.name AS student_name FROM NOTE INNER JOIN USER ON NOTE.student_id = USER.id WHERE NOTE.deleted_at IS NULL AND NOTE.visibility = ? ORDER BY created_at DESC LIMIT 5 OFFSET 0 Query eseguita con successo
+2026-01-19T00:06:03+00:00 INFO - user:- - Rilasciata istanza database a user
+2026-01-19T00:06:03+00:00 INFO - user:- count=>5 getAllNotes risultato
+2026-01-19T00:06:10+00:00 INFO - user:- per_page=>5 page=>1 getAllNotes chiamato
+2026-01-19T00:06:10+00:00 INFO - user:- join=>{"type":"INNER","table":"USER","first":"NOTE.student_id","operator":"=","second":"USER.id"} Aggiunta join con successo
+2026-01-19T00:06:10+00:00 INFO - user:- condition=>{"column":"NOTE.deleted_at","operator":"IS","value":null,"and":true} Aggiunta condizione where con successo
+2026-01-19T00:06:10+00:00 INFO - user:- condition=>{"column":"NOTE.visibility","operator":"=","value":"public","and":true} Aggiunta condizione where con successo
+2026-01-19T00:06:10+00:00 INFO - user:- condition=>ORDER BY created_at DESC Aggiunta condizione order_by con successo
+2026-01-19T00:06:10+00:00 INFO - user:- host=>localhost port=>3306 database=>uninotes Connessione al database riuscita
+2026-01-19T00:06:10+00:00 INFO - user:- - Rilasciata istanza database a user
+2026-01-19T00:06:10+00:00 INFO - user:- query=>SELECT NOTE.*, USER.name AS student_name FROM NOTE INNER JOIN USER ON NOTE.student_id = USER.id WHERE NOTE.deleted_at IS NULL AND NOTE.visibility = ? ORDER BY created_at DESC LIMIT 5 OFFSET 0 Query eseguita con successo
+2026-01-19T00:06:10+00:00 INFO - user:- - Rilasciata istanza database a user
+2026-01-19T00:06:10+00:00 INFO - user:- count=>5 getAllNotes risultato
+2026-01-19T00:06:49+00:00 INFO - user:- per_page=>5 page=>1 getAllNotes chiamato
+2026-01-19T00:06:49+00:00 INFO - user:- join=>{"type":"INNER","table":"USER","first":"NOTE.student_id","operator":"=","second":"USER.id"} Aggiunta join con successo
+2026-01-19T00:06:49+00:00 INFO - user:- condition=>{"column":"NOTE.deleted_at","operator":"IS","value":null,"and":true} Aggiunta condizione where con successo
+2026-01-19T00:06:49+00:00 INFO - user:- condition=>{"column":"NOTE.visibility","operator":"=","value":"public","and":true} Aggiunta condizione where con successo
+2026-01-19T00:06:49+00:00 INFO - user:- condition=>ORDER BY created_at DESC Aggiunta condizione order_by con successo
+2026-01-19T00:06:49+00:00 INFO - user:- host=>localhost port=>3306 database=>uninotes Connessione al database riuscita
+2026-01-19T00:06:49+00:00 INFO - user:- - Rilasciata istanza database a user
+2026-01-19T00:06:49+00:00 INFO - user:- query=>SELECT NOTE.*, USER.name AS student_name FROM NOTE INNER JOIN USER ON NOTE.student_id = USER.id WHERE NOTE.deleted_at IS NULL AND NOTE.visibility = ? ORDER BY created_at DESC LIMIT 5 OFFSET 0 Query eseguita con successo
+2026-01-19T00:06:49+00:00 INFO - user:- - Rilasciata istanza database a user
+2026-01-19T00:06:49+00:00 INFO - user:- count=>5 getAllNotes risultato
+2026-01-19T00:07:11+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-19T00:07:35+00:00 INFO ::1 user:- method=>POST path=>/login route=>/login params=> Route matched
+2026-01-19T00:07:35+00:00 INFO ::1 user:- email=>alice@uninotes.it Tentativo di login
+2026-01-19T00:07:35+00:00 INFO ::1 user:- condition=>{"column":"email","operator":"=","value":"alice@uninotes.it","and":true} Aggiunta condizione where con successo
+2026-01-19T00:07:35+00:00 INFO ::1 user:- condition=>LIMIT 1 Aggiunta condizione where con successo
+2026-01-19T00:07:35+00:00 INFO ::1 user:- host=>localhost port=>3306 database=>uninotes Connessione al database riuscita
+2026-01-19T00:07:35+00:00 INFO ::1 user:- - Rilasciata istanza database a user
+2026-01-19T00:07:35+00:00 INFO ::1 user:- query=>SELECT * FROM USER WHERE email = ? LIMIT 1 Query eseguita con successo
+2026-01-19T00:08:46+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-19T00:08:55+00:00 INFO ::1 user:- method=>POST path=>/login route=>/login params=> Route matched
+2026-01-19T00:08:55+00:00 INFO ::1 user:- email=>alice@uninotes.it Tentativo di login
+2026-01-19T00:09:39+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-19T00:09:46+00:00 INFO ::1 user:- method=>POST path=>/login route=>/login params=> Route matched
+2026-01-19T00:09:46+00:00 INFO ::1 user:- email=>alice@uninotes.it Tentativo di login
+2026-01-19T00:09:46+00:00 INFO ::1 user:- condition=>{"column":"email","operator":"=","value":"alice@uninotes.it","and":true} Aggiunta condizione where con successo
+2026-01-19T00:09:46+00:00 INFO ::1 user:- condition=>LIMIT 1 Aggiunta condizione where con successo
+2026-01-19T00:09:46+00:00 INFO ::1 user:- host=>localhost port=>3306 database=>uninotes Connessione al database riuscita
+2026-01-19T00:09:46+00:00 INFO ::1 user:- - Rilasciata istanza database a user
+2026-01-19T00:09:46+00:00 INFO ::1 user:- query=>SELECT * FROM USER WHERE email = ? LIMIT 1 Query eseguita con successo
+2026-01-19T00:09:46+00:00 WARNING ::1 user:- email=>alice@uninotes.it Login fallito - credenziali non valide
+2026-01-19T00:09:46+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-19T00:11:56+00:00 INFO ::1 user:- method=>POST path=>/login route=>/login params=> Route matched
+2026-01-19T00:11:56+00:00 INFO ::1 user:- email=>alice@uninotes.it Tentativo di login
+2026-01-19T00:11:56+00:00 INFO ::1 user:- condition=>{"column":"email","operator":"=","value":"alice@uninotes.it","and":true} Aggiunta condizione where con successo
+2026-01-19T00:11:56+00:00 INFO ::1 user:- condition=>LIMIT 1 Aggiunta condizione where con successo
+2026-01-19T00:11:56+00:00 INFO ::1 user:- host=>localhost port=>3306 database=>uninotes Connessione al database riuscita
+2026-01-19T00:11:56+00:00 INFO ::1 user:- - Rilasciata istanza database a user
+2026-01-19T00:11:56+00:00 INFO ::1 user:- query=>SELECT * FROM USER WHERE email = ? LIMIT 1 Query eseguita con successo
+2026-01-19T00:11:56+00:00 WARNING ::1 user:- email=>alice@uninotes.it Login fallito - credenziali non valide
+2026-01-19T00:11:56+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-19T00:12:00+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-19T00:12:02+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-19T00:12:03+00:00 INFO ::1 user:- method=>GET path=>/register route=>/register params=> Route matched
+2026-01-19T00:12:05+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-19T00:12:19+00:00 INFO ::1 user:- method=>POST path=>/login route=>/login params=> Route matched
+2026-01-19T00:12:19+00:00 INFO ::1 user:- email=>alice@uninotes.it Tentativo di login
+2026-01-19T00:12:19+00:00 INFO ::1 user:- condition=>{"column":"email","operator":"=","value":"alice@uninotes.it","and":true} Aggiunta condizione where con successo
+2026-01-19T00:12:19+00:00 INFO ::1 user:- condition=>LIMIT 1 Aggiunta condizione where con successo
+2026-01-19T00:12:19+00:00 INFO ::1 user:- host=>localhost port=>3306 database=>uninotes Connessione al database riuscita
+2026-01-19T00:12:19+00:00 INFO ::1 user:- - Rilasciata istanza database a user
+2026-01-19T00:12:19+00:00 INFO ::1 user:- query=>SELECT * FROM USER WHERE email = ? LIMIT 1 Query eseguita con successo
+2026-01-19T00:12:19+00:00 WARNING ::1 user:- email=>alice@uninotes.it Login fallito - credenziali non valide
+2026-01-19T00:12:19+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-19T00:16:09+00:00 INFO ::1 user:- method=>GET path=>/register route=>/register params=> Route matched
+2026-01-19T00:16:23+00:00 INFO ::1 user:- method=>POST path=>/register route=>/register params=> Route matched
+2026-01-19T00:16:23+00:00 INFO ::1 user:- email=>alice@uninotes.it name=>Alice Tentativo di registrazione
+2026-01-19T00:16:24+00:00 INFO ::1 user:- method=>GET path=>/register route=>/register params=> Route matched
+2026-01-19T00:20:19+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-19T00:20:25+00:00 INFO ::1 user:- method=>POST path=>/login route=>/login params=> Route matched
+2026-01-19T00:20:25+00:00 INFO ::1 user:- email=>lice@uninotes.it Tentativo di login
+2026-01-19T00:20:25+00:00 INFO ::1 user:- condition=>{"column":"email","operator":"=","value":"lice@uninotes.it","and":true} Aggiunta condizione where con successo
+2026-01-19T00:20:25+00:00 INFO ::1 user:- condition=>LIMIT 1 Aggiunta condizione where con successo
+2026-01-19T00:20:25+00:00 INFO ::1 user:- host=>localhost port=>3306 database=>uninotes Connessione al database riuscita
+2026-01-19T00:20:25+00:00 INFO ::1 user:- - Rilasciata istanza database a user
+2026-01-19T00:20:25+00:00 INFO ::1 user:- query=>SELECT * FROM USER WHERE email = ? LIMIT 1 Query eseguita con successo
+2026-01-19T00:20:25+00:00 WARNING ::1 user:- email=>lice@uninotes.it Login fallito - credenziali non valide
+2026-01-19T00:20:25+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-19T00:20:33+00:00 INFO ::1 user:- method=>GET path=>/register route=>/register params=> Route matched
+2026-01-19T00:20:54+00:00 INFO ::1 user:- method=>POST path=>/register route=>/register params=> Route matched
+2026-01-19T00:20:54+00:00 INFO ::1 user:- email=>sbrunelli01@gmail.com name=>simone Tentativo di registrazione
+2026-01-19T00:20:54+00:00 INFO ::1 user:- method=>GET path=>/register route=>/register params=> Route matched
+2026-01-19T00:22:27+00:00 INFO ::1 user:- method=>GET path=>/register route=>/register params=> Route matched
+2026-01-19T00:22:47+00:00 INFO ::1 user:- method=>POST path=>/register route=>/register params=> Route matched
+2026-01-19T00:22:47+00:00 INFO ::1 user:- method=>POST === INIZIO register() ===
+2026-01-19T00:22:47+00:00 INFO ::1 user:- name=>simo email=>sburelli01@gmail.com password_length=>10 password_confirm_length=>0 Dati registrazione ricevuti
+2026-01-19T00:22:47+00:00 WARNING ::1 user:- errors=>["Le password non coincidono"] Registrazione fallita - validazione
+2026-01-19T00:22:47+00:00 INFO ::1 user:- method=>GET path=>/register route=>/register params=> Route matched
+2026-01-19T00:23:11+00:00 INFO ::1 user:- method=>POST path=>/register route=>/register params=> Route matched
+2026-01-19T00:23:11+00:00 INFO ::1 user:- method=>POST === INIZIO register() ===
+2026-01-19T00:23:11+00:00 INFO ::1 user:- name=>s email=>s@gmail.com password_length=>10 password_confirm_length=>0 Dati registrazione ricevuti
+2026-01-19T00:23:11+00:00 WARNING ::1 user:- errors=>["Le password non coincidono"] Registrazione fallita - validazione
+2026-01-19T00:23:11+00:00 INFO ::1 user:- method=>GET path=>/register route=>/register params=> Route matched
+2026-01-19T00:25:17+00:00 INFO ::1 user:- method=>POST path=>/register route=>/register params=> Route matched
+2026-01-19T00:25:17+00:00 INFO ::1 user:- method=>POST === INIZIO register() ===
+2026-01-19T00:25:17+00:00 INFO ::1 user:- name=>s email=>s@gmail.com password_length=>10 password_confirm_length=>10 Dati registrazione ricevuti
+2026-01-19T00:25:17+00:00 INFO ::1 user:- - Validazione OK, procedo con insert
+2026-01-19T00:25:17+00:00 INFO ::1 user:- - Controllo email esistente
+2026-01-19T00:25:17+00:00 INFO ::1 user:- condition=>{"column":"email","operator":"=","value":"s@gmail.com","and":true} Aggiunta condizione where con successo
+2026-01-19T00:25:17+00:00 INFO ::1 user:- condition=>LIMIT 1 Aggiunta condizione where con successo
+2026-01-19T00:25:17+00:00 INFO ::1 user:- host=>localhost port=>3306 database=>uninotes Connessione al database riuscita
+2026-01-19T00:25:17+00:00 INFO ::1 user:- - Rilasciata istanza database a user
+2026-01-19T00:25:17+00:00 INFO ::1 user:- query=>SELECT * FROM USER WHERE email = ? LIMIT 1 Query eseguita con successo
+2026-01-19T00:25:17+00:00 INFO ::1 user:- - Email disponibile, genero hash
+2026-01-19T00:25:17+00:00 INFO ::1 user:- hash_length=>60 hash_preview=>$2y$10$wjnrOCpuzERFx Hash generato
+2026-01-19T00:25:17+00:00 INFO ::1 user:- data_keys=>["name","email","password_hash","role","reputation"] Tentativo insert utente
+2026-01-19T00:25:17+00:00 INFO ::1 user:- - Rilasciata istanza database a user
+2026-01-19T00:25:17+00:00 WARNING ::1 user:- id=>100 Entry inserita con successo
+2026-01-19T00:25:17+00:00 INFO ::1 user:- user_id=>100 result_type=>string Insert completato
+2026-01-19T00:25:17+00:00 INFO ::1 user:- user_id=>100 email=>s@gmail.com Registrazione completata con successo
+2026-01-19T00:25:17+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-19T00:25:49+00:00 INFO ::1 user:- method=>POST path=>/login route=>/login params=> Route matched
+2026-01-19T00:25:49+00:00 INFO ::1 user:- email=>s@gmail.com Tentativo di login
+2026-01-19T00:25:49+00:00 INFO ::1 user:- condition=>{"column":"email","operator":"=","value":"s@gmail.com","and":true} Aggiunta condizione where con successo
+2026-01-19T00:25:49+00:00 INFO ::1 user:- condition=>LIMIT 1 Aggiunta condizione where con successo
+2026-01-19T00:25:49+00:00 INFO ::1 user:- host=>localhost port=>3306 database=>uninotes Connessione al database riuscita
+2026-01-19T00:25:49+00:00 INFO ::1 user:- - Rilasciata istanza database a user
+2026-01-19T00:25:49+00:00 INFO ::1 user:- query=>SELECT * FROM USER WHERE email = ? LIMIT 1 Query eseguita con successo
+2026-01-19T00:25:49+00:00 INFO ::1 user:- user_found=>true user_id=>100 user_email=>s@gmail.com Debug login
+2026-01-19T00:25:49+00:00 INFO ::1 user:- user_id=>100 email=>s@gmail.com Utente loggato
+2026-01-19T00:25:49+00:00 INFO ::1 user:- user_id=>100 email=>s@gmail.com role=>student Login riuscito
+2026-01-19T00:25:49+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-19T00:33:20+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-19T00:33:23+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-19T00:33:35+00:00 INFO ::1 user:- method=>POST path=>/login route=>/login params=> Route matched
+2026-01-19T00:33:35+00:00 INFO ::1 user:- email=>s@gmail.com Tentativo di login
+2026-01-19T00:33:35+00:00 INFO ::1 user:- condition=>{"column":"email","operator":"=","value":"s@gmail.com","and":true} Aggiunta condizione where con successo
+2026-01-19T00:33:35+00:00 INFO ::1 user:- condition=>LIMIT 1 Aggiunta condizione where con successo
+2026-01-19T00:33:35+00:00 INFO ::1 user:- host=>localhost port=>3306 database=>uninotes Connessione al database riuscita
+2026-01-19T00:33:35+00:00 INFO ::1 user:- - Rilasciata istanza database a user
+2026-01-19T00:33:35+00:00 INFO ::1 user:- query=>SELECT * FROM USER WHERE email = ? LIMIT 1 Query eseguita con successo
+2026-01-19T00:33:35+00:00 INFO ::1 user:- user_found=>true user_id=>100 user_email=>s@gmail.com Debug login
+2026-01-19T00:33:35+00:00 INFO ::1 user:- user_id=>100 email=>s@gmail.com Utente loggato
+2026-01-19T00:33:35+00:00 INFO ::1 user:- user_id=>100 email=>s@gmail.com role=>student Login riuscito
+2026-01-19T00:33:35+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-19T00:33:38+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched
+2026-01-19T00:33:39+00:00 INFO ::1 user:- method=>GET path=>/login route=>/login params=> Route matched
+2026-01-19T00:38:33+00:00 INFO ::1 user:- method=>GET path=>/ route=>/ params=> Route matched

@@ -16,7 +16,7 @@ interface BaseInterface {
     public function insert(array $data) : string | bool;
     public function update(array $data) : bool;
     public function delete() : bool;
-    public function first() : BaseInterface | null;
+    public function first() : array | null;
     public function count() : int;
     public function leftJoin(string $table, string $first, string $operator, string $second) : BaseInterface | null;
     public function rightJoin(string $table, string $first, string $operator, string $second) : BaseInterface | null;

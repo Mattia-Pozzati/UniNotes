@@ -1,7 +1,3 @@
--- Schema creation for MySQL / MariaDB
-CREATE DATABASE IF NOT EXISTS `uninotes` CHARACTER SET = 'utf8mb4' COLLATE = 'utf8mb4_unicode_ci';
-USE `uninotes`;
-
 SET FOREIGN_KEY_CHECKS = 0;
 
 DROP TABLE IF EXISTS `NOTE_DOWNLOAD`;
@@ -33,6 +29,8 @@ CREATE TABLE `NOTE` (
   `title` VARCHAR(255) NOT NULL,
   `description` VARCHAR(250) DEFAULT NULL,
   `note_type` VARCHAR(100) DEFAULT NULL,
+  `format` VARCHAR(50) DEFAULT NULL,
+  `university` VARCHAR(191) DEFAULT NULL,
   `visibility` ENUM('public','course','private') NOT NULL DEFAULT 'public',
   `created_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `updated_at` DATETIME(6) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(6),
