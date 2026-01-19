@@ -26,7 +26,11 @@
             <?php endif; ?>
 
             <?php if (!empty($tab['form'])): ?>
-                <?= \App\View\View::getComponent($tab['form']) ?>
+                <?= \App\View\View::getComponent($tab['form'], [
+                    'courses' => $tab['courses'] ?? [],
+                    'tags' => $tab['tags'] ?? [],
+                    'action' => $tabs['action'] ?? ''
+                ]) ?>
             <?php endif; ?>
 
         </div>
