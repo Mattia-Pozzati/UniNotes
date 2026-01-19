@@ -1,13 +1,28 @@
 <?php namespace App\View; ?>
 
-
 <?php
 $note = $note ?? [];
-$currentUserId = null; // Per ora nessun utente loggato
+$currentUserId = $currentUserId ?? null;
+$isLoggedIn = $isLoggedIn ?? false;
 $isAuthor = false;
 ?>
 
 <div class="container-fluid px-3 px-md-4 px-lg-5 py-4">
+    <!-- Flash messages -->
+    <?php if ($flash = \Core\Helper\SessionManager::flash('error')): ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?= htmlspecialchars($flash) ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    <?php endif; ?>
+    
+    <?php if ($flash = \Core\Helper\SessionManager::flash('success')): ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?= htmlspecialchars($flash) ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    <?php endif; ?>
+
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb">
@@ -24,9 +39,7 @@ $isAuthor = false;
             <div class="card mb-4">
                 <div class="card-body">
                     <h1 class="h2 mb-3"><?= htmlspecialchars($note['title'] ?? 'Titolo Nota') ?></h1>
-
-                    <p class="card-text">
-                        <?= htmlspecialchars($note['description'] ?? 'Descrizione nota Abbastanza lunga') ?></p>
+                    <p class="card-text"><?= htmlspecialchars($note['description'] ?? 'Descrizione nota') ?></p>
 
                     <!-- File icon placeholder -->
                     <div class="text-center my-4">
@@ -55,43 +68,42 @@ $isAuthor = false;
             </div>
 
             <!-- Chatta con UninotesAI -->
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h5 class="card-title mb-3">Chatta con UninotesAI</h5>
-                    <p class="text-muted small mb-3">
-                        Fai domande relative alla nota e UninotesAI risponderà
-                    </p>
+            <?php if (!empty($note['files'])): ?>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Chatta con UninotesAI</h5>
+                        <p class="text-muted small mb-3">Fai domande relative alla nota e UninotesAI risponderà</p>
 
-                    <!-- Form domanda -->
-                    <form action="/note/<?= $note['id'] ?>/chat" method="POST">
-                        <div class="mb-3">
-                            <label for="chatQuestion" class="form-label">Domanda?</label>
-                            <input type="text" class="form-control" id="chatQuestion" name="question"
-                                placeholder="Value">
-                        </div>
-                        <button type="submit" class="btn btn-primary">
-                            Chiedi alla nota
-                            <i class="bi bi-arrow-right ms-1"></i>
-                        </button>
-                    </form>
+                        <!-- Form domanda -->
+                        <form action="/note/<?= $note['id'] ?>/chat" method="POST">
+                            <div class="mb-3">
+                                <label for="chatQuestion" class="form-label">Domanda?</label>
+                                <input type="text" class="form-control" id="chatQuestion" name="question"
+                                    placeholder="Scrivi la tua domanda...">
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                Chiedi alla nota
+                                <i class="bi bi-arrow-right ms-1"></i>
+                            </button>
+                        </form>
 
-                    <!-- Risposta -->
-                    <div class="mt-4">
-                        <h6 class="mb-2">Risposta</h6>
-                        <div class="p-3 bg-grey rounded" style="min-height: 150px;">
-                            <!-- Qui apparirà la risposta dell'AI -->
-                        </div>
+                        <!-- Risposta AI -->
+                        <?php if (isset($aiResponse) && !empty($aiResponse)): ?>
+                            <div class="mt-4">
+                                <h6 class="mb-2">Risposta</h6>
+                                <div class="p-3 bg-light rounded text-dark" style="min-height: 150px;">
+                                    <?= nl2br(htmlspecialchars($aiResponse)) ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
-            </div>
+            <?php endif; ?>
 
             <!-- Sezione commenti -->
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title mb-3">Commenti</h5>
-                    <p class="text-muted small mb-4">
-                        Esplora migliaia di appunti condivisi nella community
-                    </p>
 
                     <!-- Lista commenti -->
                     <?php if (empty($note['comments'])): ?>
@@ -111,23 +123,63 @@ $isAuthor = false;
                                                         <?php if ($comment['is_author'] ?? false): ?>
                                                             <span class="badge bg-secondary ms-2">Autore</span>
                                                         <?php endif; ?>
+                                                        <small class="text-muted ms-2"><?= htmlspecialchars($comment['created_at']) ?></small>
                                                     </div>
 
-                                                    <!-- Bottone collapse -->
-                                                    <?php if (!empty($comment['replies'])): ?>
-                                                        <button class="btn btn-sm btn-link text-muted" type="button"
-                                                            data-bs-toggle="collapse" data-bs-target="#replies-<?= $index ?>"
-                                                            aria-expanded="false">
-                                                            <span class="show-text">Vedi risposte
-                                                                (<?= count($comment['replies']) ?>)</span>
-                                                            <span class="hide-text d-none">Nascondi risposte</span>
-                                                            <i class="bi bi-chevron-down"></i>
-                                                        </button>
-                                                    <?php endif; ?>
+                                                    <div class="d-flex gap-2">
+                                                        <!-- Bottone elimina (proprietario o admin o autore nota) -->
+                                                        <?php if ($isLoggedIn): ?>
+                                                            <?php 
+                                                            $userRole = \Core\Helper\SessionManager::get('user')['role'] ?? 'student';
+                                                            $isCommentOwner = isset($comment['student_id']) && ($comment['student_id'] == $currentUserId);
+                                                            $isNoteAuthor = $comment['is_author'] ?? false;
+                                                            $isAdmin = $userRole === 'admin';
+                                                            $canDelete = $isCommentOwner || $isNoteAuthor || $isAdmin;
+                                                            ?>
+                                                            <?php if ($canDelete): ?>
+                                                                <form action="/note/<?= $note['id'] ?>/comment/<?= $comment['id'] ?>/delete" method="POST" 
+                                                                    onsubmit="return confirm('Sei sicuro di voler eliminare questo commento?')" class="d-inline">
+                                                                    <button type="submit" class="btn btn-sm btn-link text-danger p-0">
+                                                                        <i class="bi bi-trash"></i>
+                                                                    </button>
+                                                                </form>
+                                                            <?php endif; ?>
+                                                        <?php endif; ?>
+                                                        
+                                                        <!-- Bottone collapse -->
+                                                        <?php if (!empty($comment['replies'])): ?>
+                                                            <button class="btn btn-sm btn-link text-muted p-0" type="button"
+                                                                data-bs-toggle="collapse" data-bs-target="#replies-<?= $index ?>"
+                                                                aria-expanded="false">
+                                                                <span class="show-text">Vedi risposte (<?= count($comment['replies']) ?>)</span>
+                                                                <i class="bi bi-chevron-down"></i>
+                                                            </button>
+                                                        <?php endif; ?>
+                                                    </div>
                                                 </div>
-                                                <p class="mb-0 mt-2">
-                                                    <?= htmlspecialchars($comment['content'] ?? 'Descrizione nota Abbastanza lunga') ?>
-                                                </p>
+                                                <p class="mb-2 mt-2"><?= htmlspecialchars($comment['content']) ?></p>
+                                                
+                                                <!-- Bottone rispondi -->
+                                                <?php if ($isLoggedIn): ?>
+                                                    <button class="btn btn-sm btn-link p-0" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#reply-form-<?= $comment['id'] ?>">
+                                                        <i class="bi bi-reply"></i> Rispondi
+                                                    </button>
+                                                <?php endif; ?>
+                                                
+                                                <!-- Form risposta -->
+                                                <?php if ($isLoggedIn): ?>
+                                                    <div class="collapse mt-2" id="reply-form-<?= $comment['id'] ?>">
+                                                        <form action="/note/<?= $note['id'] ?>/comment" method="POST">
+                                                            <input type="hidden" name="parent_id" value="<?= $comment['id'] ?>">
+                                                            <div class="mb-2">
+                                                                <textarea class="form-control form-control-sm" name="content" rows="2"
+                                                                    placeholder="Scrivi una risposta..." required></textarea>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-sm btn-primary">Invia</button>
+                                                        </form>
+                                                    </div>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
 
@@ -137,15 +189,35 @@ $isAuthor = false;
                                                 <div class="border-start border-3 border-primary ps-3 ms-4">
                                                     <?php foreach ($comment['replies'] as $reply): ?>
                                                         <div class="mb-3">
-                                                            <div class="d-flex align-items-start">
-                                                                <i class="bi bi-person-circle me-2"
-                                                                    style="font-size: 1.5rem; color: var(--bs-secondary);"></i>
-                                                                <div>
-                                                                    <strong
-                                                                        class="small"><?= htmlspecialchars($reply['author']) ?></strong>
-                                                                    <p class="mb-0 small text-muted">
-                                                                        <?= htmlspecialchars($reply['content']) ?></p>
+                                                            <div class="d-flex align-items-start justify-content-between">
+                                                                <div class="d-flex align-items-start flex-grow-1">
+                                                                    <i class="bi bi-person-circle me-2"
+                                                                        style="font-size: 1.5rem; color: var(--bs-secondary);"></i>
+                                                                    <div>
+                                                                        <strong class="small"><?= htmlspecialchars($reply['author']) ?></strong>
+                                                                        <small class="text-muted ms-2"><?= htmlspecialchars($reply['created_at']) ?></small>
+                                                                        <p class="mb-0 small"><?= htmlspecialchars($reply['content']) ?></p>
+                                                                    </div>
                                                                 </div>
+                                                                
+                                                                <!-- Bottone elimina risposta -->
+                                                                <?php if ($isLoggedIn): ?>
+                                                                    <?php 
+                                                                    $userRole = \Core\Helper\SessionManager::get('user')['role'] ?? 'student';
+                                                                    $isReplyOwner = isset($reply['student_id']) && ($reply['student_id'] == $currentUserId);
+                                                                    $isAdmin = $userRole === 'admin';
+                                                                    $isNoteAuthor = ($note['student_id'] ?? null) == $currentUserId;
+                                                                    $canDelete = $isReplyOwner || $isAdmin || $isNoteAuthor;
+                                                                    ?>
+                                                                    <?php if ($canDelete): ?>
+                                                                        <form action="/note/<?= $note['id'] ?>/comment/<?= $reply['id'] ?>/delete" method="POST" 
+                                                                            onsubmit="return confirm('Eliminare questa risposta?')" class="d-inline">
+                                                                            <button type="submit" class="btn btn-sm btn-link text-danger p-0">
+                                                                                <i class="bi bi-trash"></i>
+                                                                            </button>
+                                                                        </form>
+                                                                    <?php endif; ?>
+                                                                <?php endif; ?>
                                                             </div>
                                                         </div>
                                                     <?php endforeach; ?>
@@ -159,7 +231,7 @@ $isAuthor = false;
                     <?php endif; ?>
 
                     <!-- Form nuovo commento -->
-                    <?php if ($currentUserId): ?>
+                    <?php if ($isLoggedIn): ?>
                         <form action="/note/<?= $note['id'] ?>/comment" method="POST" class="mt-4">
                             <div class="mb-3">
                                 <label for="commentContent" class="form-label">Aggiungi un commento</label>

@@ -5,8 +5,7 @@ use Core\ORM\BaseModel;
 
 class Like extends BaseModel
 {
-    protected $table = 'LIKE';
-
+    protected $table = '`LIKE`';  // LIKE non va bene, la usa sql e impassize,
     /**
      * Insert a like (expects associative array with student_id and note_id)
      * Returns boolean/insert id depending on underlying ORM
