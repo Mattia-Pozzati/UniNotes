@@ -71,26 +71,65 @@
     </h1>
 </section>
 
-<section>
-    <div>
-        <h2 class="mission text-center fw-bold py-3 my-3">
-            La nostra missione
-        </h2>
-        <div>
-            UniNotes nasce con l'obiettivo di creare una community di studenti universitari che collaborano per il successo comune. 
-            Crediamo nella potenza della condivisione della conoscenza e nel supporto reciproco durante il percorso accademico.
+<section class="mission py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <h2 class="h3 fw-bold mb-4 text-center">La nostra missione</h2>
+                <p class="text-muted text-start">
+                    UniNotes nasce con l'obiettivo di creare una community di studenti 
+                    universitari che collaborano per il successo comune. 
+                    Crediamo nella potenza della condivisione della conoscenza 
+                    e nel supporto reciproco durante il percorso accademico.
+                </p>
+            </div>
         </div>
     </div>
 </section>
 
-<section>
-    <h2 class="team text-center fw-bold py-3 my-3">
-        Il Nostro Team
-    </h2>
-
-    <div>
-        UniNotes nasce con l'obiettivo di creare una community di studenti universitari che collaborano per il successo comune. 
-        Crediamo nella potenza della condivisione della conoscenza e nel supporto reciproco durante il percorso accademico.
+<section class="team py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <h2 class="h3 fw-bold mb-4 text-center">Il nostro team</h2>
+                <p class="text-muted text-start">
+                    UniNotes nasce con l'obiettivo di creare una community di studenti 
+                    universitari che collaborano per il successo comune. 
+                    Crediamo nella potenza della condivisione della conoscenza 
+                    e nel supporto reciproco durante il percorso accademico.
+                </p>
+            </div>
+        </div>
     </div>
+</section>
 
+<section class="creator py-5">
+    <div class="row g-4">
+        <div class="col-12 col-md-6 col-lg-4">
+            <?= $getComponent('Cards/teamMemberCard', [
+                'name' => 'Mattia Pozzati',
+                'github' => 'https://github.com/Mattia-Pozzati',
+                'linkedin' => '',
+                'email' => 'mattia.pozzati3@studio.unibo.it',
+            ]) ?>
+        </div>
+    
+        <div class="col-12 col-md-6 col-lg-4">
+            <?= $getComponent('Cards/teamMemberCard', [
+                'name' => 'Simone Brunelli',
+                'github' => 'https://github.com/Purp7ePi3',
+                'linkedin' => '',
+                'email' => 'mattia.pozzati3@studio.unibo.it',
+            ]) ?>
+        </div>
+    
+        <div class="col-12 col-md-6 col-lg-4">
+            <?= $getComponent('Cards/teamMemberCard', [
+                'name' => 'Tommaso Nori',
+                'github' => 'https://github.com/TommasoNori',
+                'linkedin' => '',
+                'email' => 'tommaso.nori@studio.unibo.it',
+            ]) ?>
+        </div>
+    </div>
 </section>
