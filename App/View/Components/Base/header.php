@@ -35,7 +35,7 @@ $dashboardUrl = $isAdmin ? '/admin' : '/user/dashboard';
                         <a class="nav-link" href="/index" aria-current="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Chi siamo</a>
+                        <a class="nav-link" href="#aboutUs">Chi siamo</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Servizi</a>

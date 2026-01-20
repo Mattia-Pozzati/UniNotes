@@ -65,7 +65,7 @@
 </section>
 
 
-<section class="aboutUs text-center fw-bold py-3 my-3">
+<section class="aboutUs text-center fw-bold py-3 my-3" id="aboutUs">
     <h1>
         Chi Siamo?
     </h1>
