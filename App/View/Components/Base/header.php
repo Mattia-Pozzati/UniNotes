@@ -32,16 +32,16 @@ $dashboardUrl = $isAdmin ? '/admin' : '/user/dashboard';
 
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/index" aria-current="/">Home</a>
+                        <a class="nav-link" href="/#index" aria-current="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#aboutUs">Chi siamo</a>
+                        <a class="nav-link" href="/#aboutUs">Chi siamo</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Servizi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contatti</a>
+                        <a class="nav-link" href="/#creator">Contatti</a>
                     </li>
                 </ul>
             </div>
@@ -80,7 +80,8 @@ $dashboardUrl = $isAdmin ? '/admin' : '/user/dashboard';
                             type="button"
                             data-bs-toggle="offcanvas"
                             data-bs-target="#mobileMenu"
-                            aria-label="Menu utente">
+                            aria-label="Menu utente"
+                            >
                         <i class="bi bi-person-circle"></i>
                     </button>
                 <?php else: ?>
@@ -137,12 +138,14 @@ $dashboardUrl = $isAdmin ? '/admin' : '/user/dashboard';
                     <a class="nav-link" onClick="window.location.href='/'" aria-current="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About-Us</a>
+                    <a class="nav-link" href="/#aboutUs">Chi siamo?</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Reward</a>
+                    <a class="nav-link" href="#">Servizi</a>
                 </li>
-                
+                <li class="nav-item">
+                    <a class="nav-link" href="/#creator">Contatti</a>
+                </li>
                 
             </ul>
 

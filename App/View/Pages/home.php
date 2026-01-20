@@ -104,7 +104,7 @@
     </div>
 </section>
 
-<section class="creator py-5">
+<section class="creator py-5" id="creator">
     <div class="row g-4">
         <div class="col-12 col-md-6 col-lg-4">
             <?= $getComponent('Cards/teamMemberCard', [
