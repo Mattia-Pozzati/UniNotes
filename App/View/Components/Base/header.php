@@ -38,10 +38,10 @@ $dashboardUrl = $isAdmin ? '/admin' : '/user/dashboard';
                         <a class="nav-link" href="/#aboutUs">Chi siamo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Servizi</a>
+                        <a class="nav-link" href="#">Classiffica</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/#creator">Contatti</a>
+                        <a class="nav-link" href="#">Cerca</a>
                     </li>
                 </ul>
             </div>
@@ -91,7 +91,7 @@ $dashboardUrl = $isAdmin ? '/admin' : '/user/dashboard';
                     </button>
                     
                     <!-- Icona login mobile -->
-                    <button class="btn btn-primary d-lg-none" onClick="window.location.href='/login'">
+                    <button class="btn btn-primary d-lg-none" href='/login'>
                         <i class="bi bi-box-arrow-in-right"></i>
                     </button>
                 <?php endif; ?>
@@ -141,10 +141,10 @@ $dashboardUrl = $isAdmin ? '/admin' : '/user/dashboard';
                     <a class="nav-link" href="/#aboutUs">Chi siamo?</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Servizi</a>
+                    <a class="nav-link" href="#">Classiffica</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/#creator">Contatti</a>
+                    <a class="nav-link" href="#">Cerca</a>
                 </li>
                 
             </ul>
