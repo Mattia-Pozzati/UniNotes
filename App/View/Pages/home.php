@@ -1,6 +1,8 @@
 <!-- Hero Section -->
 <section class="hero text-center py-5 my-5">
-    <h1 class="display-3 fw-bold mb-4">Prova UniNotes!</h1>
+    <h1 class="display-3 fw-bold mb-4">
+        Prova UniNotes!
+    </h1>
     <div class="d-flex gap-3 justify-content-center flex-wrap">
         <button class="btn btn-primary btn-lg px-5">
             Inizia Ora 
