@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\Notification;
 use Core\Helper\Logger;
+use Exception;
 
 class NotificationController
 {
@@ -36,8 +37,22 @@ class NotificationController
             ->leftJoin('USER', 'NOTIFICATION.sender_id', '=', 'USER.id')
             ->leftJoin('NOTE', 'NOTIFICATION.note_id', '=', 'NOTE.id')
             ->where('NOTIFICATION.recipient_id', '=', $userId)
+            ->where("NOTIFICATION.is_read", "=", 0)
             ->order_by($order['field'], $order['direction'])
             ->paginate($perPage, $page);
+    }
+
+    public static function readNotification(int $id): void
+    {
+        try {
+            (new Notification())->where('id', '=', $id)->update(['is_read' => 1]);
+            header('Location: ' . $_SERVER['HTTP_REFERER'] ?? '/user/dashboard');
+        } catch (Exception $e) {
+            Logger::getInstance()->error("Errore nel marcare la notifica come letta", [
+                "notification_id" => $id,
+                "error" => $e->getMessage()
+            ]);
+        }
     }
 }
 

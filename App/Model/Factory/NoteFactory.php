@@ -132,7 +132,7 @@ class NoteFactory {
                     "text" => "Modifica", 
                     "icon" => true, 
                     "class" => "btn-outline-secondary", 
-                    "link" => "#", 
+                    "link" => "/note/{$id}/edit", 
                     "icon-class" => "bi-pencil"
                 ]
             ]
@@ -176,7 +176,7 @@ class NoteFactory {
                     "text" => "Like", 
                     "icon" => true, 
                     "class" => "btn-outline-secondary", 
-                    "link" => "#", 
+                    "link" => "/note/{$id}/toggleLike", 
                     "icon-class" => "bi-hand-thumbs-up"
                 ]
             ]

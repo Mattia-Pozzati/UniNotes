@@ -7,6 +7,8 @@ use App\Model\File;
 use App\Model\Comment;
 use Core\Database\Database;
 use Core\Helper\Logger;
+use \Exception;
+use App\Model\Course;
 
 class NoteService {
   private static ?bool $dbAvailable = null;
@@ -37,9 +39,9 @@ class NoteService {
 
         return (int)($result['total_likes'] ?? 0);
 
-    }catch(\Exeption $e) {
+    }catch(Exception $e) {
       Logger::getInstance()->error("Errore calcolo rep",[
-        "user_id"=> $user_id,
+        "user_id"=> $userId,
         "error" => $e->getMessage()
       ]);
       return 0;
@@ -54,6 +56,15 @@ class NoteService {
         if (!$note || ($note['deleted_at'] ?? null) !== null) {
             Logger::getInstance()->info("Nota non trovata o cancellata", ["note_id" => $id]);
             return null;
+        }
+
+        $course = (new Course())->select(['COURSE.*'])
+            ->join('NOTE_COURSE', 'COURSE.id', '=', 'NOTE_COURSE.course_id')
+            ->where('NOTE_COURSE.note_id', '=', $id)
+            ->first();
+
+        if ($course) {
+            $note['course_id'] = $course['id'];
         }
         
         // Carica autore
@@ -138,8 +149,10 @@ class NoteService {
                 'name' => $author['name'],
                 'reputation' => $reputation ?? 0
             ],
-            'course' => 'Corso', // TODO: Implementare relazione con corsi
-            'tags' => [], // TODO: Implementare tags se necessario
+            'course' => $note['course_id'] ?? null,
+            'note_type' => $note['note_type'],
+            'format' => $note['format'],
+            'university' => $note['university'],
             'visibility' => $note['visibility'],
             'created_at' => $note['created_at'],
             'updated_at' => $note['updated_at'] ?? $note['created_at'],

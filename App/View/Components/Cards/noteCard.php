@@ -40,15 +40,15 @@ $note_type = $card['note_type'] ?? ($card['type'] ?? null);
         <!-- Metadati: formato, università, tipo di nota -->
         <div class="d-flex justify-content-start gap-2 flex-wrap" aria-label="Metadati della nota">
             <?php if (!empty($format)): ?>
-                <span class="badge"><?= htmlspecialchars($format) ?></span>
+                <span class="badge badge-contrast bg-light text-dark border"><?= htmlspecialchars($format) ?></span>
             <?php endif; ?>
 
             <?php if (!empty($university)): ?>
-                <span class="badge"><?= htmlspecialchars($university) ?></span>
+                <span class="badge badge-contrast bg-light text-dark border"><?= htmlspecialchars($university) ?></span>
             <?php endif; ?>
 
             <?php if (!empty($note_type)): ?>
-                <span class="badge "><?= htmlspecialchars($note_type) ?></span>
+                <span class="badge badge-contrast bg-light text-dark border"><?= htmlspecialchars($note_type) ?></span>
             <?php endif; ?>
         </div>
 

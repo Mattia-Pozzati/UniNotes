@@ -26,11 +26,14 @@ $router->get('/logout', 'AuthController@logout');
 
 // Note
 $router->get('/note/{id}', 'NoteController@show');
+$router->get('/note/{id}/edit', 'NoteController@edit');
 $router->post('/note/{id}/like', 'NoteController@toggleLike');
 $router->post('/note/{id}/chat', 'NoteController@Chat');
 $router->post('/note/{id}/comment', 'NoteController@addComment');
 $router->post('/note/{id}/comment/{commentId}/delete', 'NoteController@deleteComment');
 
+// Notifiche
+$router->post('/notification/{id}/read', 'NotificationController@readNotification');
 // Log
 Router::getInstance()->get("/log", "LogController@show");   
 
@@ -38,5 +41,6 @@ $router->get('/user/dashboard', 'UserDashboardController@show');
 $router->get('/admin', 'AdminDashboardController@show');
 $router->get('/ranking', 'RankingController@show');
 Router::getInstance()->post('/note/create', 'NoteController@create'); // per il form
+Router::getInstance()->post('/note/{id}/update', 'NoteController@update');
 
 ?>

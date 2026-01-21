@@ -29,7 +29,7 @@
                 <?= \App\View\View::getComponent($tab['form'], [
                     'courses' => $tab['courses'] ?? [],
                     'tags' => $tab['tags'] ?? [],
-                    'action' => $tabs['action'] ?? ''
+                    'action' => $tab['action'] ?? ''
                 ]) ?>
             <?php endif; ?>
 

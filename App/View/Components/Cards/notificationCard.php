@@ -29,14 +29,13 @@ $noteLink = $card['noteLink'] ?? null;
         </p>
     </div>
 
-    <!-- Footer con bottone "Letta" -->
+    <!-- Footer con bottone "Letta" (usa POST) -->
     <footer class="card-footer d-flex justify-content-center gap-2">
-        <a href="/notification/<?= $id ?>/read"
-           class="btn btn-outline-secondary"
-           role="button"
-           aria-label="Segna notifica come letta">
-            <i class="bi bi-check-circle me-1" aria-hidden="true"></i>
-            Letta
-        </a>
+        <form class="m-0"method="POST" action="/notification/<?= $id ?>/read">
+            <button type="submit" class="btn btn-outline-secondary" aria-label="Segna notifica come letta">
+                <i class="bi bi-check-circle me-1" aria-hidden="true"></i>
+                Letta
+            </button>
+        </form>
     </footer>
 </div>

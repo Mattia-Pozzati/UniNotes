@@ -174,7 +174,6 @@ class UserDashboardController
             'icon' => 'bi-plus-circle',
             'form' => 'Forms/newNotesForm',
             'courses' => $courses,
-            'tags' => [],
             'action' => '/note/create'
         ];
     }
