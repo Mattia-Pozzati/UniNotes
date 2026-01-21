@@ -1,16 +1,29 @@
 <!-- Hero Section -->
 <section class="hero text-center py-5 my-5">
     <h1 class="display-3 fw-bold mb-4">
-        Prova UniNotes!
+        <?php if ($session->isLoggedIn()): ?>
+            Benvenuto, <?= htmlspecialchars($session->getUserName()) ?>!
+        <?php else: ?>
+            Prova UniNotes!
+        <?php endif; ?>
     </h1>
     <div class="d-flex gap-3 justify-content-center flex-wrap">
-        <button class="btn btn-primary btn-lg px-5">
-            Inizia Ora 
-            <i class="bi bi-arrow-right ms-2"></i>
-        </button>
-        <button class="btn btn-outline-secondary btn-lg px-5">
-            Scopri di più
-        </button>
+        <?php if (!$session->isLoggedIn()): ?>
+            <!-- Mostra i pulsanti solo se NON è loggato -->
+            <a href="/register" class="btn btn-primary btn-lg px-5">
+                Inizia Ora 
+                <i class="bi bi-arrow-right ms-2"></i>
+            </a>
+            <a href="#aboutUs" class="btn btn-outline-secondary btn-lg px-5">
+                Scopri di più
+            </a>
+        <?php else: ?>
+            <!-- Opzionale: mostra un pulsante diverso se è loggato -->
+            <a href="/notes" class="btn btn-primary btn-lg px-5">
+                Esplora Appunti
+                <i class="bi bi-arrow-right ms-2"></i>
+            </a>
+        <?php endif; ?>
     </div>
 </section>
 
@@ -55,16 +68,19 @@
 </section>
 
 <!-- Sezione CTA finale -->
-<section class="cta-section text-center py-5 my-5">
-    <button class="btn btn-primary btn-lg px-5">
-        Pronto ad Iniziare
-    </button>
-    <div class="mt-4">
-        <a href="#" class="btn btn-outline-secondary">
-            Registrati gratuitamente
+<?php if (!$session->isLoggedIn()): ?>
+    <!-- Mostra questa sezione solo se NON è loggato -->
+    <section class="cta-section text-center py-5 my-5">
+        <a href="/register" class="btn btn-primary btn-lg px-5">
+            Pronto ad Iniziare
         </a>
-    </div>
-</section>
+        <div class="mt-4">
+            <a href="/register" class="btn btn-outline-secondary">
+                Registrati gratuitamente
+            </a>
+        </div>
+    </section>
+<?php endif; ?>
 
 
 <section class="aboutUs text-center fw-bold py-3 my-3" id="aboutUs">

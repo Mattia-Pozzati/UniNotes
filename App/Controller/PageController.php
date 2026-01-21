@@ -4,11 +4,15 @@ namespace App\Controller;
 use App\Model\Factory\NoteFactory;
 use App\View\View;
 use App\Controller\NotesController;
+use Core\Session\SessionManager;
 
 class PageController
 {
     public function index(): void
     {
+        // Crea l'istanza di SessionManager
+        $session = new SessionManager();
+        
         // Carica le note più recenti
         $notesResult = NotesController::getAllNotes([
             'per_page' => 6,
@@ -36,7 +40,8 @@ class PageController
         
         View::render('home', 'page', [
             'title' => 'Home',
-            'cards' => $cards
+            'cards' => $cards,
+            'session' => $session
         ]);
     }
 
@@ -95,5 +100,3 @@ class PageController
         ]);
     }
 }
-
-?>
