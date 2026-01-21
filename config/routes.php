@@ -29,6 +29,7 @@ $router->get('/note/{id}', 'NoteController@show');
 $router->post('/note/{id}/like', 'NoteController@toggleLike');
 $router->post('/note/{id}/chat', 'NoteController@Chat');
 $router->post('/note/{id}/comment', 'NoteController@addComment');
+$router->post('/note/{id}/comment/{commentId}/delete', 'NoteController@deleteComment');
 
 // Log
 Router::getInstance()->get("/log", "LogController@show");   

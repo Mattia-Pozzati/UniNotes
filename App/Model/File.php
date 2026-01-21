@@ -14,7 +14,15 @@ class File extends BaseModel
 {
 
     protected $table = "FILE";
-    private static $dir = dirname(__DIR__, 2) . "/public/uploads/";
+
+    /**
+     * Ottiene il path base per gli upload
+     * @return string
+     */
+    private static function getBaseDir(): string
+    {
+        return dirname(__DIR__, 2) . "/public/uploads/";
+    }
 
     /**
      * Crea la directory se non esiste
@@ -24,7 +32,7 @@ class File extends BaseModel
      */
     private static function createUploadDirIfNotExists(int $noteId): string
     {
-        $dir = rtrim(self::$dir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "note_{$noteId}";
+        $dir = rtrim(self::getBaseDir(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "note_{$noteId}";
         if (!is_dir($dir) && !mkdir($dir, 0555, true)) {
             Logger::getInstance()->error("Unable to create directory: {$dir}");
             throw new Exception("Unable to create directory: {$dir}");
@@ -88,10 +96,7 @@ class File extends BaseModel
 
     public static function replace(int $id, array $upload): bool
     {
-        $existing = new self()
-            ->where('id', '=', $id)
-            ->first();
-
+        $existing = File::find($id);
 
         if (empty($existing)) {
             Logger::getInstance()->error("File not found for replacement: {$id}");
@@ -157,15 +162,14 @@ class File extends BaseModel
      */
     public static function deleteFile(int $id): bool
     {
-        $existing = new self()
-            ->where('id', '=', $id)
-            ->first();
+        $existing = File::find($id);
+
         if (empty($existing)) {
             return false;
         }
         $path = dirname(__DIR__, 2) . '/' . ltrim($existing['filepath'], '/');
 
-        $status = new self()
+        $status = (new self())
             ->where('id', '=', $id)
             ->delete();
 
@@ -181,9 +185,7 @@ class File extends BaseModel
      */
     public static function serveFile(int $id): void
     {
-        $file = new self()
-            ->where('id', '=', $id)
-            ->first();
+        $file = File::find($id);
 
         if (empty($file)) {
             Logger::getInstance()->error("File not found for serving: {$id}");
