@@ -13,31 +13,6 @@ class PageController
         // Inizializza la sessione
         SessionManager::start();
         
-        // Carica le note più recenti
-        $notesResult = NotesController::getAllNotes([
-            'per_page' => 6,
-            'page' => 1,
-            'order' => ['field' => 'created_at', 'direction' => 'DESC']
-        ]);
-        
-        $notes = $notesResult['data'] ?? [];
-        
-        // Trasforma le note in card usando NoteFactory
-        $cards = array_map(function ($noteData) {
-            return NoteFactory::searchNoteView(
-                $noteData['id'],
-                $noteData['title'],
-                $noteData['student_name'],
-                'Corso',  // TODO: aggiungere corso quando disponibile
-                $noteData['description'] ?? 'Nessuna descrizione',
-                $noteData['note_type'] ?? 'note',
-                $noteData['format'] ?? 'PDF',
-                $noteData['university'] ?? 'N/A',
-                0,  // likes - TODO: aggiungere quando implementato
-                0   // downloads - TODO: aggiungere quando implementato
-            );
-        }, $notes);
-        
         // Crea un oggetto wrapper per la sessione
         $session = new class {
             public function isLoggedIn(): bool {
@@ -52,7 +27,6 @@ class PageController
         
         View::render('home', 'page', [
             'title' => 'Home',
-            'cards' => $cards,
             'session' => $session
         ]);
     }
