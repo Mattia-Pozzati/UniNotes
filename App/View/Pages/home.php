@@ -19,7 +19,7 @@
             </a>
         <?php else: ?>
             <!-- Opzionale: mostra un pulsante diverso se è loggato -->
-            <a href="/notes" class="btn btn-primary btn-lg px-5">
+            <a href="/search" class="btn btn-primary btn-lg px-5">
                 Esplora Appunti
                 <i class="bi bi-arrow-right ms-2"></i>
             </a>

@@ -4,14 +4,14 @@ namespace App\Controller;
 use App\Model\Factory\NoteFactory;
 use App\View\View;
 use App\Controller\NotesController;
-use Core\Session\SessionManager;
+use Core\Helper\SessionManager;
 
 class PageController
 {
     public function index(): void
     {
-        // Crea l'istanza di SessionManager
-        $session = new SessionManager();
+        // Inizializza la sessione
+        SessionManager::start();
         
         // Carica le note più recenti
         $notesResult = NotesController::getAllNotes([
@@ -37,6 +37,18 @@ class PageController
                 0   // downloads - TODO: aggiungere quando implementato
             );
         }, $notes);
+        
+        // Crea un oggetto wrapper per la sessione
+        $session = new class {
+            public function isLoggedIn(): bool {
+                return SessionManager::isLoggedIn();
+            }
+            
+            public function getUserName(): ?string {
+                $user = SessionManager::user();
+                return $user['name'] ?? null;
+            }
+        };
         
         View::render('home', 'page', [
             'title' => 'Home',
