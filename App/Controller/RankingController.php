@@ -2,8 +2,8 @@
 namespace App\Controller;
 
 use App\View\View;
-use App\Model\User;
 use Core\Helper\Logger;
+use Core\Database\Database;
 
 class RankingController
 {
@@ -26,32 +26,69 @@ class RankingController
     
     private function getTopUploaders(int $limit): array
     {
-        return (new User())
-            ->select([
-                'USER.*',
-                'COUNT(NOTE.id) AS note_count'
-            ])
-            ->leftJoin('NOTE', 'NOTE.student_id', '=', 'USER.id')
-            ->where('NOTE.deleted_at', 'IS', null)
-            ->group_by('USER.id')
-            ->order_by('note_count', 'DESC')
-            ->limit($limit)
-            ->get();
+        try {
+            $db = Database::getInstance();
+            
+            $sql = "
+                SELECT 
+                    u.id,
+                    u.name,
+                    u.email,
+                    u.university,
+                    COUNT(n.id) AS note_count
+                FROM USER u
+                LEFT JOIN NOTE n ON n.student_id = u.id AND n.deleted_at IS NULL
+                GROUP BY u.id, u.name, u.email, u.university
+                ORDER BY note_count DESC
+                LIMIT :limit
+            ";
+            
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
+            $stmt->execute();
+            
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            
+        } catch (\Exception $e) {
+            Logger::getInstance()->error("Errore getTopUploaders", [
+                "error" => $e->getMessage()
+            ]);
+            return [];
+        }
     }
     
     private function getTopLiked(int $limit): array
     {
-        return (new User())
-            ->select([
-                'USER.*',
-                'COUNT(DISTINCT `LIKE`.note_id) AS like_count'
-            ])
-            ->leftJoin('NOTE', 'NOTE.student_id', '=', 'USER.id')
-            ->leftJoin('`LIKE`', '`LIKE`.note_id', '=', 'NOTE.id')
-            ->where('NOTE.deleted_at', 'IS', null)
-            ->group_by('USER.id')
-            ->order_by('like_count', 'DESC')
-            ->limit($limit)
-            ->get();
+        try {
+            $db = Database::getInstance();
+            
+            // Stessa logica di calculateUserReputation ma per tutti gli utenti
+            $sql = "
+                SELECT 
+                    u.id,
+                    u.name,
+                    u.email,
+                    u.university,
+                    COUNT(l.student_id) AS like_count
+                FROM USER u
+                LEFT JOIN NOTE n ON n.student_id = u.id AND n.deleted_at IS NULL
+                LEFT JOIN `LIKE` l ON l.note_id = n.id
+                GROUP BY u.id, u.name, u.email, u.university
+                ORDER BY like_count DESC
+                LIMIT :limit
+            ";
+            
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
+            $stmt->execute();
+            
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            
+        } catch (\Exception $e) {
+            Logger::getInstance()->error("Errore getTopLiked", [
+                "error" => $e->getMessage()
+            ]);
+            return [];
+        }
     }
 }
