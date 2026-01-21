@@ -3,14 +3,17 @@ $card = $card ?? [];
 
 $titolo = $card['title'] ?? 'Titolo';
 $autore = $card['author'] ?? 'Autore';
-$corso = $card['corso'] ?? 'Corso';
+$corso = $card['course'] ?? 'Corso';
 $desc = $card['desc'] ?? ($card['description'] ?? 'Descrizione non disponibile');
 $chatEnabled = !empty($card['chatEnabled']);
-$tags = $card['tags'] ?? [];
-$likes = $card['likes'] ?? 0;
-$downloads = $card['downloads'] ?? 0;
+$likes = $card['likes'];
+$downloads = $card['downloads'];
 $buttonsEnabled = $card['buttonsEnabled'] ?? [];
 $buttons = $card['buttons'] ?? [];
+// Metadati della nota (mostrati al posto dei tag)
+$format = $card['format'] ?? null;
+$university = $card['university'] ?? null;
+$note_type = $card['note_type'] ?? ($card['type'] ?? null);
 ?>
 
 <div class="card shadow border-primary h-100">
@@ -34,16 +37,20 @@ $buttons = $card['buttons'] ?? [];
         <!-- Descrizione -->
         <p class="card-text"><?= htmlspecialchars($desc) ?></p>
 
-        <!-- Tags -->
-        <?php if (!empty($tags)): ?>
-            <div class="d-flex justify-content-start gap-2 flex-wrap" aria-label="Tag della nota">
-                <?php foreach ($tags as $tag): ?>
-                    <span class="btn btn-outline-secondary btn-sm" role="button" tabindex="0">
-                        <?= htmlspecialchars($tag) ?>
-                    </span>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
+        <!-- Metadati: formato, università, tipo di nota -->
+        <div class="d-flex justify-content-start gap-2 flex-wrap" aria-label="Metadati della nota">
+            <?php if (!empty($format)): ?>
+                <span class="badge"><?= htmlspecialchars($format) ?></span>
+            <?php endif; ?>
+
+            <?php if (!empty($university)): ?>
+                <span class="badge"><?= htmlspecialchars($university) ?></span>
+            <?php endif; ?>
+
+            <?php if (!empty($note_type)): ?>
+                <span class="badge "><?= htmlspecialchars($note_type) ?></span>
+            <?php endif; ?>
+        </div>
 
         <!-- Likes & Downloads -->
         <div class="d-flex justify-content-start gap-3 mt-2" aria-label="Statistiche della nota">

@@ -1,7 +1,7 @@
 <?php
 namespace App\Model\Factory;
 
-class NotificationView {
+class NotificationFactory {
     private int $id;
     private int $sender_id;
     private int $recipient_id;
@@ -35,14 +35,14 @@ class NotificationView {
         string $author,
         string $desc
     ): array {
-        return new self(
+        return (new self(
             $id,
             $sender_id,
             $recipient_id,
             "System",
             $author,
             $desc
-        )->toArray();
+        ))->toArray();
     }
 
     public static function commentNotification(
@@ -62,7 +62,7 @@ class NotificationView {
             htmlspecialchars($noteTitle)
         );
 
-        return new self(
+        return (new self(
             $id,
             $sender_id,
             $recipient_id,
@@ -70,7 +70,7 @@ class NotificationView {
             $author,
             $desc,
             $noteLink
-        )->toArray();
+        ))->toArray();
     }
 
     public static function likeNotification(
@@ -90,7 +90,7 @@ class NotificationView {
             htmlspecialchars($noteTitle)
         );
 
-        return new self(
+        return (new self(
             $id,
             $sender_id,
             $recipient_id,
@@ -98,7 +98,7 @@ class NotificationView {
             $author,
             $desc,
             $noteLink
-        )->toArray();
+        ))->toArray();
     }
 
     public function toArray(): array {

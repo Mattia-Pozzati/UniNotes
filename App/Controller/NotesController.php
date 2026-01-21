@@ -5,30 +5,6 @@ use Core\Helper\Logger;
 
 class NotesController
 {
-    public static function getAllNotes(array $opts = []): array
-    {
-        Logger::getInstance()->info("getAllNotes chiamato", $opts);
-        
-        $order = $opts['order'] ?? ['field' => 'created_at', 'direction' => 'DESC'];
-        $visibility = array_key_exists('visibility', $opts) ? $opts['visibility'] : 'public';
-        $perPage = $opts['per_page'] ?? 12;
-        $page = $opts['page'] ?? 1;
-
-        $result = (new Note())
-            ->select(['NOTE.*', 'USER.name AS student_name'])
-            ->join('USER', 'NOTE.student_id', '=', 'USER.id')
-            ->where('NOTE.deleted_at', 'IS', null)
-            ->where('NOTE.visibility', '=', $visibility)
-            ->order_by($order['field'], $order['direction'])
-            ->paginate($perPage, $page);
-        
-        Logger::getInstance()->info("getAllNotes risultato", [
-            "count" => count($result['data'])
-        ]);
-        
-        return $result;
-    }
-
     public static function getMyNotes(int $studentId, array $opts = []): array
     {
         $order = $opts['order'] ?? ['field' => 'created_at', 'direction' => 'DESC'];
@@ -36,25 +12,51 @@ class NotesController
         $page = $opts['page'] ?? 1;
 
         return (new Note())
-            ->select(['NOTE.*', 'USER.name AS student_name'])
+            ->select([
+                'NOTE.*',
+                'USER.name AS student_name',
+                'COURSE.name AS course_name',
+                // conteggio totale dei like per la nota
+                '(SELECT COUNT(DISTINCT `LIKE`.student_id) FROM `LIKE` WHERE `LIKE`.note_id = NOTE.id) AS likes',
+                // conteggio totale dei download per la nota
+                '(SELECT COUNT(DISTINCT NOTE_DOWNLOAD.student_id) FROM NOTE_DOWNLOAD WHERE NOTE_DOWNLOAD.note_id = NOTE.id) AS downloads'
+            ])
             ->join('USER', 'NOTE.student_id', '=', 'USER.id')
+                ->join('NOTE_COURSE', 'NOTE.id', '=', 'NOTE_COURSE.note_id')
+                ->leftJoin('COURSE', 'NOTE_COURSE.course_id', '=', 'COURSE.id')
             ->where('NOTE.student_id', '=', $studentId)
             ->where('NOTE.deleted_at', 'IS', null)
             ->order_by($order['field'], $order['direction'])
             ->paginate($perPage, $page);
     }
 
-    public static function getNote(int $id): array|null
+    public static function getDownloadedNotes(int $studentId, array $opts = []): array
     {
-        $res = (new Note())
-            ->select(['NOTE.*', 'USER.name AS student_name'])
-            ->join('USER', 'NOTE.student_id', '=', 'USER.id')
-            ->where('NOTE.id', '=', $id)
-            ->where('NOTE.deleted_at', 'IS', null)
-            ->first();
+        $order = $opts['order'] ?? ['field' => 'created_at', 'direction' => 'DESC'];
+        $perPage = $opts['per_page'] ?? 12;
+        $page = $opts['page'] ?? 1;
 
-        return $res ?: null;
+        return (new Note())
+            ->select([
+                'NOTE.*',
+                'USER.name AS student_name',
+                'COURSE.name AS course_name',
+                // conteggio totale dei like per la nota
+                '(SELECT COUNT(DISTINCT `LIKE`.student_id) FROM `LIKE` WHERE `LIKE`.note_id = NOTE.id) AS likes',
+                // conteggio totale dei download per la nota
+                '(SELECT COUNT(DISTINCT NOTE_DOWNLOAD.student_id) FROM NOTE_DOWNLOAD WHERE NOTE_DOWNLOAD.note_id = NOTE.id) AS downloads'
+            ])
+            ->join('USER', 'NOTE.student_id', '=', 'USER.id')
+            // join per filtrare le note che sono state scaricate dallo studente
+            ->join('NOTE_DOWNLOAD', 'NOTE.id', '=', 'NOTE_DOWNLOAD.note_id')
+            ->leftJoin('NOTE_COURSE', 'NOTE.id', '=', 'NOTE_COURSE.note_id')
+            ->leftJoin('COURSE', 'NOTE_COURSE.course_id', '=', 'COURSE.id')
+            ->where('NOTE_DOWNLOAD.student_id', '=', $studentId)
+            ->where('NOTE.deleted_at', 'IS', null)
+            ->order_by($order['field'], $order['direction'])
+            ->paginate($perPage, $page);
     }
+
 
     public static function searchNotes(array $filters = [], array $paginate = []): array
     {
