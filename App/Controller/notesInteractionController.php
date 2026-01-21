@@ -4,15 +4,17 @@ namespace App\Controller;
 use App\Model\Note;
 use Core\Helper\Logger;
 use App\Model\User;
+use Core\Helper\SessionManager;
+use App\Controller\NotificationController;
 
-class notesInteractionController
+class NotesInteractionController
 {
     public function downloadFile(int $noteId): void
     {
 
     }
 
-    public function banNote(int $noteId): void
+    public static function banNote(int $noteId): void
     {
         $author = new User()
             ->select(['user.*', 'note.title AS note_title'])
@@ -22,8 +24,9 @@ class notesInteractionController
         
         if ($author) {
             // Crea notifica
-            notificationController::sendNotification(
-                $_SESSION['user']['id'],
+            NotificationController::sendNotification(
+                $noteId,
+                SessionManager::get('user')['id'],
                 $author['id'],
                 'admin',
                 "La tua nota \"" . $author['note_title'] . "\" è stata rimossa dagli amministratori per violazione dei termini di servizio. Se ritieni che si tratti di una svista, contatta il supporto.",

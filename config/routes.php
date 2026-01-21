@@ -36,6 +36,7 @@ Router::getInstance()->get("/log", "LogController@show");
 
 $router->get('/user/dashboard', 'UserDashboardController@show');
 $router->get('/admin', 'AdminDashboardController@show');
+$router->get('/ranking', 'RankingController@show');
 Router::getInstance()->post('/note/create', 'NoteController@create'); // per il form
 
 ?>

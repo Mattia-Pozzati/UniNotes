@@ -33,10 +33,20 @@ $action = $action ?? "";
                                 <?= htmlspecialchars($course['name']) ?>
                             </option>
                         <?php endforeach; ?>
+                            <option value="__new">Aggiungi nuovo corso</option>
                     </select>
                     <small id="courseHelp" class="form-text text-muted">
                         Scegli il corso di riferimento
                     </small>
+                    <!-- Nuovo corso (hidden until selected) -->
+                    <div id="newCourseWrapper" class="mt-2" style="display:none;">
+                        <label for="new_course" class="form-label">Nuovo corso</label>
+                        <input type="text" class="form-control" id="new_course" name="new_course"
+                               placeholder="Inserisci il nome del nuovo corso">
+                        <small id="newCourseHelp" class="form-text text-muted">
+                            Inserisci il nome del corso se vuoi crearne uno nuovo
+                        </small>
+                    </div>
                 </div>
 
                 <!-- Descrizione -->
@@ -124,3 +134,4 @@ $action = $action ?? "";
         </div>
     </div>
 </section>
+<script src='js/newCourseToggle.js'></script>

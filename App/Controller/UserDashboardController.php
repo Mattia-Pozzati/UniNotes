@@ -105,7 +105,7 @@ class UserDashboardController
             $tabs['notifications'] = [
                 'label' => 'Notifiche',
                 'icon' => 'bi-bell',
-                'badge' => 0, // TODO: contare notifiche non lette
+                'badge' => 0,
                 'cards' => [],
                 'component' => 'Cards/notificationCard',
                 'pagination' => [

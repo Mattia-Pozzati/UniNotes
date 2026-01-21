@@ -10,6 +10,7 @@ interface BaseInterface {
 
     public function where($coloumn, $op, $value, $and = true) : BaseInterface;
     public function order_by($coloumn, $order) : BaseInterface;
+    public function group_by(string $column) : BaseInterface;
     public function limit($number) : BaseInterface;
     public function select($params) : BaseInterface;
     public function get() : array;

@@ -32,16 +32,16 @@ $dashboardUrl = $isAdmin ? '/admin' : '/user/dashboard';
 
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/index" aria-current="/">Home</a>
+                        <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Chi siamo</a>
+                        <a class="nav-link" href="/search">Cerca</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Servizi</a>
-                    </li>
+                        <a class="nav-link" href="/ranking">Classifica</a>
+                    </li>                    
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contatti</a>
+                        <a class="nav-link" href="/#aboutUs">Chi siamo?</a>
                     </li>
                 </ul>
             </div>
@@ -80,7 +80,8 @@ $dashboardUrl = $isAdmin ? '/admin' : '/user/dashboard';
                             type="button"
                             data-bs-toggle="offcanvas"
                             data-bs-target="#mobileMenu"
-                            aria-label="Menu utente">
+                            aria-label="Menu utente"
+                            >
                         <i class="bi bi-person-circle"></i>
                     </button>
                 <?php else: ?>
@@ -134,15 +135,17 @@ $dashboardUrl = $isAdmin ? '/admin' : '/user/dashboard';
 
             <ul class="navbar-nav d-flex gap-5">
                 <li class="nav-item">
-                    <a class="nav-link" onClick="window.location.href='/'" aria-current="/">Home</a>
+                    <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About-Us</a>
+                    <a class="nav-link" href="/#aboutUs">Chi siamo?</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Reward</a>
+                    <a class="nav-link" href="/ranking">Classifica</a>
                 </li>
-                
+                <li class="nav-item">
+                    <a class="nav-link" href="/search">Cerca</a>
+                </li>
                 
             </ul>
 
@@ -169,3 +172,46 @@ $dashboardUrl = $isAdmin ? '/admin' : '/user/dashboard';
     </nav>
 
 </header>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const offcanvasElement = document.getElementById('mobileMenu');
+        const navLinks = offcanvasElement.querySelectorAll('.nav-link');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+
+                if (href && href.includes('#')) {
+                    e.preventDefault();
+
+                    const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+                    if (offcanvas) {
+                        offcanvas.hide();
+                    }
+
+                    const isExternalPage = href.startsWith('/#');
+
+                    if (isExternalPage) {
+                        offcanvasElement.addEventListener('hidden.bs.offcanvas', function() {
+                            window.location.href = href;
+                        }, { once: true });
+                    } else {
+                        offcanvasElement.addEventListener('hidden.bs.offcanvas', function() {
+                            const targetId = href.substring(1); 
+                            const targetElement = document.getElementById(targetId);
+                            if (targetElement) {
+                                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                        }, { once: true });
+                    }
+                } else {
+                    const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+                    if (offcanvas) {
+                        offcanvas.hide();
+                    }
+                }
+            });
+        });
+    });
+</script>

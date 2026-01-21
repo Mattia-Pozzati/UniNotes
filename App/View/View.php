@@ -53,7 +53,7 @@ class View {
         if (!file_exists($viewFile)) {
             throw new RuntimeException("View non trovata: {$viewFile}");
         }
-
+        
         // ($title, $user, ecc.)
         extract($data, EXTR_SKIP);
 
