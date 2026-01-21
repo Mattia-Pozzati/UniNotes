@@ -1,0 +1,29 @@
+
+Welcome to Pa11y
+
+ > Running Pa11y on URL http://localhost:8000/register
+
+Results for URL: http://localhost:8000/register
+
+ • Error: This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.
+   ├── WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.Button.Name
+   ├── html > body > header > nav:nth-child(1) > div > div:nth-child(3) > button:nth-child(3)
+   └── <button class="btn btn-primary d-lg-none" onclick="window.location.href='/login'"> <i cla...</button>
+
+ • Error: This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.
+   ├── WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.Button.Name
+   ├── #mobileMenu > div:nth-child(1) > button
+   └── <button type="button" class="btn-close" data-bs-dismiss="offcanvas"> </button>
+
+ • Error: This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.
+   ├── WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.Button.Name
+   ├── #togglePassword
+   └── <button type="button" class="btn btn-outline-secondary" id="togglePassword"> <i c...</button>
+
+ • Error: This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.
+   ├── WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.Button.Name
+   ├── #toggleConfirmPassword
+   └── <button type="button" class="btn btn-outline-secondary" id="toggleConfirmPassword"> <i c...</button>
+
+4 Errors
+

@@ -1,0 +1,34 @@
+
+Welcome to Pa11y
+
+ > Running Pa11y on URL http://localhost:8000/
+
+Results for URL: http://localhost:8000/
+
+ • Error: This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.
+   ├── WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.Button.Name
+   ├── html > body > header > nav:nth-child(1) > div > div:nth-child(3) > button:nth-child(3)
+   └── <button class="btn btn-primary d-lg-none" onclick="window.location.href='/login'"> <i cla...</button>
+
+ • Error: This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.
+   ├── WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.Button.Name
+   ├── #mobileMenu > div:nth-child(1) > button
+   └── <button type="button" class="btn-close" data-bs-dismiss="offcanvas"> </button>
+
+ • Error: Anchor element found with no link content and no name and/or ID attribute.
+   ├── WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.A.EmptyNoId
+   ├── #creator > div > div:nth-child(1) > div > div > div > a:nth-child(2)
+   └── <a href="" target="_blank" class="btn btn-outline-secondary btn-sm" aria-label="Linkedin di Mattia Pozzati"> <i class="...</a>
+
+ • Error: Anchor element found with no link content and no name and/or ID attribute.
+   ├── WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.A.EmptyNoId
+   ├── #creator > div > div:nth-child(2) > div > div > div > a:nth-child(2)
+   └── <a href="" target="_blank" class="btn btn-outline-secondary btn-sm" aria-label="Linkedin di Simone Brunelli"> <i class="...</a>
+
+ • Error: Anchor element found with no link content and no name and/or ID attribute.
+   ├── WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.A.EmptyNoId
+   ├── #creator > div > div:nth-child(3) > div > div > div > a:nth-child(2)
+   └── <a href="" target="_blank" class="btn btn-outline-secondary btn-sm" aria-label="Linkedin di Tommaso Nori"> <i class="...</a>
+
+5 Errors
+

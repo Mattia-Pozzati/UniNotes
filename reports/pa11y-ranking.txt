@@ -1,0 +1,19 @@
+
+Welcome to Pa11y
+
+ > Running Pa11y on URL http://localhost:8000/ranking
+
+Results for URL: http://localhost:8000/ranking
+
+ • Error: This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.
+   ├── WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.Button.Name
+   ├── html > body > header > nav:nth-child(1) > div > div:nth-child(3) > button:nth-child(3)
+   └── <button class="btn btn-primary d-lg-none" onclick="window.location.href='/login'"> <i cla...</button>
+
+ • Error: This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.
+   ├── WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.Button.Name
+   ├── #mobileMenu > div:nth-child(1) > button
+   └── <button type="button" class="btn-close" data-bs-dismiss="offcanvas"> </button>
+
+2 Errors
+

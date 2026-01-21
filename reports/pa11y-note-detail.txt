@@ -1,0 +1,24 @@
+
+Welcome to Pa11y
+
+ > Running Pa11y on URL http://localhost:8000/note/1
+
+Results for URL: http://localhost:8000/note/1
+
+ • Error: This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.
+   ├── WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.Button.Name
+   ├── html > body > header > nav:nth-child(1) > div > div:nth-child(3) > button:nth-child(3)
+   └── <button class="btn btn-primary d-lg-none" onclick="window.location.href='/login'"> <i cla...</button>
+
+ • Error: This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.
+   ├── WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.Button.Name
+   ├── #mobileMenu > div:nth-child(1) > button
+   └── <button type="button" class="btn-close" data-bs-dismiss="offcanvas"> </button>
+
+ • Error: Anchor element found with a valid href attribute, but no link content has been supplied.
+   ├── WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.A.NoContent
+   ├── html > body > div > main > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div > a
+   └── <a href="/file/1/download" class="btn btn-sm btn-outline-primary"> ...</a>
+
+3 Errors
+
