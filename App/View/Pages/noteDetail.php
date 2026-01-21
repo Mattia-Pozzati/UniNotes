@@ -264,16 +264,15 @@ $isAuthor = false;
                         <i class="bi bi-person-circle" style="font-size: 4rem;"></i>
                     </div>
                     <h5><?= htmlspecialchars($note['author']['name'] ?? 'Autore') ?></h5>
-                    <div class="text-muted mb-3">
-                        <i class="text-warning"></i>
-                        Reputazione: <?= $note['author']['reputation'] ?? 0 ?>
+                    <div class="mt-3">
+                        <span class="badge bg-primary fs-6">
+                            <i class="bi bi-star-fill me-1"></i>
+                            <?= $note['author']['reputation'] ?? 0 ?> reputazione
+                        </span>
                     </div>
-                    <a href="/user/<?= $note['author']['id'] ?? '' ?>" class="btn btn-sm btn-outline-primary">
-                        Vedi profilo
-                    </a>
                 </div>
             </div>
-
+              
             <!-- File allegati -->
             <?php if (!empty($note['files'])): ?>
                 <div class="card mb-4">

@@ -19,6 +19,33 @@ class NoteService {
     return self::getNotesFromDatabase($limit);
   }
 
+  public static function calculateUserReputation(int $userId): int {
+    try{
+      $db = Database::getInstance();
+
+      $sql = "
+          SELECT COUNT(l.student_id) as total_likes
+          FROM NOTE n
+          LEFT JOIN `LIKE` l ON l.note_id = n.id
+          WHERE n.student_id = :user_id
+            AND n.deleted_at IS NULL
+          ";
+        
+        $stmt = $db -> prepare($sql);
+        $stmt->execute(['user_id' => $userId]);
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        return (int)($result['total_likes'] ?? 0);
+
+    }catch(\Exeption $e) {
+      Logger::getInstance()->error("Errore calcolo rep",[
+        "user_id"=> $user_id,
+        "error" => $e->getMessage()
+      ]);
+      return 0;
+    }
+  }
+
   private static function getFullNoteFromDatabase(int $id): ?array {
     try {
         $note = Note::find($id);
@@ -39,6 +66,8 @@ class NoteService {
             return null;
         }
         
+        $reputation = self::calculateUserReputation($author['id']);
+
         // Carica file
         $filesFromDb = (new File())->where('note_id', '=', $id)->get();
         $files = array_map(function($file) {
@@ -107,7 +136,7 @@ class NoteService {
             'author' => [
                 'id' => $author['id'],
                 'name' => $author['name'],
-                'reputation' => $author['reputation'] ?? 0
+                'reputation' => $reputation ?? 0
             ],
             'course' => 'Corso', // TODO: Implementare relazione con corsi
             'tags' => [], // TODO: Implementare tags se necessario
