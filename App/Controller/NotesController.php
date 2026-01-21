@@ -78,9 +78,8 @@ class NotesController
             ->leftJoin('`LIKE`', 'NOTE.id', '=', '`LIKE`.note_id')
             ->leftJoin('NOTE_DOWNLOAD', 'NOTE.id', '=', 'NOTE_DOWNLOAD.note_id')
             ->where('NOTE.deleted_at', 'IS', null)
-            ->where('NOTE.visibility', '=', 'public');
-
-        $qb->group_by('NOTE.id');
+            ->where('NOTE.visibility', '=', 'public')
+            ->group_by('NOTE.id');
 
         if ($qText !== '') {
             $qb->where('NOTE.title', 'LIKE', '%' . $qText . '%', false);
