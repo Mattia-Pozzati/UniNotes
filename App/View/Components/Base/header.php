@@ -1,4 +1,5 @@
-<?php namespace App\View; 
+<?php
+namespace App\View;
 
 use Core\Helper\SessionManager;
 
@@ -14,16 +15,14 @@ $dashboardUrl = $isAdmin ? '/admin' : '/user/dashboard';
 <header class="row p-5">
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light"
-        aria-label="Barra di navigazione principale">
+    <nav class="navbar navbar-expand-lg navbar-light" aria-label="Barra di navigazione principale">
 
         <div class="container-fluid p-0">
 
             <a class="navbar-brand fw-bold" href="/">Uninotes</a>
 
             <!-- Link desktop -->
-            <div 
-                class="collapse 
+            <div class="collapse 
                     navbar-collapse 
                     d-none 
                     d-lg-flex 
@@ -39,7 +38,7 @@ $dashboardUrl = $isAdmin ? '/admin' : '/user/dashboard';
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/ranking">Classifica</a>
-                    </li>                    
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/#aboutUs">Chi siamo?</a>
                     </li>
@@ -55,8 +54,8 @@ $dashboardUrl = $isAdmin ? '/admin' : '/user/dashboard';
                 <?php if ($isLoggedIn): ?>
                     <!-- Menu utente loggato - SOLO DESKTOP -->
                     <div class="dropdown d-none d-lg-block">
-                        <button class="btn btn-primary dropdown-toggle" type="button" 
-                                id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="userMenu"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person-circle me-1"></i>
                             <?= htmlspecialchars($user['name'] ?? 'Utente') ?>
                         </button>
@@ -66,7 +65,9 @@ $dashboardUrl = $isAdmin ? '/admin' : '/user/dashboard';
                                     <i class="bi bi-speedometer2 me-2"></i>Dashboard
                                 </a>
                             </li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li>
                                 <a class="dropdown-item text-danger" href="/logout">
                                     <i class="bi bi-box-arrow-right me-2"></i>Logout
@@ -74,14 +75,10 @@ $dashboardUrl = $isAdmin ? '/admin' : '/user/dashboard';
                             </li>
                         </ul>
                     </div>
-                    
+
                     <!-- Icona utente - SOLO MOBILE -->
-                    <button class="btn btn-primary d-lg-none" 
-                            type="button"
-                            data-bs-toggle="offcanvas"
-                            data-bs-target="#mobileMenu"
-                            aria-label="Menu utente"
-                            >
+                    <button class="btn btn-primary d-lg-none" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#mobileMenu" aria-label="Menu utente">
                         <i class="bi bi-person-circle"></i>
                     </button>
                 <?php else: ?>
@@ -89,22 +86,17 @@ $dashboardUrl = $isAdmin ? '/admin' : '/user/dashboard';
                     <button class="btn btn-primary d-none d-lg-block" id="loginBtn" onClick="window.location.href='/login'">
                         Login
                     </button>
-                    
+
                     <!-- Icona login mobile -->
-                    <button class="btn btn-primary d-lg-none" onClick="window.location.href='/login'">
+                    <button class="btn btn-primary d-lg-none" onClick="window.location.href='/login'" aria-label="Login button mobile"> 
                         <i class="bi bi-box-arrow-in-right"></i>
                     </button>
                 <?php endif; ?>
 
                 <!-- Hamburger mobile - SOLO se NON loggato -->
                 <?php if (!$isLoggedIn): ?>
-                    <button class="btn d-lg-none"
-                        type="button"
-                        data-bs-toggle="offcanvas"
-                        data-bs-target="#mobileMenu"
-                        aria-controls="mobileMenu"
-                        aria-label="Apri menu"
-                        >
+                    <button class="btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu"
+                        aria-controls="mobileMenu" aria-label="Apri menu">
                         <i class="bi bi-list" aria-hidden="true"></i>
                     </button>
                 <?php endif; ?>
@@ -113,17 +105,11 @@ $dashboardUrl = $isAdmin ? '/admin' : '/user/dashboard';
     </nav>
 
     <!-- Offcanvas mobile -->
-    <nav
-        class="offcanvas offcanvas-start"
-        tabindex="-1"
-        id="mobileMenu"
-        aria-label="mobileMunu">
+    <nav class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-label="mobileMunu">
 
         <div class="offcanvas-header">
             <h2 class="offcanvas-title p-5">Uninotes</h2>
-            <button 
-                type="button" 
-                class="btn-close" data-bs-dismiss="offcanvas">
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas">
             </button>
         </div>
         <div class="offcanvas-body 
@@ -146,7 +132,7 @@ $dashboardUrl = $isAdmin ? '/admin' : '/user/dashboard';
                 <li class="nav-item">
                     <a class="nav-link" href="/search">Cerca</a>
                 </li>
-                
+
             </ul>
 
             <?php if ($isLoggedIn): ?>
@@ -173,45 +159,4 @@ $dashboardUrl = $isAdmin ? '/admin' : '/user/dashboard';
 
 </header>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const offcanvasElement = document.getElementById('mobileMenu');
-        const navLinks = offcanvasElement.querySelectorAll('.nav-link');
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-
-                if (href && href.includes('#')) {
-                    e.preventDefault();
-
-                    const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
-                    if (offcanvas) {
-                        offcanvas.hide();
-                    }
-
-                    const isExternalPage = href.startsWith('/#');
-
-                    if (isExternalPage) {
-                        offcanvasElement.addEventListener('hidden.bs.offcanvas', function() {
-                            window.location.href = href;
-                        }, { once: true });
-                    } else {
-                        offcanvasElement.addEventListener('hidden.bs.offcanvas', function() {
-                            const targetId = href.substring(1); 
-                            const targetElement = document.getElementById(targetId);
-                            if (targetElement) {
-                                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                            }
-                        }, { once: true });
-                    }
-                } else {
-                    const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
-                    if (offcanvas) {
-                        offcanvas.hide();
-                    }
-                }
-            });
-        });
-    });
-</script>
+<script src="/js/headerScript.js"></script>

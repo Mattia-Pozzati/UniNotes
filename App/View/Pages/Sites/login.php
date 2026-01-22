@@ -48,6 +48,7 @@
                             type="button" 
                             class="btn btn-outline-secondary" 
                             id="togglePassword"
+                            aria-label="Mostra/Nascondi password"
                         >
                             <i class="bi bi-eye"></i>
                         </button>

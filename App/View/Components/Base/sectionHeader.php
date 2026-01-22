@@ -12,7 +12,7 @@ $p = $p ?? '';
     <div class="col text-center px-3">
       <h1><?= htmlspecialchars($title) ?></h1>
       <?php if ($subtitle): ?>
-        <h3><i class="bi <?= htmlspecialchars($subtitleIcon) ?>"></i> <?= htmlspecialchars($subtitle) ?></h3>
+        <h2><i class="bi <?= htmlspecialchars($subtitleIcon) ?>"></i> <?= htmlspecialchars($subtitle) ?></h2>
       <?php endif; ?>
       <p><?= htmlspecialchars($p) ?></p>
     </div>

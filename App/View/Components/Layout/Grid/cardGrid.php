@@ -34,14 +34,14 @@ $showPagination = $currentPage !== null && $totalPages !== null;
             <ul class="pagination justify-content-center">
                 <!-- Prima pagina -->
                 <li class="btn <?= $currentPage == 1 ? 'disabled' : '' ?>">
-                    <a href="<?= $buildUrl(1) ?>">
+                    <a href="<?= $buildUrl(1) ?>" aria-label="Prima pagina">
                         <i class="bi bi-chevron-double-left"></i>
                     </a>
                 </li>
                 
                 <!-- Pagina precedente -->
                 <li class="btn <?= $currentPage == 1 ? 'disabled' : '' ?>">
-                    <a href="<?= $buildUrl($currentPage - 1) ?>">
+                    <a href="<?= $buildUrl($currentPage - 1) ?>" aria-label="Pagina precedente">
                         <i class="bi bi-chevron-left"></i>
                     </a>
                 </li>
@@ -53,7 +53,7 @@ $showPagination = $currentPage !== null && $totalPages !== null;
                 
                 if ($start > 1): ?>
                     <li class="btn">
-                        <a href="<?= $buildUrl(1) ?>">1</a>
+                        <a href="<?= $buildUrl(1) ?>" aria-label="Pagina 1">1</a>
                     </li>
                     <?php if ($start > 2): ?>
                         <li class="btn disabled">
@@ -64,7 +64,7 @@ $showPagination = $currentPage !== null && $totalPages !== null;
 
                 <?php for ($i = $start; $i <= $end; $i++): ?>
                     <li class="btn <?= $i == $currentPage ? 'active' : '' ?>">
-                        <a href="<?= $buildUrl($i) ?>"><?= $i ?></a>
+                        <a href="<?= $buildUrl($i) ?>" aria-label="Pagina <?= $i ?>"><?= $i ?></a>
                     </li>
                 <?php endfor; ?>
 
@@ -75,20 +75,20 @@ $showPagination = $currentPage !== null && $totalPages !== null;
                         </li>
                     <?php endif; ?>
                     <li class="btn">
-                        <a href="<?= $buildUrl($totalPages) ?>"><?= $totalPages ?></a>
+                        <a href="<?= $buildUrl($totalPages) ?>" aria-label="Pagina <?= $totalPages ?>"><?= $totalPages ?></a>
                     </li>
                 <?php endif; ?>
 
                 <!-- Pagina successiva -->
                 <li class="btn <?= $currentPage == $totalPages ? 'disabled' : '' ?>">
-                    <a href="<?= $buildUrl($currentPage + 1) ?>">
+                    <a href="<?= $buildUrl($currentPage + 1) ?>" aria-label="Pagina successiva">
                         <i class="bi bi-chevron-right"></i>
                     </a>
                 </li>
                 
                 <!-- Ultima pagina -->
                 <li class="btn <?= $currentPage == $totalPages ? 'disabled' : '' ?>">
-                    <a href="<?= $buildUrl($totalPages) ?>">
+                    <a href="<?= $buildUrl($totalPages) ?>" aria-label="Ultima pagina">
                         <i class="bi bi-chevron-double-right"></i>
                     </a>
                 </li>
