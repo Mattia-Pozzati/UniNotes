@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>relazione</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="uninotes">UniNotes</h1>
+<h2 id="relazione-sulla-fase-di-progettazione">Relazione sulla Fase di
+Progettazione</h2>
+<p><em>Simone Brunelli, Mattia Pozzati, Tommaso Nori</em></p>
+<hr />
+<h2 id="introduzione">1. Introduzione</h2>
+<p>UniNotes è una piattaforma web progettata per la condivisione di
+materiale didattico universitario, che permette agli studenti di
+caricare, ricercare, commentare e valutare appunti in modo rapido e
+intuitivo. Il sistema integra funzionalità avanzate come un sistema di
+reputazione, notifiche real-time e chat AI per l’analisi del contenuto
+delle note.</p>
+<hr />
+<h2 id="progettazione-ed-prototipazione">2. Progettazione ed
+prototipazione</h2>
+<p>La definizione dell’interfaccia definitiva di UniNotes è stata
+strutturata in tre fasi distinte. Questo approccio ci ha permesso di
+validare le scelte iniziali e di modificarle in base alle reali
+necessità degli studenti. I mockup sono stati realizzati con l’utilizzo
+del software Figma.</p>
+<h3 id="fase-1-mockup-iniziali-e-ipotesi-di-progetto">Fase 1: Mockup
+Iniziali e Ipotesi di Progetto</h3>
+<p>Inizialmente, i mockup sono stati realizzati seguendo le linee guida
+di progettazione standard, ipotizzando le funzionalità classiche di un
+sito di condivisione appunti.</p>
+<figure>
+<img src="/Applications/XAMPP/xamppfiles/htdocs/Uninotes/Docs/images/firstMockup.png" alt="Mockup Iniziale - Homepage" />
+<figcaption aria-hidden="true">Mockup Iniziale - Homepage</figcaption>
+</figure>
+<h3 id="fase-2-sessione-di-prototipazione">Fase 2: Sessione di
+prototipazione</h3>
+<p>Per verificare l’efficacia di queste ipotesi, abbiamo condotto una
+sessione di sviluppo coinvolgendo un gruppo di utenti target (studenti
+universitari di diverse facoltà).</p>
+<p>Sono emerse delle necessità e criticità:</p>
+<ul>
+<li><strong>Sistema di Interazione Sociale</strong>: Gli utenti hanno
+espresso la necessità di poter interagire con le note attraverso like e
+commenti, non solo valutazioni.</li>
+<li><strong>Notifiche e Feedback</strong>: Gli utilizzatori hanno fatto
+emergere la necessità di ricevere notifiche quando qualcuno interagisce
+con i loro contenuti.</li>
+<li><strong>Dashboard Personalizzata</strong>: Gli studenti volevano una
+vista centralizzata per gestire le proprie note, quelle scaricate e le
+notifiche ricevute.</li>
+<li><strong>Ricerca Avanzata</strong>: È emersa la necessità di filtri
+più granulari per trovare appunti specifici (università, corso, formato,
+tipo).</li>
+<li><strong>Dark Mode</strong>: Richiesta esplicita di supporto per tema
+scuro, essenziale per sessioni di studio notturne.</li>
+</ul>
+<h2 id="mockup">Mockup</h2>
+<h3 id="desktop---light-mode">Desktop - Light Mode</h3>
+<figure>
+<img src="/Applications/XAMPP/xamppfiles/htdocs/Uninotes/Docs/images/light-desktop.png" alt="Desktop Light" />
+<figcaption aria-hidden="true">Desktop Light</figcaption>
+</figure>
+<h3 id="desktop---dark-mode">Desktop - Dark Mode</h3>
+<figure>
+<img src="/Applications/XAMPP/xamppfiles/htdocs/Uninotes/Docs/images/dark-desktop.png" alt="Desktop Dark" />
+<figcaption aria-hidden="true">Desktop Dark</figcaption>
+</figure>
+<h3 id="mobile---light-mode">Mobile - Light Mode</h3>
+<figure>
+<img src="/Applications/XAMPP/xamppfiles/htdocs/Uninotes/Docs/images/light-mobile.png" alt="Mobile Light" />
+<figcaption aria-hidden="true">Mobile Light</figcaption>
+</figure>
+<h3 id="mobile---dark-mode">Mobile - Dark Mode</h3>
+<figure>
+<img src="/Applications/XAMPP/xamppfiles/htdocs/Uninotes/Docs/images/dark-mobile.png" alt="Mobile Dark" />
+<figcaption aria-hidden="true">Mobile Dark</figcaption>
+</figure>
+<h3 id="fase-3-evoluzione-e-miglioramento-mockup">Fase 3: Evoluzione e
+miglioramento mockup</h3>
+<p>Sulla base dei risultati della Fase 2, abbiamo modificato i mockup
+producendo la versione finale del progetto:</p>
+<h4 id="sistema-di-like-e-commenti">1. Sistema di Like e Commenti</h4>
+<p>Abbiamo implementato un sistema di interazione che permette agli
+utenti di: - Mettere like alle note - Commentare e rispondere ai
+commenti - Visualizzare statistiche di engagement (like e download)</p>
+<h4 id="dashboard-unificata">2. Dashboard Unificata</h4>
+<p>È stata creata una dashboard personalizzata con sezioni tabbed per: -
+Visualizzare e gestire le proprie note - Accedere alle note scaricate -
+Ricevere notifiche in tempo reale - Caricare nuove note</p>
+<h4 id="sistema-di-notifiche">3. Sistema di Notifiche</h4>
+<p>Implementato un sistema completo di notifiche per: - Nuovi like
+ricevuti - Nuovi commenti - Aggiornamenti delle note scaricate -
+Comunicazioni amministrative</p>
+<h4 id="ricerca-avanzata-con-filtri">4. Ricerca Avanzata con Filtri</h4>
+<p>La pagina di ricerca è stata arricchita con: - Filtri per università,
+corso, formato file e tipo di nota - Barra di ricerca full-text -
+Visualizzazione a griglia responsive</p>
+<h4 id="dark-mode-e-temi">5. Dark Mode e Temi</h4>
+<p>Implementazione completa di un sistema di temi con: - Toggle
+dark/light mode - Persistenza della preferenza - Variabili CSS custom
+per manutenibilità</p>
+<h4 id="implementazione-ai">6. Implementazione AI</h4>
+<p>Integrazione di un sistema di chat AI per l’analisi intelligente del
+contenuto delle note: - Estrazione automatica del testo da file PDF
+tramite pdftotext - Integrazione con OpenRouter API per elaborazione
+linguaggio naturale - Interfaccia Q&amp;A che permette agli studenti di
+porre domande sul contenuto - Contestualizzazione delle risposte basata
+esclusivamente sul materiale caricato —</p>
+</body>
+</html>

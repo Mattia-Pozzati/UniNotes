@@ -119,7 +119,7 @@ INSERT INTO `USER` (id, name, email, password_hash, university, role) VALUES
 INSERT INTO NOTE (id, student_id, title, description, note_type, format, university, visibility, created_at) VALUES
 (6, 6, 'Nota 6', 'Descrizione della nota 6', 'riassunto', 'pdf', 'Università di Napoli', 'public', NOW()),
 (7, 7, 'Nota 7', 'Descrizione della nota 7', 'esercizi', 'pdf', 'Università di Padova', 'public', NOW()),
-(8, 8, 'Nota 8', 'Descrizione della nota 8', 'formulario', 'md', 'Università di Bologna', 'course', NOW()),
+(8, 8, 'Nota 8', 'Descrizione della nota 8', 'formulario', 'md', 'Università di Bologna', 'private', NOW()),
 (9, 9, 'Nota 9', 'Descrizione della nota 9', 'note', 'pdf', 'Politecnico di Milano', 'public', NOW()),
 (10, 10, 'Nota 10', 'Descrizione della nota 10', 'altro', 'tex', 'Università di Roma', 'private', NOW());
 
@@ -131,7 +131,7 @@ SELECT seq.id, ((seq.id % 35) + 1) as student_id,
 			 ELT((seq.id % 5)+1, 'riassunto','formulario','esercizi','note','altro') as note_type,
 			 ELT((seq.id % 3)+1, 'pdf','md','tex') as format,
 			 ELT((seq.id % 6)+1, 'Università di Bologna','Politecnico di Milano','Università di Roma','Università di Pisa','Università di Napoli','Università di Torino') as university,
-			 ELT((seq.id % 3)+1, 'public','course','private') as visibility,
+			 ELT((seq.id % 2)+1, 'public','private') as visibility,
 			 NOW()
 FROM (
 	SELECT 11 as id UNION ALL SELECT 12 UNION ALL SELECT 13 UNION ALL SELECT 14 UNION ALL SELECT 15
