@@ -41,6 +41,7 @@ class UserDashboardController
         return [
             'label' => 'Mie Note',
             'icon' => 'bi-file-earmark-text',
+            'title',
             'cards' => $myNotesCards,
             'component' => 'Cards/noteCard',
             'pagination' => [

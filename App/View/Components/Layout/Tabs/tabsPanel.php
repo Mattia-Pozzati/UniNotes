@@ -11,7 +11,7 @@ use App\View\View;
         <div class="tab-pane show active" role="tabpanel">
 
             <?= View::getComponent('Base/sectionHeader', [
-                'titolo' => $tab['label'],
+                'title' => $tab['label'],
                 'p' => $tab['description'] ?? ''
             ]) ?>
 

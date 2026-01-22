@@ -630,9 +630,9 @@ class NoteController {
             exit;
         }
 
-        try {
+        try {å
             (new Note())->where('id', '=', (int)$id)->update([
-                'deleted_at' => date('Y-m-d H:i:s')
+                'visibility' => 'private'
             ]);
 
             Logger::getInstance()->info("Nota bloccata", [

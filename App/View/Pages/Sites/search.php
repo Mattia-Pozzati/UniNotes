@@ -8,7 +8,7 @@ $courses = $courses ?? [];
 ?>
 
 <?= \App\View\View::getComponent('Base/sectionHeader', [
-    'titolo' => 'Cerca note',
+    'title' => 'Cerca note',
     'p' => 'Trova appunti, PDF, riassunti'
 ]) ?>
 
