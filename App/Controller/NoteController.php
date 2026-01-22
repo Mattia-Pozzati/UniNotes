@@ -12,7 +12,7 @@ use Core\Database\Database;
 use Core\Helper\SessionManager;
 use Core\Helper\Logger;
 use Core\Helper\PdfExtractor;
-use Service\Ai\ClientLLM;
+use App\Service\Ai\ClientLLM;
 use Exception;
 use App\Model\Comment;
 use App\Model\Notification;

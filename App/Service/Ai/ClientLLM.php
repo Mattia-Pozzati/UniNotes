@@ -4,7 +4,7 @@ use Exception;
 
 class ClientLLM {
     public static function callLLM(string $fileName, string $fileContent, string $prompt): string {
-        $envPath = dirname(__DIR__, 2) . '/.env.local';
+        $envPath = dirname(__DIR__, 3) . '/.env.local';
         if (!file_exists($envPath)) {
             throw new Exception('ENV file not found');
         }

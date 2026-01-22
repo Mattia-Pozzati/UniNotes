@@ -24,12 +24,38 @@ class PdfExtractor
     {
         // Default path a pdftotext.exe
         $bin = 'C:\\poppler\\Library\\bin\\pdftotext.exe';
-        return shell_exec("\"$bin\" " . escapeshellarg($path) . " -") ?? '';
+        if (file_exists($bin)) {
+            $cmd = "\"$bin\" " . escapeshellarg($path) . ' -';
+        } else {
+            $cmd = 'pdftotext ' . escapeshellarg($path) . ' -';
+        }
+        [$out, $err, $exit] = self::runCommand($cmd);
+        return $out ?? '';
     }
 
     private static function unix(string $path): string
     {
-        return shell_exec("pdftotext " . escapeshellarg($path) . " -") ?? '';
+        $cmd = '/opt/homebrew/bin/pdftotext ' . escapeshellarg($path) . ' -';
+        [$out, $err, $exit] = self::runCommand($cmd);
+        return $out ?? '';
+    }
+
+    private static function runCommand(string $cmd): array
+    {
+        $descriptors = [
+            1 => ['pipe', 'w'],
+            2 => ['pipe', 'w'],
+        ];
+        $process = @proc_open($cmd, $descriptors, $pipes);
+        if (!is_resource($process)) {
+            return ['', 'proc_open failed', 1];
+        }
+        $stdout = stream_get_contents($pipes[1]);
+        fclose($pipes[1]);
+        $stderr = stream_get_contents($pipes[2]);
+        fclose($pipes[2]);
+        $exit = proc_close($process);
+        return [trim($stdout), trim($stderr), $exit];
     }
 }
 
