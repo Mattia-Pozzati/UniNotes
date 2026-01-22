@@ -510,7 +510,7 @@ class NoteController
                 "aiResponse" => $aiResponse
             ]);
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Logger::getInstance()->error("Errore AI chat", [
                 "note_id" => $noteId,
                 "error" => $e->getMessage(),
@@ -600,7 +600,7 @@ class NoteController
 
         try {
             // Trova il commento
-            $comment = \App\Model\Comment::find($commentId);
+            $comment = Comment::find($commentId);
 
             if (!$comment) {
                 SessionManager::flash('error', 'Commento non trovato');
@@ -619,7 +619,7 @@ class NoteController
             }
 
             // Elimina il commento
-            (new \App\Model\Comment())
+            (new Comment())
                 ->where('id', '=', $commentId)
                 ->delete();
 
@@ -630,7 +630,7 @@ class NoteController
             ]);
 
             SessionManager::flash('success', 'Commento eliminato');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Logger::getInstance()->error("Errore eliminazione commento", [
                 "error" => $e->getMessage()
             ]);
