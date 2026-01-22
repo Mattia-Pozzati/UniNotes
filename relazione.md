@@ -1,84 +1,89 @@
-# Relazione Tecnica - UniNotes
+# UniNotes
+## Relazione sulla Fase di Progettazione
+*Simone Brunelli, Mattia Pozzati, Tommaso Nori*
 
-## Panoramica del Progetto
-UniNotes è una piattaforma web per la condivisione di appunti universitari sviluppata in PHP nativo senza framework esterni. Il sistema permette agli studenti di caricare, condividere e commentare materiale didattico, con funzionalità di ricerca avanzata, sistema di reputazione e notifiche.
+---
 
-## Architettura Tecnica
+## 1. Introduzione
+UniNotes è una piattaforma web progettata per la condivisione di materiale didattico universitario, che permette agli studenti di caricare, ricercare, commentare e valutare appunti in modo rapido e intuitivo. Il sistema integra funzionalità avanzate come un sistema di reputazione, notifiche real-time e chat AI per l'analisi del contenuto delle note.
 
-### Pattern Architetturali
-Il progetto adotta un'architettura **MVC personalizzata** con separazione netta tra logica applicativa, presentazione e accesso ai dati:
+---
 
-- **Model**: ORM custom (`BaseModel`) con query builder fluente per interazioni database
-- **View**: Sistema di templating PHP con componenti riutilizzabili e layout gerarchici
-- **Controller**: Gestione della logica applicativa e coordinamento tra Model e View
+## 2. Progettazione ed Experience Prototyping
+La definizione dell'interfaccia definitiva di UniNotes è stata strutturata in tre fasi distinte. Questo approccio ci ha permesso di validare le scelte iniziali e di modificarle in base alle reali necessità degli studenti. I mockup sono stati realizzati con l'utilizzo del software Figma.
 
-### Componenti Core
+### Fase 1: Mockup Iniziali e Ipotesi di Progetto
+Inizialmente, i mockup sono stati realizzati seguendo le linee guida di progettazione standard, ipotizzando le funzionalità classiche di un sito di condivisione appunti.
 
-**Router (`Core/Routing/Router.php`)**: Singleton pattern per gestione delle route con supporto a parametri dinamici (`/note/{id}`) e dispatching automatico ai controller.
+![Mockup Iniziale - Homepage](firstMockup.png)
 
-**ORM Custom (`Core/ORM/BaseModel.php`)**: Query builder type-safe che implementa interfaccia fluente per operazioni CRUD, con supporto a:
-- Join multipli (INNER, LEFT, RIGHT)
-- Paginazione nativa
-- Where conditions con operatori SQL standard
-- Group by e Order by
+### Fase 2: Sessione di Experience Prototyping
+Per verificare l'efficacia di queste ipotesi, abbiamo condotto una sessione di Experience Prototyping coinvolgendo un gruppo di utenti target (studenti universitari di diverse facoltà).
 
-**Logger (`Core/Helper/Logger.php`)**: Sistema di logging centralizzato con sanitizzazione automatica di dati sensibili (password, email parziali) e categorizzazione per livello (DEBUG, INFO, ERROR, WARNING).
+Sono emerse delle necessità e criticità:
 
-**SessionManager (`Core/Helper/SessionManager.php`)**: Gestione sicura delle sessioni con:
-- Rigenerazione periodica degli ID
-- Flash messages monouso
-- Controllo ruoli (student/admin)
+- **Sistema di Interazione Sociale**: Gli utenti hanno espresso la necessità di poter interagire con le note attraverso like e commenti, non solo valutazioni.
+- **Notifiche e Feedback**: Gli utilizzatori hanno fatto emergere la necessità di ricevere notifiche quando qualcuno interagisce con i loro contenuti.
+- **Dashboard Personalizzata**: Gli studenti volevano una vista centralizzata per gestire le proprie note, quelle scaricate e le notifiche ricevute.
+- **Ricerca Avanzata**: È emersa la necessità di filtri più granulari per trovare appunti specifici (università, corso, formato, tipo).
+- **Dark Mode**: Richiesta esplicita di supporto per tema scuro, essenziale per sessioni di studio notturne.
 
-## Database
-Schema relazionale normalizzato con 9 tabelle principali:
-- `USER`: Gestione utenti con sistema di reputazione
-- `NOTE`: Contenitore logico per appunti con soft-delete
-- `FILE`: Storage metadati file con hash per integrità
-- `COURSE`, `NOTE_COURSE`: Relazione many-to-many per categorizzazione
-- `COMMENT`: Sistema di commenti con thread annidati (parent_comment_id)
-- `LIKE`, `NOTIFICATION`, `NOTE_DOWNLOAD`: Tracking interazioni utente
+### Fase 3: Evoluzione e Mockup Definitivi
+Sulla base dei risultati della Fase 2, abbiamo modificato i mockup producendo la versione finale del progetto:
 
-## Funzionalità Implementate
+#### 1. Sistema di Like e Commenti
+Abbiamo implementato un sistema di interazione che permette agli utenti di:
+- Mettere like alle note
+- Commentare e rispondere ai commenti (thread annidati)
+- Visualizzare statistiche di engagement (like e download)
 
-### Gestione Appunti
-- Upload file (PDF, MD, TEX) con validazione MIME type
-- Aggiornamento file (sovrascrittura con notifica ai downloader)
-- Ricerca full-text con filtri multipli (corso, formato, tipo)
-- Paginazione server-side per performance
-- Sistema di visibilità (public/course/private)
+#### 2. Dashboard Unificata
+È stata creata una dashboard personalizzata con sezioni tabbed per:
+- Visualizzare e gestire le proprie note
+- Accedere alle note scaricate
+- Ricevere notifiche in tempo reale
+- Caricare nuove note
 
-### Interazioni Utente
-- Like/unlike con aggiornamento reputazione autore
-- Commenti con risposte annidate
-- Sistema di notifiche real-time per like, commenti e aggiornamenti
-- Dashboard personalizzata per studenti e admin
+#### 3. Sistema di Notifiche
+Implementato un sistema completo di notifiche per:
+- Nuovi like ricevuti
+- Nuovi commenti
+- Aggiornamenti delle note scaricate
+- Comunicazioni amministrative
 
-### Sicurezza
-- Password hashing con `password_hash()` (bcrypt)
-- Prepared statements per prevenzione SQL injection
-- Validazione input lato server con sanitizzazione
-- Session fixation protection con rigenerazione ID
-- CSRF protection attraverso validazione metodo HTTP
+#### 4. Ricerca Avanzata con Filtri
+La pagina di ricerca è stata arricchita con:
+- Filtri per università, corso, formato file e tipo di nota
+- Barra di ricerca full-text
+- Visualizzazione a griglia responsive
 
-### Funzionalità Avanzate
-- **Chat AI**: Integrazione OpenRouter API per Q&A su contenuto note (estrazione testo da PDF con pdftotext)
-- **Dark Mode**: Sistema di temi CSS con variabili custom e persistenza localStorage
-- **Responsive Design**: UI mobile-first con Bootstrap 5.3
+#### 5. Dark Mode e Temi
+Implementazione completa di un sistema di temi con:
+- Toggle dark/light mode
+- Persistenza della preferenza
+- Variabili CSS custom per manutenibilità
 
-## Scelte Implementative
+---
 
-**PHP Nativo**: Scelta didattica per comprendere internals del linguaggio senza astrazione framework.
+## 3. Mockup piú completi
 
-**ORM Custom vs PDO Diretto**: Trade-off tra leggibilità del codice e flessibilità SQL. Il query builder riduce boilerplate del 60% mantenendo type safety.
+### Desktop - Light Mode
 
-**File Storage**: Filesystem locale con metadati in database. Pro: semplicità. Contro: scaling orizzontale limitato (mitigabile con NFS o object storage futuro).
+![Desktop Light](light-desktop.png)
 
-**No Versioning File**: Aggiornamenti sovrascrivono file esistente. Razionale: semplicità MVP. Feature future: audit log o S3 versioning.
 
-## Performance e Scalabilità
-- Indici database su colonne filtrate frequentemente (`created_at`, `student_id`, `note_id`)
-- Paginazione per limitare memoria utilizzata (default 12 item/pagina)
-- Lazy loading componenti UI (tab-based navigation)
+### Desktop - Dark Mode
 
-## Conclusioni
-UniNotes dimostra implementazione completa di pattern enterprise (MVC, Singleton, Repository) senza dipendenze esterne. Il codice privilegia leggibilità e manutenibilità attraverso separazione delle responsabilità e documentazione inline. Il sistema è production-ready per deployment LAMP stack con spazio per ottimizzazioni future (caching, CDN, microservizi).
+![Desktop Dark](dark-desktop.png)
+
+
+### Mobile - Light Mode
+
+![Mobile Light](light-mobile.png)
+
+
+### Mobile - Dark Mode
+
+![Mobile Dark](dark-mobile.png)
+
+---
