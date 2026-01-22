@@ -28,6 +28,30 @@ Sono emerse delle necessità e criticità:
 - **Ricerca Avanzata**: È emersa la necessità di filtri più granulari per trovare appunti specifici (università, corso, formato, tipo).
 - **Dark Mode**: Richiesta esplicita di supporto per tema scuro, essenziale per sessioni di studio notturne.
 
+
+## Mockup
+
+### Desktop - Light Mode
+
+![Desktop Light](light-desktop.png)
+
+
+### Desktop - Dark Mode
+
+![Desktop Dark](dark-desktop.png)
+
+
+### Mobile - Light Mode
+
+![Mobile Light](light-mobile.png)
+
+
+### Mobile - Dark Mode
+
+![Mobile Dark](dark-mobile.png)
+
+
+
 ### Fase 3: Evoluzione e miglioramento mockup
 Sulla base dei risultati della Fase 2, abbiamo modificato i mockup producendo la versione finale del progetto:
 
@@ -63,27 +87,10 @@ Implementazione completa di un sistema di temi con:
 - Persistenza della preferenza
 - Variabili CSS custom per manutenibilità
 
-
-#### 6. Mockup
-
-### Desktop - Light Mode
-
-![Desktop Light](light-desktop.png)
-
-
-### Desktop - Dark Mode
-
-![Desktop Dark](dark-desktop.png)
-
-
-### Mobile - Light Mode
-
-![Mobile Light](light-mobile.png)
-
-
-### Mobile - Dark Mode
-
-![Mobile Dark](dark-mobile.png)
-
-
+#### 6. Implementazione AI
+Integrazione di un sistema di chat AI per l'analisi intelligente del contenuto delle note:
+- Estrazione automatica del testo da file PDF tramite pdftotext
+- Integrazione con OpenRouter API per elaborazione linguaggio naturale
+- Interfaccia Q&A che permette agli studenti di porre domande sul contenuto
+- Contestualizzazione delle risposte basata esclusivamente sul materiale caricato
 ---
