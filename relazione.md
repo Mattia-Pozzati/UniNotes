@@ -9,7 +9,7 @@ UniNotes è una piattaforma web progettata per la condivisione di materiale dida
 
 ---
 
-## 2. Progettazione ed Experience Prototyping
+## 2. Progettazione ed prototipazione
 La definizione dell'interfaccia definitiva di UniNotes è stata strutturata in tre fasi distinte. Questo approccio ci ha permesso di validare le scelte iniziali e di modificarle in base alle reali necessità degli studenti. I mockup sono stati realizzati con l'utilizzo del software Figma.
 
 ### Fase 1: Mockup Iniziali e Ipotesi di Progetto
@@ -17,8 +17,8 @@ Inizialmente, i mockup sono stati realizzati seguendo le linee guida di progetta
 
 ![Mockup Iniziale - Homepage](firstMockup.png)
 
-### Fase 2: Sessione di Experience Prototyping
-Per verificare l'efficacia di queste ipotesi, abbiamo condotto una sessione di Experience Prototyping coinvolgendo un gruppo di utenti target (studenti universitari di diverse facoltà).
+### Fase 2: Sessione di prototipazione
+Per verificare l'efficacia di queste ipotesi, abbiamo condotto una sessione di sviluppo coinvolgendo un gruppo di utenti target (studenti universitari di diverse facoltà).
 
 Sono emerse delle necessità e criticità:
 
