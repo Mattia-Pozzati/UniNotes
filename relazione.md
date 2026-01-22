@@ -28,44 +28,10 @@ Sono emerse delle necessità e criticità:
 - **Ricerca Avanzata**: È emersa la necessità di filtri più granulari per trovare appunti specifici (università, corso, formato, tipo).
 - **Dark Mode**: Richiesta esplicita di supporto per tema scuro, essenziale per sessioni di studio notturne.
 
-### Fase 3: Evoluzione e Mockup Definitivi
+### Fase 3: Evoluzione e miglioramento mockup
 Sulla base dei risultati della Fase 2, abbiamo modificato i mockup producendo la versione finale del progetto:
 
-#### 1. Sistema di Like e Commenti
-Abbiamo implementato un sistema di interazione che permette agli utenti di:
-- Mettere like alle note
-- Commentare e rispondere ai commenti (thread annidati)
-- Visualizzare statistiche di engagement (like e download)
-
-#### 2. Dashboard Unificata
-È stata creata una dashboard personalizzata con sezioni tabbed per:
-- Visualizzare e gestire le proprie note
-- Accedere alle note scaricate
-- Ricevere notifiche in tempo reale
-- Caricare nuove note
-
-#### 3. Sistema di Notifiche
-Implementato un sistema completo di notifiche per:
-- Nuovi like ricevuti
-- Nuovi commenti
-- Aggiornamenti delle note scaricate
-- Comunicazioni amministrative
-
-#### 4. Ricerca Avanzata con Filtri
-La pagina di ricerca è stata arricchita con:
-- Filtri per università, corso, formato file e tipo di nota
-- Barra di ricerca full-text
-- Visualizzazione a griglia responsive
-
-#### 5. Dark Mode e Temi
-Implementazione completa di un sistema di temi con:
-- Toggle dark/light mode
-- Persistenza della preferenza
-- Variabili CSS custom per manutenibilità
-
----
-
-## 3. Mockup piú completi
+#### 1. Mockup
 
 ### Desktop - Light Mode
 
@@ -85,5 +51,39 @@ Implementazione completa di un sistema di temi con:
 ### Mobile - Dark Mode
 
 ![Mobile Dark](dark-mobile.png)
+
+
+
+#### 2. Sistema di Like e Commenti
+Abbiamo implementato un sistema di interazione che permette agli utenti di:
+- Mettere like alle note
+- Commentare e rispondere ai commenti
+- Visualizzare statistiche di engagement (like e download)
+
+#### 3. Dashboard Unificata
+È stata creata una dashboard personalizzata con sezioni tabbed per:
+- Visualizzare e gestire le proprie note
+- Accedere alle note scaricate
+- Ricevere notifiche in tempo reale
+- Caricare nuove note
+
+#### 4. Sistema di Notifiche
+Implementato un sistema completo di notifiche per:
+- Nuovi like ricevuti
+- Nuovi commenti
+- Aggiornamenti delle note scaricate
+- Comunicazioni amministrative
+
+#### 5. Ricerca Avanzata con Filtri
+La pagina di ricerca è stata arricchita con:
+- Filtri per università, corso, formato file e tipo di nota
+- Barra di ricerca full-text
+- Visualizzazione a griglia responsive
+
+#### 6. Dark Mode e Temi
+Implementazione completa di un sistema di temi con:
+- Toggle dark/light mode
+- Persistenza della preferenza
+- Variabili CSS custom per manutenibilità
 
 ---
