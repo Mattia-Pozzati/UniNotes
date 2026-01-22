@@ -624,7 +624,7 @@ class NoteController {
             exit;
         }
 
-        if (!SessionManager::isLoggedIn() || !(SessionManager::get('user')['is_admin'] ?? false)) {
+        if (!SessionManager::isLoggedIn() || SessionManager::get('user')['role'] !== 'admin') {
             SessionManager::flash('error', 'Permessi insufficienti per bloccare la nota');
             header('Location: /note/' . $id);
             exit;
@@ -639,6 +639,14 @@ class NoteController {
                 "note_id" => $id,
                 "admin_id" => SessionManager::userId()
             ]);
+
+            NotificationController::sendNotification(
+                $id,
+                 (new Note())->select(['student_id'])->where('id', '=', (int)$id)->first()['student_id'] ?? null,
+                 SessionManager::userId(),
+                 'System',
+                'La tua nota è stata bloccata dagli amministratori.'
+            );
 
             SessionManager::flash('success', 'Nota bloccata con successo');
         } catch (Exception $e) {

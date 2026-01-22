@@ -33,7 +33,8 @@ class UserDashboardController
                 $noteData['format'] ?? null,
                 $noteData['university'] ?? null,
                 $noteData['likes'] ?? 0, // likes
-                $noteData['downloads'] ?? 0  // downloads
+                $noteData['downloads'] ?? 0,  // downloads
+                $noteData['visibility'] ?? 0
             );
         }, $myNotesResult['data'] ?? []);
 

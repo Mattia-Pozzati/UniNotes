@@ -16,7 +16,7 @@ class AuthController
         $error = SessionManager::flash('error');
         $success = SessionManager::flash('success');
         
-        View::render('login', 'page', [
+        View::render('Sites/login', 'page', [
             "title" => "Login",
             "error" => $error,
             "success" => $success
@@ -30,7 +30,7 @@ class AuthController
     {
         $error = SessionManager::flash('error');
         
-        View::render('register', 'page', [
+        View::render('Sites/register', 'page', [
             "title" => "Registrazione",
             "error" => $error
         ]);

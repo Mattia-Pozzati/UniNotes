@@ -17,7 +17,7 @@ class RankingController
         // Query per utenti con più like ricevuti
         $topLiked = $this->getTopLiked(10);
         
-        View::render('ranking', 'page', [
+        View::render('Sites/ranking', 'page', [
             'title' => 'Classifica',
             'topUploaders' => $topUploaders,
             'topLiked' => $topLiked

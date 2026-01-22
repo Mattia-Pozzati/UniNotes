@@ -10,6 +10,7 @@ $likes = $card['likes'];
 $downloads = $card['downloads'];
 $buttonsEnabled = $card['buttonsEnabled'] ?? [];
 $buttons = $card['buttons'] ?? [];
+$visibility = $card['visibility'] ??'public';
 // Metadati della nota (mostrati al posto dei tag)
 $format = $card['format'] ?? null;
 $university = $card['university'] ?? null;
@@ -22,10 +23,8 @@ $note_type = $card['note_type'] ?? ($card['type'] ?? null);
         <!-- Titolo e Chat -->
         <div class="d-flex align-items-center justify-content-between">
             <h5 class="card-title"><?= htmlspecialchars($titolo) ?></h5>
-            <?php if ($chatEnabled): ?>
-                <a href="#" class="ms-2" aria-label="Apri chat AI">
-                    <i class="bi bi-chat-left-dots" aria-hidden="true"></i>
-                </a>
+            <?php if ($visibility === 'private'): ?>
+                <p> Private </p>
             <?php endif; ?>
         </div>
 

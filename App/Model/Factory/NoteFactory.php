@@ -13,6 +13,7 @@ class NoteFactory {
     private bool $chatEnabled;
     private int $likes;
     private int $downloads;
+    private string $visibility;
     /** @var bool[] quali pulsanti sono visibili, in ordine */
     private array $buttonsEnabled;
     /** @var array[] configurazione pulsanti nel footer */
@@ -33,6 +34,7 @@ class NoteFactory {
         bool $chatEnabled,
         int $likes,
         int $downloads,
+        string $visibility,
         array $buttonsEnabled,
         array $buttons
     ) {
@@ -49,6 +51,7 @@ class NoteFactory {
         $this->downloads = $downloads;
         $this->buttonsEnabled = $buttonsEnabled;
         $this->buttons = $buttons;
+        $this->visibility = $visibility;
     }
 
     public static function adminNoteView (
@@ -75,6 +78,7 @@ class NoteFactory {
             false,
             $likes,
             $downloads,
+            'public',
             [true, true],
             [
                 [
@@ -107,6 +111,7 @@ class NoteFactory {
         ?string $university,
         int $likes,
         int $downloads,
+        string $visibility,
     ) : array {
         return (new self(
             $id,
@@ -120,6 +125,7 @@ class NoteFactory {
             false,
             $likes,
             $downloads,
+            $visibility,
             [true, true],
             [ 
                 [
@@ -164,6 +170,7 @@ class NoteFactory {
             false,
             $likes,
             $downloads,
+            'public',
             [true, false],
             [
                 [
@@ -189,6 +196,7 @@ class NoteFactory {
         ?string $university,
         int $likes,
         int $downloads,
+        string $visibility,
     ) : array {
         return (new self(
             $id,
@@ -202,6 +210,7 @@ class NoteFactory {
             true,
             $likes,
             $downloads,
+            $visibility,
             [false, false],
             [[],[]]
         ))->toArray();
@@ -220,6 +229,7 @@ class NoteFactory {
             "chatEnabled" => $this->chatEnabled,
             "likes" => $this->likes,
             "downloads" => $this->downloads,
+            'visibility' => $this->visibility,
             "buttonsEnabled" => $this->buttonsEnabled,
             "buttons" => $this->buttons,
         ];

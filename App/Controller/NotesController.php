@@ -22,10 +22,9 @@ class NotesController
                 '(SELECT COUNT(DISTINCT NOTE_DOWNLOAD.student_id) FROM NOTE_DOWNLOAD WHERE NOTE_DOWNLOAD.note_id = NOTE.id) AS downloads'
             ])
             ->join('USER', 'NOTE.student_id', '=', 'USER.id')
-                ->join('NOTE_COURSE', 'NOTE.id', '=', 'NOTE_COURSE.note_id')
-                ->leftJoin('COURSE', 'NOTE_COURSE.course_id', '=', 'COURSE.id')
+            ->join('NOTE_COURSE', 'NOTE.id', '=', 'NOTE_COURSE.note_id')
+            ->leftJoin('COURSE', 'NOTE_COURSE.course_id', '=', 'COURSE.id')
             ->where('NOTE.student_id', '=', $studentId)
-            ->where('NOTE.deleted_at', 'IS', null)
             ->order_by($order['field'], $order['direction'])
             ->paginate($perPage, $page);
     }
@@ -88,11 +87,11 @@ class NotesController
             // Basic text search on title (keeps connectors simple)
             $qb->where('NOTE.title', 'LIKE', '%' . $qText . '%');
         }
-        
+
         if ($noteType !== '') {
             $qb->where('NOTE.note_type', '=', $noteType);
         }
-        
+
         if ($format !== '') {
             $qb->where('NOTE.format', '=', $format);
         }

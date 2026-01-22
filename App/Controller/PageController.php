@@ -26,7 +26,7 @@ class PageController
             }
         };
         
-        View::render('home', 'page', [
+        View::render('Sites/home', 'page', [
             'title' => 'Home',
             'session' => $session
         ]);
