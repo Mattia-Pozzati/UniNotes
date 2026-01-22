@@ -76,7 +76,7 @@ class AdminDashboardController
                 $n['sender_id'],
                 $n['recipient_id'],
                 $n['sender_name'] ?? 'Sistema',
-                $n['desc'] ?? 'Sistema Notification',
+                $n['message'] ?? 'Sistema Notification',
             );
         }, $notificationResult['data'] ?? []);
 
