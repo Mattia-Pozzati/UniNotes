@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Model\User;
 use App\View\View;
 use App\Service\NoteService;
 use App\Model\Like;
@@ -13,6 +14,8 @@ use Core\Helper\Logger;
 use Core\Helper\PdfExtractor;
 use Service\Ai\ClientLLM;
 use Exception;
+use App\Model\Comment;
+use App\Model\Notification;
 
 class NoteController {
     
@@ -125,6 +128,20 @@ class NoteController {
             // Todo: Salva file
 
             SessionManager::flash('success', 'Nota pubblicata con successo');
+
+            $adminUsers = (new User())->select(['id'])
+                ->where('is_admin', '=', 1)
+                ->get();
+
+            foreach ($adminUsers as $admin) {
+                NotificationController::sendNotification(
+                    $noteId,
+                    $admin['id'],
+                    $studentId,
+                    'System',
+                    'Nota caricata da ' . SessionManager::get('user')['name']
+                );
+            }
             exit;
 
         } catch (Exception $e) {
@@ -157,7 +174,13 @@ class NoteController {
                 ->where('student_id', '=', $userId)
                 ->where('note_id', '=', $noteId)
                 ->delete();
-            
+
+            // Rimuovi notifica
+            (new Notification())
+            ->where('note_id','=', $noteId)
+            ->where('sender_id','=', $userId)
+            ->delete();
+
             Logger::getInstance()->info("Like rimosso", [
                 "user_id" => $userId,
                 "note_id" => $noteId
@@ -169,6 +192,18 @@ class NoteController {
                 'note_id' => $noteId,
                 'created_at' => date('Y-m-d H:i:s')
             ]);
+
+            $authorId = (new Note())->select(['student_id'])
+                ->where('id', '=', $noteId)
+                ->first()['student_id'] ?? null;
+
+            NotificationController::sendNotification(
+                 $noteId,
+                toUserId: $authorId,
+                fromUserId: $userId,
+                type: 'like',
+                message: 'La tua nota ha ricevuto un nuovo like!'
+            );
             
             Logger::getInstance()->info("Like aggiunto", [
                 "user_id" => $userId,
@@ -290,6 +325,28 @@ class NoteController {
                 }
             }
 
+            $downloaderUsers = (new User())
+                ->select(
+                    ['USER.id']
+                )
+                ->join('NOTE_DOWNLOAD', 'USER.id', '=', 'NOTE_DOWNLOAD.student_id')
+                ->where('NOTE_DOWNLOAD.note_id', '=', (int)$id)
+                ->get();
+
+            foreach ($downloaderUsers as $user) {
+                $user_id = $user['id'];
+
+                NotificationController::sendNotification(
+                    $id,
+                    $user_id,
+                    SessionManager::get('user')['id'],
+                    'System',
+                    'La nota che hai scaricato è stata aggiornata. Vai a controllarla'
+                );
+
+            }
+
+            
             SessionManager::flash('success', 'Nota aggiornata con successo');
             header('Location: /note/' . $id);
             exit;
@@ -445,13 +502,21 @@ class NoteController {
         
         try {
             // Inserisci il commento
-            (new \App\Model\Comment())->insert([
+            (new Comment())->insert([
                 'note_id' => $noteId,
                 'student_id' => $userId,
                 'content' => $content,
                 'parent_comment_id' => $parentId,
                 'created_at' => date('Y-m-d H:i:s')
             ]);
+
+            NotificationController::sendNotification(
+                $noteId,
+                toUserId: (new Note())->select(['student_id'])->where('id', '=', $noteId)->first()['student_id'] ?? null,
+                fromUserId: $userId,
+                type: 'comment',
+                message: 'La tua nota ha ricevuto un nuovo commento!'
+            );
             
             Logger::getInstance()->info("Commento aggiunto", [
                 "user_id" => $userId,
@@ -460,7 +525,7 @@ class NoteController {
             ]);
             
             SessionManager::flash('success', $parentId ? 'Risposta aggiunta!' : 'Commento aggiunto!');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Logger::getInstance()->error("Errore aggiunta commento", [
                 "error" => $e->getMessage()
             ]);
@@ -522,6 +587,41 @@ class NoteController {
         }
         
         header('Location: /note/' . $noteId);
+        exit;
+    }
+
+    public function ban($id): void {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: /note/' . $id);
+            exit;
+        }
+
+        if (!SessionManager::isLoggedIn() || !(SessionManager::get('user')['is_admin'] ?? false)) {
+            SessionManager::flash('error', 'Permessi insufficienti per bloccare la nota');
+            header('Location: /note/' . $id);
+            exit;
+        }
+
+        try {
+            (new Note())->where('id', '=', (int)$id)->update([
+                'deleted_at' => date('Y-m-d H:i:s')
+            ]);
+
+            Logger::getInstance()->info("Nota bloccata", [
+                "note_id" => $id,
+                "admin_id" => SessionManager::userId()
+            ]);
+
+            SessionManager::flash('success', 'Nota bloccata con successo');
+        } catch (Exception $e) {
+            Logger::getInstance()->error("Errore nel bloccare la nota", [
+                "note_id" => $id,
+                "error" => $e->getMessage()
+            ]);
+            SessionManager::flash('error', 'Errore durante il blocco della nota');
+        }
+
+        header('Location: /note/' . $id);
         exit;
     }
     

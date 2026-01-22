@@ -4,6 +4,7 @@ $cards = $cards ?? [];  // <-- cambia da $notes a $cards
 $currentPage = $meta['current_page'] ?? null;
 $totalPages = $meta['total_pages'] ?? null;
 $queryParams = $queryParams ?? ['q' => $q];
+$courses = $courses ?? [];
 ?>
 
 <?= \App\View\View::getComponent('Base/sectionHeader', [
@@ -11,7 +12,7 @@ $queryParams = $queryParams ?? ['q' => $q];
     'p' => 'Trova appunti, PDF, riassunti'
 ]) ?>
 
-<?= \App\View\View::getComponent('Forms/searchForm') ?>
+<?= \App\View\View::getComponent('Forms/searchForm', ['courses' => $courses]) ?>
 
 <?= \App\View\View::getComponent('Layout/Grid/cardGrid', [
     'cards' => $cards,

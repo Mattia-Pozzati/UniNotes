@@ -126,7 +126,6 @@ $isEdit = !empty($is_edit) || (is_string($action) && preg_match('#/update/?$#', 
                     <label for="visibility" class="form-label">Visibilità *</label>
                     <select class="form-select" id="visibility" name="visibility" required aria-required="true">
                         <option value="public" <?= $visibilityValue === 'public' ? 'selected' : '' ?>>Pubblica</option>
-                        <option value="course" <?= $visibilityValue === 'course' ? 'selected' : '' ?>>Solo corso</option>
                         <option value="private" <?= $visibilityValue === 'private' ? 'selected' : '' ?>>Privata</option>
                     </select>
                 </div>

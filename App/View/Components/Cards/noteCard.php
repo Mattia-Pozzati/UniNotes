@@ -72,18 +72,32 @@ $note_type = $card['note_type'] ?? ($card['type'] ?? null);
         <footer class="card-footer d-flex justify-content-center gap-2">
             <?php foreach ($buttons as $index => $btn): ?>
                 <?php if ($buttonsEnabled[$index] ?? false): ?>
-                    <a href="<?= htmlspecialchars($btn['link'] ?? '#') ?>"
-                        class="btn <?= htmlspecialchars($btn['class'] ?? 'btn-primary') ?>"
-                        aria-label="<?= trim($btn['text'] ?? '') !== '' ? htmlspecialchars($btn['text']) : htmlspecialchars($btn['icon-class'] ?? 'Azione') ?>">
+                    <?php if (!empty($btn['method']) && strtolower($btn['method']) === 'post'): ?>
+                        <form method="POST" action="<?= htmlspecialchars($btn['link'] ?? '#') ?>" class="d-inline">
+                            <button type="submit" class="btn <?= htmlspecialchars($btn['class'] ?? 'btn-primary') ?>"
+                                aria-label="<?= trim($btn['text'] ?? '') !== '' ? htmlspecialchars($btn['text']) : htmlspecialchars($btn['icon-class'] ?? 'Azione') ?>">
+                                <?php if (trim($btn['text'] ?? '') !== ''): ?>
+                                    <?= htmlspecialchars($btn['text']) ?>
+                                <?php endif ?>
+                                <?php if (!empty($btn['icon'])): ?>
+                                    <i class="bi <?= htmlspecialchars($btn["icon-class"]) ?> fw-bold ms-1" aria-hidden="true"></i>
+                                <?php endif ?>
+                            </button>
+                        </form>
+                    <?php else: ?>
+                        <a href="<?= htmlspecialchars($btn['link'] ?? '#') ?>"
+                            class="btn <?= htmlspecialchars($btn['class'] ?? 'btn-primary') ?>"
+                            aria-label="<?= trim($btn['text'] ?? '') !== '' ? htmlspecialchars($btn['text']) : htmlspecialchars($btn['icon-class'] ?? 'Azione') ?>">
 
-                        <?php if (trim($btn['text'] ?? '') !== ''): ?>
-                            <?= htmlspecialchars($btn['text']) ?>
-                        <?php endif ?>
+                            <?php if (trim($btn['text'] ?? '') !== ''): ?>
+                                <?= htmlspecialchars($btn['text']) ?>
+                            <?php endif ?>
 
-                        <?php if (!empty($btn['icon'])): ?>
-                            <i class="bi <?= htmlspecialchars($btn["icon-class"]) ?> fw-bold ms-1" aria-hidden="true"></i>
-                        <?php endif ?>
-                    </a>
+                            <?php if (!empty($btn['icon'])): ?>
+                                <i class="bi <?= htmlspecialchars($btn["icon-class"]) ?> fw-bold ms-1" aria-hidden="true"></i>
+                            <?php endif ?>
+                        </a>
+                    <?php endif; ?>
 
                 <?php endif; ?>
             <?php endforeach; ?>

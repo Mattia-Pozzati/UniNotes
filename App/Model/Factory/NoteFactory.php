@@ -88,7 +88,8 @@ class NoteFactory {
                     "text" => "Blocca", 
                     "icon" => false, 
                     "class" => "btn-outline-secondary", 
-                    "link" => "#", 
+                    "link" => "/note/{$id}/ban", 
+                    "method" => "post",
                     "icon-class" => ""
                 ]
             ]
@@ -163,7 +164,7 @@ class NoteFactory {
             false,
             $likes,
             $downloads,
-            [true, true],
+            [true, false],
             [
                 [
                     "text" => "Vai alla nota", 
@@ -172,13 +173,7 @@ class NoteFactory {
                     "link" => "/note/{$id}", 
                     "icon-class" => "bi-arrow-right"
                 ],
-                [
-                    "text" => "Like", 
-                    "icon" => true, 
-                    "class" => "btn-outline-secondary", 
-                    "link" => "/note/{$id}/toggleLike", 
-                    "icon-class" => "bi-hand-thumbs-up"
-                ]
+                []
             ]
         ))->toArray();
     }

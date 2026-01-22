@@ -61,8 +61,9 @@ class NotesController
     public static function searchNotes(array $filters = [], array $paginate = []): array
     {
         $qText = trim((string) ($filters['text'] ?? ''));
-        $university = trim((string) ($filters['university'] ?? ''));
         $format = trim((string) ($filters['format'] ?? ''));
+        $course = trim((string) ($filters['course'] ?? ''));
+        $noteType = trim((string) ($filters['note_type'] ?? ''));
         $perPage = $paginate['per_page'] ?? 12;
         $page = $paginate['page'] ?? 1;
 
@@ -84,43 +85,24 @@ class NotesController
             ->group_by('NOTE.id');
 
         if ($qText !== '') {
-            $qb->where('NOTE.title', 'LIKE', '%' . $qText . '%', false);
-            $qb->where('COURSE.name', 'LIKE', '%' . $qText . '%', false);
+            // Basic text search on title (keeps connectors simple)
+            $qb->where('NOTE.title', 'LIKE', '%' . $qText . '%');
+        }
+        
+        if ($noteType !== '') {
+            $qb->where('NOTE.note_type', '=', $noteType);
+        }
+        
+        if ($format !== '') {
+            $qb->where('NOTE.format', '=', $format);
         }
 
-        if ($university !== '')
-            $qb->where('NOTE.university', 'LIKE', '%' . $university . '%', false);
-        if ($format !== '')
-            $qb->where('NOTE.format', '=', $format, false);
+
+        if ($course !== '')
+            $qb->where('COURSE.name', '=', $course, false);
 
         return $qb->paginate($perPage, $page);
     }
 
-    public static function insertNote(array $data): string|bool
-    {
-        return (new Note())->insert($data);
-    }
-
-    public static function updateNote(array $data): bool
-    {
-        $id = $data['id'] ?? null;
-
-        if ($id === null) {
-            return false;
-        }
-
-        unset($data['id']);
-
-        return (new Note())
-            ->where('id', '=', $id)
-            ->update($data);
-    }
-
-    public static function deleteNote(int $id): bool
-    {
-        return (new Note())
-            ->where('id', '=', $id)
-            ->update(['deleted_at' => date('Y-m-d H:i:s')]);
-    }
 }
 ?>

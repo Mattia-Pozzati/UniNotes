@@ -5,6 +5,7 @@ use App\Model\Factory\NoteFactory;
 use App\View\View;
 use App\Controller\NotesController;
 use Core\Helper\SessionManager;
+use App\Model\Course;
 
 class PageController
 {
@@ -41,7 +42,9 @@ class PageController
         $filters = [
             'text' => $q,
             'university' => $_GET['university'] ?? '',
-            'format' => $_GET['format'] ?? ''
+            'format' => $_GET['format'] ?? '',
+            'note_type' => $_GET['note_type'] ?? '',
+            'course' => $_GET['course'] ?? ''
         ];
         
         $paginate = [
@@ -83,6 +86,7 @@ class PageController
             'cards' => $cards,
             'meta' => $meta,
             'queryParams' => ['q' => $q],
+            'courses' => (new Course())->get()
         ]);
     }
 }

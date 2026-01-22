@@ -30,7 +30,7 @@ CREATE TABLE `NOTE` (
   `note_type` VARCHAR(100) DEFAULT NULL,
   `format` VARCHAR(50) DEFAULT NULL,
   `university` VARCHAR(191) DEFAULT NULL,
-  `visibility` ENUM('public','course','private') NOT NULL DEFAULT 'public',
+  `visibility` ENUM('public','private') NOT NULL DEFAULT 'public',
   `created_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `updated_at` DATETIME(6) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(6),
   `deleted_at` DATETIME(6) DEFAULT NULL,

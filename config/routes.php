@@ -31,6 +31,7 @@ $router->post('/note/{id}/like', 'NoteController@toggleLike');
 $router->post('/note/{id}/chat', 'NoteController@Chat');
 $router->post('/note/{id}/comment', 'NoteController@addComment');
 $router->post('/note/{id}/comment/{commentId}/delete', 'NoteController@deleteComment');
+$router->post('/note/{id}/ban', 'NoteController@ban');
 
 // Notifiche
 $router->post('/notification/{id}/read', 'NotificationController@readNotification');
