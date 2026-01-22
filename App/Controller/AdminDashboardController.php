@@ -7,6 +7,7 @@ use App\Model\Factory\NoteFactory;
 use Core\Helper\SessionManager;
 use Core\Helper\Logger;
 use App\Model\Factory\NotificationFactory;
+use App\Model\Course;
 
 class AdminDashboardController
 {
@@ -46,10 +47,15 @@ class AdminDashboardController
             );
         }, $notesResult['data'] ?? []);
 
+        $courses = (new Course())->get();
+
         return [
             'label' => 'Ban Notes',
             'icon' => 'bi-file-earmark-text',
             'cards' => $banCards,
+            'courses' => $courses,
+            'action' => '/admin',
+            'form' => 'Forms/searchForm',
             'component' => 'Cards/noteCard',
             'pagination' => [
                 'currentPage' => $notesResult['meta']['current_page'] ?? 1,

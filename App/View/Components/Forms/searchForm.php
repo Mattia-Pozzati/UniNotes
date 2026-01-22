@@ -5,7 +5,7 @@ $courses;
 ?>
 <?php $courses = $courses ?? []; ?>
 
-<form method="GET" action="/search" class="row px-3 d-flex justify-content-center">
+<form method="GET" action="<?= htmlspecialchars($action) ?>" class="row px-3 d-flex justify-content-center">
     <section class="row">
         <div class="col-10 mb-3">
                  <label for="searchbar" class="form-label">Cerca</label>
