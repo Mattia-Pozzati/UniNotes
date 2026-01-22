@@ -13,15 +13,14 @@ $noteLink = $card['noteLink'] ?? null;
 
         <!-- Titolo -->
         <div class="d-flex align-items-center justify-content-between">
-            <h3 class="card-title">
+            <span class="card-title">
                 <?= $title ?> <!-- se il titolo contiene HTML, assicurati che sia sicuro -->
-            </h3>
+            </span>
         </div>
-
         <!-- Autore -->
-        <h6 class="card-subtitle my-2 text-muted">
+        <span class="card-subtitle my-2 text-muted">
             <?= htmlspecialchars($author) ?>
-        </h6>
+        </span>
 
         <!-- Descrizione -->
         <p class="card-text">

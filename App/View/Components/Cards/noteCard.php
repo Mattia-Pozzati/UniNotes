@@ -22,16 +22,16 @@ $note_type = $card['note_type'] ?? ($card['type'] ?? null);
 
         <!-- Titolo e Chat -->
         <div class="d-flex align-items-center justify-content-between">
-            <h5 class="card-title"><?= htmlspecialchars($titolo) ?></h5>
+            <span class="card-title"><?= htmlspecialchars($titolo) ?></span>
             <?php if ($visibility === 'private'): ?>
-                <p> Private </p>
+                <span> Private </span>
             <?php endif; ?>
         </div>
 
         <!-- Sottotitolo -->
-        <h6 class="card-subtitle my-2 text-muted">
+        <span class="card-subtitle my-2 text-muted">
             <?= htmlspecialchars($autore) ?> &middot; <?= htmlspecialchars($corso) ?>
-        </h6>
+        </span>
 
         <!-- Descrizione -->
         <p class="card-text"><?= htmlspecialchars($desc) ?></p>
