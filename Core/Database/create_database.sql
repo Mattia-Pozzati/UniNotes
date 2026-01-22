@@ -18,7 +18,6 @@ CREATE TABLE `USER` (
   `email` VARCHAR(191) NOT NULL UNIQUE,
   `password_hash` VARCHAR(255) NOT NULL,
   `university` VARCHAR(191) DEFAULT NULL,
-  'reputation' INT NOT NULL DEFAULT 0,
   `role` ENUM('student','admin') NOT NULL DEFAULT 'student',
   `created_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
