@@ -33,6 +33,9 @@ $router->post('/note/{id}/comment', 'NoteController@addComment');
 $router->post('/note/{id}/comment/{commentId}/delete', 'NoteController@deleteComment');
 $router->post('/note/{id}/ban', 'NoteController@ban');
 
+// File
+$router->get('/file/{id}/download', 'FileController@download'); 
+
 // Notifiche
 $router->post('/notification/{id}/read', 'NotificationController@readNotification');
 // Log

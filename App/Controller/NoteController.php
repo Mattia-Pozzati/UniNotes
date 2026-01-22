@@ -125,12 +125,39 @@ class NoteController {
                 $stmt->execute([(int)$noteId, (int)$courseId]);
             }
 
-            // Todo: Salva file
+            if (!empty($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
+                try {
+                    $fileModel = new File();
+                    $fileId = $fileModel->createForNote((int)$noteId, [
+                        'tmp_path' => $_FILES['file']['tmp_name'],
+                        'original_name' => $_FILES['file']['name'],
+                        'size' => $_FILES['file']['size']
+                    ]);
+                    
+                    Logger::getInstance()->info("File caricato con successo", [
+                        "file_id" => $fileId,
+                        "note_id" => $noteId,
+                        "filename" => $_FILES['file']['name']
+                    ]);
+                } catch (Exception $e) {
+                    Logger::getInstance()->error("Errore upload file", [
+                        "note_id" => $noteId,
+                        "error" => $e->getMessage()
+                    ]);
+                    // Il file non è stato caricato ma la nota esiste già
+                    SessionManager::flash('warning', 'Nota creata ma errore durante upload file: ' . $e->getMessage());
+                }
+            } else {
+                Logger::getInstance()->warning("Nessun file caricato o errore upload", [
+                    "note_id" => $noteId,
+                    "file_error" => $_FILES['file']['error'] ?? 'missing'
+                ]);
+            }
 
             SessionManager::flash('success', 'Nota pubblicata con successo');
 
             $adminUsers = (new User())->select(['id'])
-                ->where('is_admin', '=', 1)
+                ->where('role', '=', "admin")
                 ->get();
 
             foreach ($adminUsers as $admin) {
@@ -142,6 +169,7 @@ class NoteController {
                     'Nota caricata da ' . SessionManager::get('user')['name']
                 );
             }
+            header('Location: /note/' . $noteId);
             exit;
 
         } catch (Exception $e) {
