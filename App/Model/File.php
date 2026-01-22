@@ -37,25 +37,25 @@ class File extends BaseModel
 
         // Ensure base exists
         if (!is_dir($base)) {
-            if (!@mkdir($base, 0755, true)) {
+            if (!@mkdir($base, 0766, true)) {
                 Logger::getInstance()->error("Unable to create base uploads directory", [
                     'base' => $base,
                     'last_error' => error_get_last()
                 ]);
                 throw new Exception("Unable to create base uploads directory: {$base}");
             }
-            @chmod($base, 0755);
+            @chmod($base, 0766);
         }
 
         if (!is_dir($dir)) {
-            if (!@mkdir($dir, 0755, true)) {
+            if (!@mkdir($dir, 0766, true)) {
                 Logger::getInstance()->error("Unable to create directory", [
                     'dir' => $dir,
                     'last_error' => error_get_last()
                 ]);
                 throw new Exception("Unable to create directory: {$dir}");
             }
-            @chmod($dir, 0755);
+            @chmod($dir, 0766);
         }
 
         return $dir;
