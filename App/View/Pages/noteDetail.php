@@ -26,7 +26,7 @@ $isAuthor = false;
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/user/dashboard">Dashboard</a></li>
             <li class="breadcrumb-item active" aria-current="page"><?= htmlspecialchars($note['title'] ?? 'Nota') ?>
             </li>
         </ol>
