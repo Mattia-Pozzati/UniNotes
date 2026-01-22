@@ -26,7 +26,7 @@ $label = $type === 'note' ? 'Note Caricate' : 'Like Ricevuti';
                 <i class="bi bi-star-fill"></i>
             </div>
             <div class="flex-grow-1">
-                <h6 class="mb-0 text-dark"><?= htmlspecialchars($name) ?></h6>
+                <h2 class="mb-0 text-dark"><?= htmlspecialchars($name) ?></h2>
                 <small class="text-dark"><?= $label ?>: <?= $count ?></small>
             </div>
         </div>

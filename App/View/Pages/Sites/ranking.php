@@ -71,7 +71,7 @@
                     <div class="mb-3">
                         <i class="bi bi-question-circle display-4"></i>
                     </div>
-                    <h5 class="card-title mb-3">Come funzionano le classifiche</h5>
+                    <h3 class="card-title mb-3">Come funzionano le classifiche</h3>
                     <p class="card-text text-muted">
                         Le classifiche vengono aggiornate in tempo reale in base all'attività della community. 
                         Carica più appunti e ricevi più like per scalare le posizioni e guadagnare badge esclusivi!
