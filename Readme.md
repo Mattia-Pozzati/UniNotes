@@ -12,6 +12,12 @@ DocumentRoot "C:/xampp/htdocs/UniNotes/public"
 <Directory "C:/xampp/htdocs/UniNotes/public">
 ```
 
+3. Aggiungere il file .env.local
+```prendere le chiavi API da https://openrouter.ai/
+  e aggiugnere una riga
+  OPENROUTER_API_KEY="XXXXXXXXX"
+```
+
 # 📘 Specifiche Descrittive del Database
 
 ## 🎯 Obiettivo generale del sistema
