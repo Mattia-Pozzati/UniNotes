@@ -139,7 +139,7 @@ $isAuthor = false;
                                                             <?php if ($canDelete): ?>
                                                                 <form action="/note/<?= $note['id'] ?>/comment/<?= $comment['id'] ?>/delete" method="POST" 
                                                                     onsubmit="return confirm('Sei sicuro di voler eliminare questo commento?')" class="d-inline">
-                                                                    <button type="submit" class="btn btn-sm btn-link text-danger p-0">
+                                                                    <button type="submit" class="btn btn-sm btn-link text-danger p-0" aria-label="Cancel">
                                                                         <i class="bi bi-trash"></i>
                                                                     </button>
                                                                 </form>
@@ -212,7 +212,7 @@ $isAuthor = false;
                                                                     <?php if ($canDelete): ?>
                                                                         <form action="/note/<?= $note['id'] ?>/comment/<?= $reply['id'] ?>/delete" method="POST" 
                                                                             onsubmit="return confirm('Eliminare questa risposta?')" class="d-inline">
-                                                                            <button type="submit" class="btn btn-sm btn-link text-danger p-0">
+                                                                            <button type="submit" class="btn btn-sm btn-link text-danger p-0" aria-label="Cancel">
                                                                                 <i class="bi bi-trash"></i>
                                                                             </button>
                                                                         </form>
