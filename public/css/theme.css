@@ -356,6 +356,24 @@ button:focus-visible {
     color: #fff !important;
     border-color: #fff !important;
 }
+/* Link Dashboard*/
+a[href$="dashboard"] {
+    color: #6a3da0 !important;
+}
+
+a[href$="dashboard"]:hover {
+    color: #5a2d8a !important;
+}
+
+/* Link Dashboard*/
+[data-bs-theme="dark"] a[href$="dashboard"] {
+    color: #c4aee8 !important;
+}
+
+[data-bs-theme="dark"] a[href$="dashboard"]:hover {
+    color: #d4c4f0 !important;
+}
+
 
 /* Hover states */
 .btn.btn-outline-secondary:hover {

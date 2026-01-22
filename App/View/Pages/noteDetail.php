@@ -71,7 +71,7 @@ $isAuthor = false;
             <?php if (!empty($note['files'])): ?>
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h5 class="card-title mb-3">Chatta con UninotesAI</h5>
+                        <h2 class="card-title mb-3">Chatta con UninotesAI</h2>
                         <p class="text-muted small mb-3">Fai domande relative alla nota e UninotesAI risponderà</p>
 
                         <!-- Form domanda -->
@@ -103,7 +103,7 @@ $isAuthor = false;
             <!-- Sezione commenti -->
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title mb-3">Commenti</h5>
+                    <h2 class="card-title mb-3">Commenti</h2>
 
                     <!-- Lista commenti -->
                     <?php if (empty($note['comments'])): ?>
@@ -257,13 +257,13 @@ $isAuthor = false;
             <!-- Info autore -->
             <div class="card mb-4">
                 <div class="card-header">
-                    <h6 class="mb-0">Informazioni autore</h6>
+                    <span class="mb-0">Informazioni autore</span>
                 </div>
                 <div class="card-body text-center">
                     <div class="mb-3">
                         <i class="bi bi-person-circle" style="font-size: 4rem;"></i>
                     </div>
-                    <h5><?= htmlspecialchars($note['author']['name'] ?? 'Autore') ?></h5>
+                    <h3><?= htmlspecialchars($note['author']['name'] ?? 'Autore') ?></h3>
                     <div class="mt-3">
                         <span class="badge bg-primary fs-6">
                             <i class="bi bi-star-fill me-1"></i>
@@ -277,10 +277,10 @@ $isAuthor = false;
             <?php if (!empty($note['files'])): ?>
                 <div class="card mb-4">
                     <div class="card-header">
-                        <h6 class="mb-0">
+                        <span class="mb-0">
                             <i class="bi bi-file-earmark-text me-2"></i>
                             File allegati
-                        </h6>
+                        </span>
                     </div>
                     <div class="card-body">
                         <?php foreach ($note['files'] ?? [] as $file): ?>
@@ -289,7 +289,7 @@ $isAuthor = false;
                                     <i class="bi bi-file-pdf text-danger me-2"></i>
                                     <small><?= htmlspecialchars($file['filename']) ?></small>
                                 </div>
-                                <a href="/file/<?= $file['id'] ?>/download" class="btn btn-sm btn-outline-primary">
+                                <a href="/file/<?= $file['id'] ?>/download" class="btn btn-sm btn-outline-primary" aria-label="Scarica file">
                                     <i class="bi bi-download"></i>
                                 </a>
                             </div>
