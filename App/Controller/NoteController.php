@@ -427,7 +427,7 @@ class NoteController {
             // Estrai testo dal primo file
             $firstFile = $files[0];
             $filePath = dirname(__DIR__, 2) . '/' . ltrim($firstFile['filepath'], '/');
-            Logger::getInstance()->info("Chat AI - File path", ["path" => $filePath, "format" => $firstFile['format']]);
+            Logger::getInstance()->info("Chat AI - File path", ["path" => $filePath, "mime_type" => $firstFile['mime_type']]);
             
             if (!file_exists($filePath)) {
                 SessionManager::flash('error', 'File non trovato: ' . $filePath);
@@ -437,12 +437,12 @@ class NoteController {
             
             // Estrai contenuto in base al formato
             $fileContent = '';
-            $format = strtolower($firstFile['format'] ?? '');
+            $format = strtolower($firstFile['mime_type'] ?? '');
             
-            if ($format === 'pdf') {
+            if ($format === 'application/pdf') {
                 Logger::getInstance()->info("Chat AI - Estrazione PDF");
                 $fileContent = PdfExtractor::extract($filePath);
-            } else if (in_array($format, ['txt', 'md'])) {
+            } else if (in_array($format, ['text/plain', 'text/markdown'])) {
                 Logger::getInstance()->info("Chat AI - Lettura TXT/MD");
                 $fileContent = file_get_contents($filePath);
             } else {

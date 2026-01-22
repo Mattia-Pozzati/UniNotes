@@ -21,7 +21,7 @@ class File extends BaseModel
      */
     private static function getBaseDir(): string
     {
-        return dirname(__DIR__, 2) . "/public/uploads/";
+        return dirname(__DIR__, 2) . "/storage/upload/";
     }
 
     /**
@@ -32,10 +32,30 @@ class File extends BaseModel
      */
     private static function createUploadDirIfNotExists(int $noteId): string
     {
-        $dir = rtrim(self::getBaseDir(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "note_{$noteId}";
-        if (!is_dir($dir) && !mkdir($dir, 0555, true)) {
-            Logger::getInstance()->error("Unable to create directory: {$dir}");
-            throw new Exception("Unable to create directory: {$dir}");
+        $base = rtrim(self::getBaseDir(), DIRECTORY_SEPARATOR);
+        $dir = $base . DIRECTORY_SEPARATOR . "note_{$noteId}";
+
+        // Ensure base exists
+        if (!is_dir($base)) {
+            if (!@mkdir($base, 0755, true)) {
+                Logger::getInstance()->error("Unable to create base uploads directory", [
+                    'base' => $base,
+                    'last_error' => error_get_last()
+                ]);
+                throw new Exception("Unable to create base uploads directory: {$base}");
+            }
+            @chmod($base, 0755);
+        }
+
+        if (!is_dir($dir)) {
+            if (!@mkdir($dir, 0755, true)) {
+                Logger::getInstance()->error("Unable to create directory", [
+                    'dir' => $dir,
+                    'last_error' => error_get_last()
+                ]);
+                throw new Exception("Unable to create directory: {$dir}");
+            }
+            @chmod($dir, 0755);
         }
 
         return $dir;
@@ -72,8 +92,32 @@ class File extends BaseModel
         $filename = "{$safeBase}.{$ext}";
         $target = $fileDir . DIRECTORY_SEPARATOR . "file_{$unique}.{$ext}";
 
-        $moved = is_uploaded_file($tmp) ? @move_uploaded_file($tmp, $target) : @rename($tmp, $target);
+        // Try to move uploaded file, with safe fallback (copy+unlink) if move fails
+        $isUploaded = is_uploaded_file($tmp);
+        $moved = false;
+        if ($isUploaded) {
+            $moved = @move_uploaded_file($tmp, $target);
+        } else {
+            $moved = @rename($tmp, $target);
+        }
+
         if (!$moved) {
+            // fallback: copy then unlink
+            if (@copy($tmp, $target)) {
+                @unlink($tmp);
+                $moved = true;
+            }
+        }
+
+        if (!$moved) {
+            Logger::getInstance()->error('Failed to move uploaded file to storage', [
+                'tmp' => $tmp,
+                'target' => $target,
+                'is_uploaded_file' => $isUploaded,
+                'dir_exists' => is_dir($fileDir),
+                'dir_perms' => @fileperms($fileDir),
+                'last_error' => error_get_last()
+            ]);
             throw new Exception("Failed to move uploaded file to storage");
         }
 
@@ -85,7 +129,6 @@ class File extends BaseModel
             'filepath' => ltrim(str_replace(dirname(__DIR__, 2) . '/', '', $target), '/'),
             'mime_type' => $mime,
             'size' => $size,
-            'format' => $ext,
             'hash' => $hash,
             'uploaded_at' => date('Y-m-d H:i:s'),
         ];
@@ -113,14 +156,30 @@ class File extends BaseModel
             throw new Exception('Invalid upload payload for replace');
         }
 
-        // prepare new storage path
-        $ext = pathinfo($orig, PATHINFO_EXTENSION) ?: ($existing['format'] ?? 'bin');
+        // prepare new storage path (fallback to existing filename extension)
+        $ext = pathinfo($orig, PATHINFO_EXTENSION) ?: pathinfo($existing['filename'] ?? '', PATHINFO_EXTENSION) ?: 'bin';
 
         $fileDir = self::createUploadDirIfNotExists($noteId);
 
         $target = $fileDir . "/file_" . time() . "_" . bin2hex(random_bytes(4)) . "." . $ext;
-        $moved = is_uploaded_file($tmp) ? move_uploaded_file($tmp, $target) : rename($tmp, $target);
+        $isUploaded = is_uploaded_file($tmp);
+        $moved = false;
+        if ($isUploaded) {
+            $moved = @move_uploaded_file($tmp, $target);
+        } else {
+            $moved = @rename($tmp, $target);
+        }
         if (!$moved) {
+            if (@copy($tmp, $target)) { @unlink($tmp); $moved = true; }
+        }
+        if (!$moved) {
+            Logger::getInstance()->error('Failed to move replacement file to storage', [
+                'tmp' => $tmp,
+                'target' => $target,
+                'is_uploaded_file' => $isUploaded,
+                'dir_exists' => is_dir($fileDir),
+                'last_error' => error_get_last()
+            ]);
             throw new Exception("Failed to move replacement file to storage");
         }
 
@@ -133,7 +192,6 @@ class File extends BaseModel
             'filepath' => ltrim(str_replace(dirname(__DIR__, 2) . '/', '', $target), '/'),
             'mime_type' => $mime,
             'size' => $size,
-            'format' => $ext,
             'hash' => $hash,
             'updated_at' => date('Y-m-d H:i:s'),
         ];

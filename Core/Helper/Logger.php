@@ -37,8 +37,10 @@ class Logger
     private static function formatForLog(mixed $val): string
     {
         if (is_array($val) || is_object($val)) {
-            $enc = json_encode($val, JSON_UNESCAPED_UNICODE);
-            return $enc === false ? print_r($val, true) : $enc;
+            // ensure arrays/objects are JSON-serializable and have sensitive fields redacted
+            $sanitized = self::sanitizeContext($val);
+            $enc = json_encode($sanitized, JSON_UNESCAPED_UNICODE);
+            return $enc === false ? print_r($sanitized, true) : $enc;
         }
 
         if (is_bool($val)) {
@@ -50,6 +52,57 @@ class Logger
         }
 
         return (string) $val;
+    }
+
+    /**
+     * Redact sensitive keys in arrays/objects before logging.
+     * Returns a cleaned array/object preserving structure.
+     */
+    private static function sanitizeContext(mixed $data): mixed
+    {
+        $sensitivePatterns = ['pass', 'password', 'pwd', 'secret', 'token', 'api_key', 'apikey', 'authorization', 'auth', 'cookie', 'ssn', 'card'];
+
+        if (is_object($data)) {
+            $data = (array) $data;
+        }
+
+        if (!is_array($data)) {
+            return $data;
+        }
+
+        $out = [];
+        foreach ($data as $k => $v) {
+            $lower = strtolower((string)$k);
+            $isSensitive = false;
+            foreach ($sensitivePatterns as $pat) {
+                if (str_contains($lower, $pat)) { $isSensitive = true; break; }
+            }
+
+            if ($isSensitive) {
+                $out[$k] = 'REDACTED';
+                continue;
+            }
+
+            // If value is array/object, recurse but cap depth
+            if (is_array($v) || is_object($v)) {
+                $out[$k] = self::sanitizeContext($v);
+                continue;
+            }
+
+            // Mask emails partially
+            if (is_string($v) && filter_var($v, FILTER_VALIDATE_EMAIL)) {
+                $parts = explode('@', $v);
+                $user = $parts[0];
+                $userMasked = strlen($user) > 2 ? substr($user,0,1) . str_repeat('*', max(1, strlen($user)-2)) . substr($user,-1) : str_repeat('*', strlen($user));
+                $out[$k] = $userMasked . '@' . $parts[1];
+                continue;
+            }
+
+            // For everything else, keep as-is
+            $out[$k] = $v;
+        }
+
+        return $out;
     }
 
     /**
