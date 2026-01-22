@@ -12,7 +12,7 @@ $courses = $courses ?? [];
     'p' => 'Trova appunti, PDF, riassunti'
 ]) ?>
 
-<?= \App\View\View::getComponent('Forms/searchForm', ['courses' => $courses]) ?>
+<?= \App\View\View::getComponent('Forms/searchForm', ['courses' => $courses, 'action' => $action]) ?>
 
 <?= \App\View\View::getComponent('Layout/Grid/cardGrid', [
     'cards' => $cards,

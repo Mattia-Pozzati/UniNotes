@@ -85,6 +85,7 @@ class PageController
             'q' => $q,
             'cards' => $cards,
             'meta' => $meta,
+            'action' => '/search',
             'queryParams' => ['q' => $q],
             'courses' => (new Course())->get()
         ]);
