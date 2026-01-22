@@ -17,13 +17,15 @@ use Exception;
 use App\Model\Comment;
 use App\Model\Notification;
 
-class NoteController {
-    
-    public function show($id): void {
+class NoteController
+{
+
+    public function show($id): void
+    {
         Logger::getInstance()->info("Visualizzazione nota", ["note_id" => $id]);
 
-        $noteData = NoteService::getFullNote((int)$id);
-        
+        $noteData = NoteService::getFullNote((int) $id);
+
         if (!$noteData) {
             http_response_code(404);
             echo "<!DOCTYPE html><html><body>";
@@ -32,23 +34,23 @@ class NoteController {
             echo "</body></html>";
             return;
         }
-        
+
         // Verifica se l'utente corrente ha già messo like
         $userId = SessionManager::userId();
         if ($userId) {
             $existingLike = (new Like())
                 ->where('student_id', '=', $userId)
-                ->where('note_id', '=', (int)$id)
+                ->where('note_id', '=', (int) $id)
                 ->first();
             $noteData['user_has_liked'] = $existingLike !== null;
         }
-        
+
         // Conta i like
         $likesCount = (new Like())
-            ->where('note_id', '=', (int)$id)
+            ->where('note_id', '=', (int) $id)
             ->count();
         $noteData['likes_count'] = $likesCount;
-        
+
         View::render('noteDetail', 'page', [
             "title" => $noteData['title'],
             "note" => $noteData,
@@ -57,7 +59,8 @@ class NoteController {
         ]);
     }
 
-    public function create(): void {
+    public function create(): void
+    {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: /');
             exit;
@@ -69,14 +72,14 @@ class NoteController {
             exit;
         }
 
-        $title = trim((string)($_POST['title'] ?? ''));
-        $courseSel = trim((string)($_POST['course'] ?? ''));
-        $newCourse = trim((string)($_POST['new_course'] ?? ''));
-        $description = trim((string)($_POST['description'] ?? ''));
-        $university = trim((string)($_POST['university'] ?? ''));
-        $note_type = trim((string)($_POST['note_type'] ?? '')) ?: null;
-        $format = trim((string)($_POST['format'] ?? ''));
-        $visibility = trim((string)($_POST['visibility'] ?? 'public'));
+        $title = trim((string) ($_POST['title'] ?? ''));
+        $courseSel = trim((string) ($_POST['course'] ?? ''));
+        $newCourse = trim((string) ($_POST['new_course'] ?? ''));
+        $description = trim((string) ($_POST['description'] ?? ''));
+        $university = trim((string) ($_POST['university'] ?? ''));
+        $note_type = trim((string) ($_POST['note_type'] ?? '')) ?: null;
+        $format = trim((string) ($_POST['format'] ?? ''));
+        $visibility = trim((string) ($_POST['visibility'] ?? 'public'));
 
         // Validazione minima
         if ($title === '' || $format === '' || $university === '' || empty($_FILES['file'])) {
@@ -100,7 +103,7 @@ class NoteController {
                     'name' => $newCourse,
                 ]);
             } else {
-                $courseId = (int)$courseSel;
+                $courseId = (int) $courseSel;
             }
 
             // Inserisci la nota
@@ -116,24 +119,25 @@ class NoteController {
             ];
 
             $noteId = (new Note())->insert($noteData);
-            if (!$noteId) throw new Exception('Impossibile creare la nota');
+            if (!$noteId)
+                throw new Exception('Impossibile creare la nota');
 
             // Collega nota e corso (NOTE_COURSE)
             if ($courseId) {
                 $pdo = Database::getInstance();
                 $stmt = $pdo->prepare('INSERT INTO NOTE_COURSE (note_id, course_id) VALUES (?, ?)');
-                $stmt->execute([(int)$noteId, (int)$courseId]);
+                $stmt->execute([(int) $noteId, (int) $courseId]);
             }
 
             if (!empty($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
                 try {
                     $fileModel = new File();
-                    $fileId = $fileModel->createForNote((int)$noteId, [
+                    $fileId = $fileModel->createForNote((int) $noteId, [
                         'tmp_path' => $_FILES['file']['tmp_name'],
                         'original_name' => $_FILES['file']['name'],
                         'size' => $_FILES['file']['size']
                     ]);
-                    
+
                     Logger::getInstance()->info("File caricato con successo", [
                         "file_id" => $fileId,
                         "note_id" => $noteId,
@@ -180,22 +184,23 @@ class NoteController {
         }
     }
 
-    public function toggleLike($id): void {
+    public function toggleLike($id): void
+    {
         if (!SessionManager::isLoggedIn()) {
             SessionManager::flash('error', 'Devi essere loggato per mettere like');
             header('Location: /login');
             exit;
         }
-        
+
         $userId = SessionManager::userId();
-        $noteId = (int)$id;
-        
+        $noteId = (int) $id;
+
         // Verifica se il like esiste già
         $existingLike = (new Like())
             ->where('student_id', '=', $userId)
             ->where('note_id', '=', $noteId)
             ->first();
-        
+
         if ($existingLike) {
             // Rimuovi il like
             (new Like())
@@ -205,9 +210,9 @@ class NoteController {
 
             // Rimuovi notifica
             (new Notification())
-            ->where('note_id','=', $noteId)
-            ->where('sender_id','=', $userId)
-            ->delete();
+                ->where('note_id', '=', $noteId)
+                ->where('sender_id', '=', $userId)
+                ->delete();
 
             Logger::getInstance()->info("Like rimosso", [
                 "user_id" => $userId,
@@ -226,24 +231,25 @@ class NoteController {
                 ->first()['student_id'] ?? null;
 
             NotificationController::sendNotification(
-                 $noteId,
+                $noteId,
                 toUserId: $authorId,
                 fromUserId: $userId,
                 type: 'like',
                 message: 'La tua nota ha ricevuto un nuovo like!'
             );
-            
+
             Logger::getInstance()->info("Like aggiunto", [
                 "user_id" => $userId,
                 "note_id" => $noteId
             ]);
         }
-        
+
         header('Location: /note/' . $id);
         exit;
     }
 
-    public function edit(int $id): void {
+    public function edit(int $id): void
+    {
 
         if (!SessionManager::isLoggedIn()) {
             header('Location: /login');
@@ -261,7 +267,7 @@ class NoteController {
         }
 
         // Carica primo file (se esiste)
-        $files = (new File())->where('note_id', '=', (int)$id)->get();
+        $files = (new File())->where('note_id', '=', (int) $id)->get();
         $existingFile = $files[0] ?? null;
 
         View::render('noteEdit', 'page', [
@@ -280,7 +286,8 @@ class NoteController {
         ]);
     }
 
-    public function update($id): void {
+    public function update($id): void
+    {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: /note/' . $id);
             exit;
@@ -292,23 +299,24 @@ class NoteController {
             exit;
         }
 
-        $title = trim((string)($_POST['title'] ?? ''));
-        $courseSel = trim((string)($_POST['course'] ?? ''));
-        $newCourse = trim((string)($_POST['new_course'] ?? ''));
-        $description = trim((string)($_POST['description'] ?? ''));
-        $university = trim((string)($_POST['university'] ?? ''));
-        $note_type = trim((string)($_POST['note_type'] ?? '')) ?: null;
-        $format = trim((string)($_POST['format'] ?? ''));
-        $visibility = trim((string)($_POST['visibility'] ?? 'public'));
+        $title = trim((string) ($_POST['title'] ?? ''));
+        $courseSel = trim((string) ($_POST['course'] ?? ''));
+        $newCourse = trim((string) ($_POST['new_course'] ?? ''));
+        $description = trim((string) ($_POST['description'] ?? ''));
+        $university = trim((string) ($_POST['university'] ?? ''));
+        $note_type = trim((string) ($_POST['note_type'] ?? '')) ?: null;
+        $format = trim((string) ($_POST['format'] ?? ''));
+        $visibility = trim((string) ($_POST['visibility'] ?? 'public'));
 
         try {
             // Gestione corso
             $courseId = null;
             if ($courseSel === '__new') {
-                if ($newCourse === '') throw new Exception('Nome corso mancante');
+                if ($newCourse === '')
+                    throw new Exception('Nome corso mancante');
                 $courseId = (new Course())->insert(['name' => $newCourse, 'created_at' => date('Y-m-d H:i:s')]);
             } else {
-                $courseId = $courseSel !== '' ? (int)$courseSel : null;
+                $courseId = $courseSel !== '' ? (int) $courseSel : null;
             }
 
             // Aggiorna nota
@@ -322,30 +330,30 @@ class NoteController {
                 'updated_at' => date('Y-m-d H:i:s')
             ];
 
-            (new Note())->where('id', '=', (int)$id)->update($updateData);
+            (new Note())->where('id', '=', (int) $id)->update($updateData);
 
             // Aggiorna NOTE_COURSE (elimina e reinserisce)
             $pdo = Database::getInstance();
             $stmt = $pdo->prepare('DELETE FROM NOTE_COURSE WHERE note_id = ?');
-            $stmt->execute([(int)$id]);
+            $stmt->execute([(int) $id]);
             if ($courseId) {
                 $stmt = $pdo->prepare('INSERT INTO NOTE_COURSE (note_id, course_id) VALUES (?, ?)');
-                $stmt->execute([(int)$id, (int)$courseId]);
+                $stmt->execute([(int) $id, (int) $courseId]);
             }
 
             // File: sostituisci se è stato inviato un nuovo file
             if (!empty($_FILES['file']) && !empty($_FILES['file']['tmp_name'])) {
-                $files = (new File())->where('note_id', '=', (int)$id)->get();
+                $files = (new File())->where('note_id', '=', (int) $id)->get();
                 if (!empty($files)) {
                     // sostituisci primo file
                     $first = $files[0];
-                    File::replace((int)$first['id'], [
+                    File::replace((int) $first['id'], [
                         'tmp_path' => $_FILES['file']['tmp_name'],
                         'original_name' => $_FILES['file']['name'],
                         'size' => $_FILES['file']['size'] ?? 0
                     ]);
                 } else {
-                    (new File())->createForNote((int)$id, [
+                    (new File())->createForNote((int) $id, [
                         'tmp_path' => $_FILES['file']['tmp_name'],
                         'original_name' => $_FILES['file']['name'],
                         'size' => $_FILES['file']['size'] ?? 0
@@ -358,7 +366,7 @@ class NoteController {
                     ['USER.id']
                 )
                 ->join('NOTE_DOWNLOAD', 'USER.id', '=', 'NOTE_DOWNLOAD.student_id')
-                ->where('NOTE_DOWNLOAD.note_id', '=', (int)$id)
+                ->where('NOTE_DOWNLOAD.note_id', '=', (int) $id)
                 ->get();
 
             foreach ($downloaderUsers as $user) {
@@ -374,7 +382,7 @@ class NoteController {
 
             }
 
-            
+
             SessionManager::flash('success', 'Nota aggiornata con successo');
             header('Location: /note/' . $id);
             exit;
@@ -386,84 +394,97 @@ class NoteController {
         }
     }
 
-    public function chat($id): void {
+    public function chat($id): void
+    {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: /note/' . $id);
             exit;
         }
-        
+
         $question = trim($_POST['question'] ?? '');
-        
+
         if (empty($question)) {
             SessionManager::flash('error', 'La domanda non può essere vuota');
             header('Location: /note/' . $id);
             exit;
         }
-        
-        $noteId = (int)$id;
-        
+
+        $noteId = (int) $id;
+
         try {
             Logger::getInstance()->info("Chat AI - Inizio", ["note_id" => $noteId, "question" => $question]);
-            
+
             // Carica la nota
             $noteData = NoteService::getFullNote($noteId);
-            
+
             if (!$noteData) {
                 SessionManager::flash('error', 'Nota non trovata');
                 header('Location: /note/' . $id);
                 exit;
             }
-            
+
             // Carica i file della nota
             $files = (new File())->where('note_id', '=', $noteId)->get();
             Logger::getInstance()->info("Chat AI - File trovati", ["count" => count($files)]);
-            
+
             if (empty($files)) {
                 SessionManager::flash('error', 'Nessun file disponibile per fare domande all\'AI. La nota deve avere almeno un file PDF o TXT allegato.');
                 header('Location: /note/' . $id);
                 exit;
             }
-            
+
             // Estrai testo dal primo file
             $firstFile = $files[0];
             $filePath = dirname(__DIR__, 2) . '/' . ltrim($firstFile['filepath'], '/');
             Logger::getInstance()->info("Chat AI - File path", ["path" => $filePath, "mime_type" => $firstFile['mime_type']]);
-            
+
             if (!file_exists($filePath)) {
                 SessionManager::flash('error', 'File non trovato: ' . $filePath);
                 header('Location: /note/' . $id);
                 exit;
             }
-            
-            // Estrai contenuto in base al formato
+
+            // Estrai contenuto in base al formato (con fallback dall'estensione se il mime è vuoto/generico)
             $fileContent = '';
             $format = strtolower($firstFile['mime_type'] ?? '');
-            
+            $ext = strtolower(pathinfo($firstFile['filename'] ?? '', PATHINFO_EXTENSION));
+
+            // fallback se il mime è vuoto o generico
+            if (in_array($format, ['', 'application/x-empty', 'application/octet-stream'])) {
+                if (in_array($ext, ['md', 'markdown'])) {
+                    $format = 'text/markdown';
+                } elseif ($ext === 'txt') {
+                    $format = 'text/plain';
+                } elseif ($ext === 'pdf') {
+                    $format = 'application/pdf';
+                }
+            }
+
             if ($format === 'application/pdf') {
                 Logger::getInstance()->info("Chat AI - Estrazione PDF");
                 $fileContent = PdfExtractor::extract($filePath);
-            } else if (in_array($format, ['text/plain', 'text/markdown'])) {
-                Logger::getInstance()->info("Chat AI - Lettura TXT/MD");
+            } else if (in_array($format, ['text/plain', 'text/markdown', 'text/x-tex', 'text/latex'])) {
+                Logger::getInstance()->info("Chat AI - Lettura TXT/MD/TEX");
                 $fileContent = file_get_contents($filePath);
             } else {
-                SessionManager::flash('error', 'Formato file non supportato per AI: ' . $format);
+                SessionManager::flash('error', 'Formato file non supportato per AI: ' . ($format ?: 'unknown'));
                 header('Location: /note/' . $id);
                 exit;
             }
-            
+
             Logger::getInstance()->info("Chat AI - Contenuto estratto", ["length" => strlen($fileContent)]);
-            
+
             if (empty(trim($fileContent))) {
                 SessionManager::flash('error', 'Il file non contiene testo leggibile');
                 header('Location: /note/' . $id);
                 exit;
             }
-            
+
             // Chiama l'AI
             Logger::getInstance()->info("Chat AI - Chiamata API");
             $aiResponse = ClientLLM::callLLM($firstFile['filename'], $fileContent, $question);
             Logger::getInstance()->info("Chat AI - Risposta ricevuta", ["length" => strlen($aiResponse)]);
-            
+
             // Verifica se l'utente corrente ha già messo like
             $userId = SessionManager::userId();
             if ($userId) {
@@ -473,13 +494,13 @@ class NoteController {
                     ->first();
                 $noteData['user_has_liked'] = $existingLike !== null;
             }
-            
+
             // Conta i like
             $likesCount = (new Like())
                 ->where('note_id', '=', $noteId)
                 ->count();
             $noteData['likes_count'] = $likesCount;
-            
+
             // Mostra la risposta
             View::render('noteDetail', 'page', [
                 "title" => $noteData['title'],
@@ -488,14 +509,14 @@ class NoteController {
                 "isLoggedIn" => SessionManager::isLoggedIn(),
                 "aiResponse" => $aiResponse
             ]);
-            
+
         } catch (\Exception $e) {
             Logger::getInstance()->error("Errore AI chat", [
                 "note_id" => $noteId,
                 "error" => $e->getMessage(),
                 "trace" => $e->getTraceAsString()
             ]);
-            
+
             // Mostra errore dettagliato (solo in development)
             $errorMsg = 'Errore: ' . $e->getMessage();
             SessionManager::flash('error', $errorMsg);
@@ -503,31 +524,32 @@ class NoteController {
             exit;
         }
     }
-    
-    public function addComment($id): void {
+
+    public function addComment($id): void
+    {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: /note/' . $id);
             exit;
         }
-        
+
         if (!SessionManager::isLoggedIn()) {
             SessionManager::flash('error', 'Devi essere loggato per commentare');
             header('Location: /login');
             exit;
         }
-        
+
         $content = trim($_POST['content'] ?? '');
-        $parentId = isset($_POST['parent_id']) ? (int)$_POST['parent_id'] : null;
-        
+        $parentId = isset($_POST['parent_id']) ? (int) $_POST['parent_id'] : null;
+
         if (empty($content)) {
             SessionManager::flash('error', 'Il commento non può essere vuoto');
             header('Location: /note/' . $id);
             exit;
         }
-        
+
         $userId = SessionManager::userId();
-        $noteId = (int)$id;
-        
+        $noteId = (int) $id;
+
         try {
             // Inserisci il commento
             (new Comment())->insert([
@@ -545,13 +567,13 @@ class NoteController {
                 type: 'comment',
                 message: 'La tua nota ha ricevuto un nuovo commento!'
             );
-            
+
             Logger::getInstance()->info("Commento aggiunto", [
                 "user_id" => $userId,
                 "note_id" => $noteId,
                 "parent_id" => $parentId
             ]);
-            
+
             SessionManager::flash('success', $parentId ? 'Risposta aggiunta!' : 'Commento aggiunto!');
         } catch (Exception $e) {
             Logger::getInstance()->error("Errore aggiunta commento", [
@@ -559,53 +581,54 @@ class NoteController {
             ]);
             SessionManager::flash('error', 'Errore durante l\'aggiunta del commento');
         }
-        
+
         header('Location: /note/' . $id);
         exit;
     }
 
-    public function deleteComment($noteId, $commentId): void {
+    public function deleteComment($noteId, $commentId): void
+    {
         if (!SessionManager::isLoggedIn()) {
             SessionManager::flash('error', 'Devi essere loggato');
             header('Location: /login');
             exit;
         }
-        
+
         $userId = SessionManager::userId();
         $userRole = SessionManager::get('user')['role'] ?? 'student';
-        $commentId = (int)$commentId;
-        
+        $commentId = (int) $commentId;
+
         try {
             // Trova il commento
             $comment = \App\Model\Comment::find($commentId);
-            
+
             if (!$comment) {
                 SessionManager::flash('error', 'Commento non trovato');
                 header('Location: /note/' . $noteId);
                 exit;
             }
-            
+
             // Verifica permessi: proprietario o admin
             $isOwner = $comment['student_id'] == $userId;
             $isAdmin = $userRole === 'admin';
-            
+
             if (!$isOwner && !$isAdmin) {
                 SessionManager::flash('error', 'Non hai i permessi per eliminare questo commento');
                 header('Location: /note/' . $noteId);
                 exit;
             }
-            
+
             // Elimina il commento
             (new \App\Model\Comment())
                 ->where('id', '=', $commentId)
                 ->delete();
-            
+
             Logger::getInstance()->info("Commento eliminato", [
                 "user_id" => $userId,
                 "comment_id" => $commentId,
                 "is_admin" => $isAdmin
             ]);
-            
+
             SessionManager::flash('success', 'Commento eliminato');
         } catch (\Exception $e) {
             Logger::getInstance()->error("Errore eliminazione commento", [
@@ -613,12 +636,13 @@ class NoteController {
             ]);
             SessionManager::flash('error', 'Errore durante l\'eliminazione');
         }
-        
+
         header('Location: /note/' . $noteId);
         exit;
     }
 
-    public function ban($id): void {
+    public function ban($id): void
+    {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: /note/' . $id);
             exit;
@@ -630,8 +654,8 @@ class NoteController {
             exit;
         }
 
-        try {å
-            (new Note())->where('id', '=', (int)$id)->update([
+        try {
+            (new Note())->where('id', '=', (int) $id)->update([
                 'visibility' => 'private'
             ]);
 
@@ -642,9 +666,9 @@ class NoteController {
 
             NotificationController::sendNotification(
                 $id,
-                 (new Note())->select(['student_id'])->where('id', '=', (int)$id)->first()['student_id'] ?? null,
-                 SessionManager::userId(),
-                 'System',
+                (new Note())->select(['student_id'])->where('id', '=', (int) $id)->first()['student_id'] ?? null,
+                SessionManager::userId(),
+                'System',
                 'La tua nota è stata bloccata dagli amministratori.'
             );
 
@@ -660,5 +684,5 @@ class NoteController {
         header('Location: /note/' . $id);
         exit;
     }
-    
+
 }
