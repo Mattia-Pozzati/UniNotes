@@ -1,3 +1,17 @@
+# ▶ Avvio del progetto con XAMPP
+
+## Configurazione Apache
+
+1. Aprire il file di configurazione apache conf/httpd.conf
+
+
+2. Modificare la direttiva **DocumentRoot**:
+
+```apache
+DocumentRoot "C:/xampp/htdocs/UniNotes/public"
+<Directory "C:/xampp/htdocs/UniNotes/public">
+```
+
 # 📘 Specifiche Descrittive del Database
 
 ## 🎯 Obiettivo generale del sistema
