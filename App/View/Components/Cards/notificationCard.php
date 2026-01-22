@@ -13,9 +13,9 @@ $noteLink = $card['noteLink'] ?? null;
 
         <!-- Titolo -->
         <div class="d-flex align-items-center justify-content-between">
-            <h5 class="card-title">
+            <h3 class="card-title">
                 <?= $title ?> <!-- se il titolo contiene HTML, assicurati che sia sicuro -->
-            </h5>
+            </h3>
         </div>
 
         <!-- Autore -->

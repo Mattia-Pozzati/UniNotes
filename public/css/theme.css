@@ -61,7 +61,7 @@
    → Attivo con <html data-bs-theme="dark">
    ========================================================= */
 [data-bs-theme="dark"] {
-  --color-primary: #9467cb;
+  --color-primary: #7a4db8;
   --color-secondary: #ffffff;
   --color-success: #28a745;
   --color-danger: #dc3545;
@@ -344,31 +344,30 @@ button:focus-visible {
     outline-offset: 2px;
 }
 
+
 /* LIGHT MODE */
-button.btn.btn-outline-secondary.btn-sm[disabled] {
+.btn.btn-outline-secondary {
     color: #000 !important;
     border-color: #000 !important;
-    opacity: 1 !important;
 }
 
 /* DARK MODE */
-[data-bs-theme="dark"] button.btn.btn-outline-secondary.btn-sm:disabled {
+[data-bs-theme="dark"] .btn.btn-outline-secondary {
     color: #fff !important;
     border-color: #fff !important;
-    opacity: 1 !important;
 }
 
-/* LIGHT */
-a.btn.btn-outline-secondary[aria-label="Like"] {
+/* Hover states */
+.btn.btn-outline-secondary:hover {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+[data-bs-theme="dark"] .btn.btn-outline-secondary:hover {
+    background-color: #fff !important;
     color: #000 !important;
-    border-color: #000 !important;
 }
 
-/* DARK */
-[data-bs-theme="dark"] a.btn.btn-outline-secondary[aria-label="Like"] {
-    color: #fff !important;
-    border-color: #fff !important;
-}
 
 [data-bs-theme="dark"] .bi-chat-left-dots {
     color: #fff !important;

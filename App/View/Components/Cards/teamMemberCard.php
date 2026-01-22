@@ -8,7 +8,7 @@ $email = $email ?? '#';
 <div class="card border-0 shadow-sm h-100">
     <div class="card-body p-4 text-center">
         <!-- Nome -->
-        <h5 class="card-title fw-bold mb-4"><?= htmlspecialchars($name) ?></h5>
+        <h3 class="card-title fw-bold mb-4"><?= htmlspecialchars($name) ?></h3>
         
         <!-- Social Icons -->
         <div class="d-flex gap-2 justify-content-center">
